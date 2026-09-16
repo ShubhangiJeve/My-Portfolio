@@ -44,8 +44,8 @@ export default defineConfig({
     // Source maps in production are useful for debugging deployed errors
     sourcemap: false,
 
-    // Minification
-    minify: 'esbuild',
+    // Minification — Vite 8 uses OXC by default (esbuild is no longer bundled)
+    minify: 'oxc',
   },
 
   // Pre-bundle these so the browser doesn't see waterfalls of module requests in dev
