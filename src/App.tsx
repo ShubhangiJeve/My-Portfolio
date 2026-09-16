@@ -1,19 +1,39 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { portfolioData } from './data/portfolioData';
-import Navbar        from './components/Navbar';
-import Hero          from './components/Hero';
-import About         from './components/About';
-import Profile       from './components/Profile';
-import Experience    from './components/Experience';
-import Projects      from './components/Projects';
-import Skills        from './components/Skills';
-import Footer        from './components/Footer';
-import ResumeModal   from './components/ResumeModal';
-import ProjectDetail from './components/ProjectDetail';
+import Navbar      from './components/Navbar';
+import Hero        from './components/Hero';
+import Footer      from './components/Footer';
+import ResumeModal from './components/ResumeModal';
+
+// ── Lazy-load everything below the fold ──────────────────────────────────────
+const About        = lazy(() => import('./components/About'));
+const Profile      = lazy(() => import('./components/Profile'));
+const Experience   = lazy(() => import('./components/Experience'));
+const Projects     = lazy(() => import('./components/Projects'));
+const Skills       = lazy(() => import('./components/Skills'));
+const Contact      = lazy(() => import('./components/Contact'));
+const ProjectDetail = lazy(() => import('./components/ProjectDetail'));
+
 import './index.css';
 import './App.css';
+
+// Minimal inline fallback — no layout shift, matches dark bg
+function SectionFallback() {
+  return (
+    <div
+      style={{
+        minHeight: '320px',
+        background: 'var(--color-bg-base)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      aria-hidden="true"
+    />
+  );
+}
 
 // ─── Main portfolio home page ─────────────────────
 
@@ -22,12 +42,28 @@ function HomePage({ onResumeOpen }: { onResumeOpen: () => void }) {
 
   return (
     <main id="main-content">
-      <Hero        personalInfo={personalInfo} onResumeOpen={onResumeOpen} />
-      <About       personalInfo={personalInfo} />
-      <Profile     personalInfo={personalInfo} />
-      <Experience  experience={experience} />
-      <Projects    projects={projects} />
-      <Skills      skillCategories={skillCategories} />
+      {/* Hero is above the fold — always eager */}
+      <Hero personalInfo={personalInfo} onResumeOpen={onResumeOpen} />
+
+      {/* Everything below the fold is lazy */}
+      <Suspense fallback={<SectionFallback />}>
+        <About personalInfo={personalInfo} />
+      </Suspense>
+      <Suspense fallback={<SectionFallback />}>
+        <Profile personalInfo={personalInfo} />
+      </Suspense>
+      <Suspense fallback={<SectionFallback />}>
+        <Experience experience={experience} />
+      </Suspense>
+      <Suspense fallback={<SectionFallback />}>
+        <Projects projects={projects} />
+      </Suspense>
+      <Suspense fallback={<SectionFallback />}>
+        <Skills skillCategories={skillCategories} />
+      </Suspense>
+      <Suspense fallback={<SectionFallback />}>
+        <Contact personalInfo={personalInfo} />
+      </Suspense>
     </main>
   );
 }
@@ -58,9 +94,13 @@ export default function App() {
         />
         <Route
           path="/projects/:projectId"
-          element={<ProjectDetail />}
+          element={
+            <Suspense fallback={<SectionFallback />}>
+              <ProjectDetail />
+            </Suspense>
+          }
         />
-        {/* 404 fallback — redirect home */}
+        {/* 404 fallback */}
         <Route
           path="*"
           element={<HomePage onResumeOpen={openResume} />}

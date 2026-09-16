@@ -1,8 +1,34 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getProjectById } from '../data/projectsData';
 import type { Diagram } from '../types';
 import './ProjectDetail.css';
+
+// ─── Lazy Mermaid loader — fetches the script once, caches the promise ────────
+
+let mermaidLoadPromise: Promise<void> | null = null;
+
+function loadMermaid(): Promise<void> {
+  if (mermaidLoadPromise) return mermaidLoadPromise;
+
+  // Already loaded by a prior navigation
+  const win = window as Window & { mermaid?: unknown };
+  if (win.mermaid) {
+    mermaidLoadPromise = Promise.resolve();
+    return mermaidLoadPromise;
+  }
+
+  mermaidLoadPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Failed to load Mermaid'));
+    document.head.appendChild(script);
+  });
+
+  return mermaidLoadPromise;
+}
 
 // ─── Mermaid Diagram Renderer ─────────────────────
 
@@ -16,61 +42,66 @@ function MermaidDiagram({ diagram, index }: MermaidDiagramProps) {
   const [error, setError] = useState<string | null>(null);
   const [rendered, setRendered] = useState(false);
 
-  useEffect(() => {
+  const renderDiagram = useCallback(async () => {
     const container = containerRef.current;
     if (!container || diagram.type !== 'mermaid') return;
 
-    const mermaid = (window as Window & { mermaid?: unknown }).mermaid;
-    if (!mermaid || typeof (mermaid as { initialize?: unknown }).initialize !== 'function') {
-      setError('Diagram library not loaded. Please refresh the page.');
-      return;
-    }
-
-    const id = `mermaid-${index}-${Date.now()}`;
     container.innerHTML = '';
     setRendered(false);
     setError(null);
 
-    const m = mermaid as {
-      initialize: (cfg: object) => void;
-      render: (id: string, code: string) => Promise<{ svg: string }>;
-    };
+    try {
+      await loadMermaid();
 
-    m.initialize({
-      startOnLoad: false,
-      theme: 'dark',
-      themeVariables: {
-        primaryColor: '#6366f1',
-        primaryTextColor: '#f1f5f9',
-        primaryBorderColor: '#6366f1',
-        lineColor: '#475569',
-        secondaryColor: '#1e293b',
-        tertiaryColor: '#0f172a',
-        background: '#0a0f1e',
-        mainBkg: '#111827',
-        nodeBorder: '#6366f1',
-        clusterBkg: '#0f172a',
-        titleColor: '#f1f5f9',
-        edgeLabelBackground: '#1e293b',
-        attributeBackgroundColorEven: '#111827',
-        attributeBackgroundColorOdd: '#0f172a',
-      },
-      securityLevel: 'loose',
-      fontFamily: "'Inter', system-ui, sans-serif",
-    });
+      const win = window as Window & { mermaid?: unknown };
+      const m = win.mermaid as {
+        initialize: (cfg: object) => void;
+        render: (id: string, code: string) => Promise<{ svg: string }>;
+      };
 
-    m.render(id, diagram.code)
-      .then(({ svg }: { svg: string }) => {
-        if (container) {
-          container.innerHTML = svg;
-          setRendered(true);
-        }
-      })
-      .catch((err: Error) => {
-        console.error('Mermaid render error:', err);
-        setError('Diagram could not be rendered.');
+      if (!m?.render) {
+        setError('Diagram library not available. Please refresh.');
+        return;
+      }
+
+      m.initialize({
+        startOnLoad: false,
+        theme: 'dark',
+        themeVariables: {
+          primaryColor: '#6366f1',
+          primaryTextColor: '#f1f5f9',
+          primaryBorderColor: '#6366f1',
+          lineColor: '#475569',
+          secondaryColor: '#1e293b',
+          tertiaryColor: '#0f172a',
+          background: '#0a0f1e',
+          mainBkg: '#111827',
+          nodeBorder: '#6366f1',
+          clusterBkg: '#0f172a',
+          titleColor: '#f1f5f9',
+          edgeLabelBackground: '#1e293b',
+          attributeBackgroundColorEven: '#111827',
+          attributeBackgroundColorOdd: '#0f172a',
+        },
+        securityLevel: 'loose',
+        fontFamily: "'Inter', system-ui, sans-serif",
       });
+
+      const id = `mermaid-${index}-${Date.now()}`;
+      const { svg } = await m.render(id, diagram.code);
+      if (containerRef.current) {
+        containerRef.current.innerHTML = svg;
+        setRendered(true);
+      }
+    } catch (err) {
+      console.error('Mermaid render error:', err);
+      setError('Diagram could not be rendered.');
+    }
   }, [diagram.code, diagram.type, index]);
+
+  useEffect(() => {
+    renderDiagram();
+  }, [renderDiagram]);
 
   if (error) {
     return (

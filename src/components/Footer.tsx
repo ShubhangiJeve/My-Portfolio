@@ -125,7 +125,7 @@ export default function Footer({ personalInfo, onResumeOpen }: FooterProps) {
         <nav className="footer__nav" aria-label="Footer navigation">
           <p className="footer__nav-title">Quick links</p>
           <ul className="footer__nav-links">
-            {['about', 'experience', 'projects', 'skills'].map((section) => (
+            {['about', 'experience', 'projects', 'skills', 'contact'].map((section) => (
               <li key={section}>
                 <button
                   type="button"
