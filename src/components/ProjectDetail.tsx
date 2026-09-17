@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getProjectById } from '../data/projectsData';
 import type { Diagram } from '../types';
+import CustomVideoPlayer from './CustomVideoPlayer';
 import './ProjectDetail.css';
 
 // ─── Lazy Mermaid loader — fetches the script once, caches the promise ────────
@@ -146,7 +147,6 @@ const CATEGORY_LABELS = {
 export default function ProjectDetail() {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
-  const [isMuted, setIsMuted] = useState(false);
 
   const project = projectId ? getProjectById(projectId) : undefined;
 
@@ -301,56 +301,17 @@ export default function ProjectDetail() {
                                 allowFullScreen
                               />
                             ) : (
-                              <div className="project-detail__video-player-box">
-                                <video
-                                  id={`project-video-${idx}`}
-                                  src={item.url}
-                                  controls
-                                  playsInline
-                                  preload="auto"
-                                  className="project-detail__video"
-                                  poster={project.featuredImage}
-                                  onVolumeChange={(e) => {
-                                    setIsMuted(e.currentTarget.muted);
-                                  }}
-                                >
-                                  <source src={item.url} type="video/mp4" />
-                                  Your browser does not support the video tag.
-                                </video>
-                              </div>
+                              <CustomVideoPlayer
+                                src={item.url}
+                                title={item.title}
+                                poster={project.featuredImage}
+                              />
                             )}
                             <div className="project-detail__video-actions">
-                              <button
-                                type="button"
-                                className="project-detail__sound-btn"
-                                onClick={() => {
-                                  const vid = document.getElementById(`project-video-${idx}`) as HTMLVideoElement;
-                                  if (vid) {
-                                    vid.muted = !vid.muted;
-                                    vid.volume = 1.0;
-                                    if (!vid.muted && vid.paused) {
-                                      vid.play();
-                                    }
-                                    setIsMuted(vid.muted);
-                                  }
-                                }}
-                              >
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                                  {isMuted ? (
-                                    <>
-                                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                                      <line x1="23" y1="9" x2="17" y2="15" />
-                                      <line x1="17" y1="9" x2="23" y2="15" />
-                                    </>
-                                  ) : (
-                                    <>
-                                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-                                    </>
-                                  )}
-                                </svg>
-                                <span>{isMuted ? 'Turn Sound ON' : 'Audio Active (100%)'}</span>
-                              </button>
+                              <div className="project-detail__video-action-hint">
+                                <span className="badge badge--green">Custom HD Player</span>
+                                <span>Click screen or big button to play with sound active</span>
+                              </div>
 
                               <a
                                 href={item.url}
@@ -363,7 +324,7 @@ export default function ProjectDetail() {
                                   <polyline points="15 3 21 3 21 9" />
                                   <line x1="10" y1="14" x2="21" y2="3" />
                                 </svg>
-                                <span>Open Video Link</span>
+                                <span>Direct Video File (14 MB)</span>
                               </a>
                             </div>
                           </div>
