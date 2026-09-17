@@ -67,14 +67,20 @@ export default function ResumeModal({
     },
     [onClose]
   );
-
   if (!isOpen) return null;
 
   const downloadFileName = 'Shubhangi_Jeve_Resume.pdf';
 
+  // Ensure path correctly handles GitHub Pages subpath (/My-Portfolio/)
+  const resolvedResumePath = resumePath.startsWith('http')
+    ? resumePath
+    : resumePath.startsWith(import.meta.env.BASE_URL)
+    ? resumePath
+    : `${import.meta.env.BASE_URL}${resumePath.replace(/^\//, '')}`;
+
   const handleDownload = async () => {
     try {
-      const response = await fetch(resumePath);
+      const response = await fetch(resolvedResumePath);
       if (!response.ok) throw new Error('Download failed');
       const blob = await response.blob();
       const blobUrl = URL.createObjectURL(new Blob([blob], { type: 'application/pdf' }));
@@ -87,7 +93,7 @@ export default function ResumeModal({
       setTimeout(() => URL.revokeObjectURL(blobUrl), 1500);
     } catch {
       // Fallback: open in new tab
-      window.open(resumePath, '_blank');
+      window.open(resolvedResumePath, '_blank');
     }
   };
 
@@ -138,13 +144,13 @@ export default function ResumeModal({
               Download PDF
             </button>
             <a
-              href={resumePath}
+              href={resolvedResumePath}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn--ghost btn--sm"
               aria-label="Open resume in new tab"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
@@ -168,7 +174,7 @@ export default function ResumeModal({
         {/* PDF viewer */}
         <div className="modal__viewer">
           <iframe
-            src={`${resumePath}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
+            src={`${resolvedResumePath}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
             title={`${candidateName} Resume`}
             className="modal__iframe"
             aria-label="Resume PDF viewer"
@@ -177,11 +183,11 @@ export default function ResumeModal({
           <div className="modal__fallback" role="note">
             <p>
               Can't view the PDF?{' '}
-              <a href={resumePath} download={downloadFileName} className="modal__fallback-link">
+              <a href={resolvedResumePath} download={downloadFileName} className="modal__fallback-link">
                 Download it here
               </a>{' '}
               or{' '}
-              <a href={resumePath} target="_blank" rel="noopener noreferrer" className="modal__fallback-link">
+              <a href={resolvedResumePath} target="_blank" rel="noopener noreferrer" className="modal__fallback-link">
                 open in a new tab
               </a>.
             </p>

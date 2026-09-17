@@ -112,7 +112,7 @@ export default function App() {
       <ResumeModal
         isOpen={isResumeOpen}
         onClose={closeResume}
-        resumePath="/resume.pdf"
+        resumePath={`${import.meta.env.BASE_URL}resume.pdf`}
         candidateName={personalInfo.name}
       />
     </BrowserRouter>
