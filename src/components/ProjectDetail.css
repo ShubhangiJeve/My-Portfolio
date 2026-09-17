@@ -353,6 +353,15 @@
   background: #070b14;
 }
 
+.project-detail__video-iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 420px;
+  border: none;
+  display: block;
+  background: #000;
+}
+
 .project-detail__video-actions {
   padding: var(--space-2) var(--space-4);
   background: rgba(15, 23, 42, 0.95);

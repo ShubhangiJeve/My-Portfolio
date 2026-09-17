@@ -278,36 +278,58 @@ export default function ProjectDetail() {
                         </h3>
                         <span className="badge badge--cyan">{item.type.toUpperCase()}</span>
                       </div>
-                      {item.type === 'video' ? (
-                        <div className="project-detail__video-wrapper">
-                          <video
-                            src={item.url}
-                            controls
-                            playsInline
-                            preload="metadata"
-                            className="project-detail__video"
-                            poster={project.featuredImage}
-                          >
-                            <source src={item.url} type="video/mp4" />
-                            Your browser does not support the video tag.
-                          </video>
-                          <div className="project-detail__video-actions">
-                            <a
-                              href={item.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="project-detail__video-action-link"
-                            >
-                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15 3 21 3 21 9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                              </svg>
-                              <span>Open / Download Original Demo (1080p MP4)</span>
-                            </a>
+                      {item.type === 'video' ? (() => {
+                        const driveMatch = item.url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+                        const ytMatch = item.url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([a-zA-Z0-9_-]+)/);
+                        const isDrive = Boolean(driveMatch) || (item.url.includes('drive.google.com') && item.url.includes('/preview'));
+                        const isYt = Boolean(ytMatch);
+                        const embedUrl = driveMatch
+                          ? `https://drive.google.com/file/d/${driveMatch[1]}/preview`
+                          : ytMatch
+                          ? `https://www.youtube.com/embed/${ytMatch[1]}`
+                          : item.url;
+
+                        return (
+                          <div className="project-detail__video-wrapper">
+                            {isDrive || isYt ? (
+                              <iframe
+                                src={embedUrl}
+                                title={item.title}
+                                className="project-detail__video-iframe"
+                                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                                allowFullScreen
+                              />
+                            ) : (
+                              <video
+                                src={item.url}
+                                controls
+                                playsInline
+                                preload="metadata"
+                                className="project-detail__video"
+                                poster={project.featuredImage}
+                              >
+                                <source src={item.url} type="video/mp4" />
+                                Your browser does not support the video tag.
+                              </video>
+                            )}
+                            <div className="project-detail__video-actions">
+                              <a
+                                href={item.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="project-detail__video-action-link"
+                              >
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                  <polyline points="15 3 21 3 21 9" />
+                                  <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg>
+                                <span>Open Video Link</span>
+                              </a>
+                            </div>
                           </div>
-                        </div>
-                      ) : (
+                        );
+                      })() : (
                         <div className="project-detail__image-wrapper">
                           <img
                             src={item.url}
