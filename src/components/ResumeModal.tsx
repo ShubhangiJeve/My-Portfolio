@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import './ResumeModal.css';
 
 interface ResumeModalProps {
@@ -17,6 +17,9 @@ export default function ResumeModal({
 }: ResumeModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const viewerScrollRef = useRef<HTMLDivElement>(null);
+
+  const [zoomLevel, setZoomLevel] = useState<number>(100);
 
   // Focus trap + close on Escape
   useEffect(() => {
@@ -40,7 +43,7 @@ export default function ResumeModal({
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       );
       const first = focusable[0];
-      const last  = focusable[focusable.length - 1];
+      const last = focusable[focusable.length - 1];
 
       if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
@@ -67,7 +70,6 @@ export default function ResumeModal({
     },
     [onClose]
   );
-  if (!isOpen) return null;
 
   const downloadFileName = 'Shubhangi_Jeve_Resume.pdf';
 
@@ -77,6 +79,11 @@ export default function ResumeModal({
     : resumePath.startsWith(import.meta.env.BASE_URL)
     ? resumePath
     : `${import.meta.env.BASE_URL}${resumePath.replace(/^\//, '')}`;
+
+  const page1Webp = `${import.meta.env.BASE_URL}resume-page-1.webp`;
+  const page1Png = `${import.meta.env.BASE_URL}resume-page-1.png`;
+  const page2Webp = `${import.meta.env.BASE_URL}resume-page-2.webp`;
+  const page2Png = `${import.meta.env.BASE_URL}resume-page-2.png`;
 
   const handleDownload = async () => {
     try {
@@ -96,6 +103,12 @@ export default function ResumeModal({
       window.open(resolvedResumePath, '_blank');
     }
   };
+
+  const handleZoomIn = () => setZoomLevel((z) => Math.min(150, z + 15));
+  const handleZoomOut = () => setZoomLevel((z) => Math.max(70, z - 15));
+  const handleZoomReset = () => setZoomLevel(100);
+
+  if (!isOpen) return null;
 
   return (
     <div
@@ -125,10 +138,48 @@ export default function ResumeModal({
             </div>
             <div>
               <h2 className="modal__title">{candidateName}</h2>
-              <p className="modal__subtitle">Resume</p>
+              <p className="modal__subtitle">Curriculum Vitae • 2 Pages</p>
             </div>
           </div>
 
+          {/* Center Zoom Controls */}
+          <div className="modal__zoom-bar" aria-label="Zoom controls">
+            <button
+              type="button"
+              className="modal__zoom-btn"
+              onClick={handleZoomOut}
+              disabled={zoomLevel <= 70}
+              title="Zoom Out (-)"
+              aria-label="Zoom out"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              className="modal__zoom-reset"
+              onClick={handleZoomReset}
+              title="Reset Zoom to 100%"
+            >
+              {zoomLevel}%
+            </button>
+            <button
+              type="button"
+              className="modal__zoom-btn"
+              onClick={handleZoomIn}
+              disabled={zoomLevel >= 150}
+              title="Zoom In (+)"
+              aria-label="Zoom in"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Action buttons */}
           <div className="modal__actions">
             <button
               onClick={handleDownload}
@@ -141,8 +192,9 @@ export default function ResumeModal({
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              Download PDF
+              <span>Download PDF</span>
             </button>
+
             <a
               href={resolvedResumePath}
               target="_blank"
@@ -155,8 +207,9 @@ export default function ResumeModal({
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
-              Open Tab
+              <span>Open Tab</span>
             </a>
+
             <button
               ref={closeButtonRef}
               className="modal__close"
@@ -171,26 +224,64 @@ export default function ResumeModal({
           </div>
         </div>
 
-        {/* PDF viewer */}
-        <div className="modal__viewer">
-          <iframe
-            src={`${resolvedResumePath}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
-            title={`${candidateName} Resume`}
-            className="modal__iframe"
-            aria-label="Resume PDF viewer"
-          />
-          {/* Fallback for browsers that can't embed PDFs */}
-          <div className="modal__fallback" role="note">
-            <p>
-              Can't view the PDF?{' '}
-              <a href={resolvedResumePath} download={downloadFileName} className="modal__fallback-link">
-                Download it here
-              </a>{' '}
-              or{' '}
-              <a href={resolvedResumePath} target="_blank" rel="noopener noreferrer" className="modal__fallback-link">
-                open in a new tab
-              </a>.
-            </p>
+        {/* Modal Body / Viewer */}
+        <div className="modal__viewer" ref={viewerScrollRef}>
+          <div
+            className="modal__doc-scroll-area"
+            style={{
+              width: zoomLevel !== 100 ? `${zoomLevel}%` : '100%',
+              maxWidth: zoomLevel !== 100 ? `${Math.round(820 * (zoomLevel / 100))}px` : '820px',
+            }}
+          >
+            {/* Page 1 */}
+            <div className="modal__page-card card">
+              <div className="modal__page-header">
+                <span className="badge badge--cyan">Page 1 of 2</span>
+                <span className="modal__page-hint">Shubhangi Jeve • AI Engineer</span>
+              </div>
+              <div className="modal__page-image-box">
+                <picture>
+                  <source srcSet={page1Webp} type="image/webp" />
+                  <img
+                    src={page1Png}
+                    alt={`${candidateName} Resume - Page 1`}
+                    className="modal__page-img"
+                    loading="eager"
+                  />
+                </picture>
+              </div>
+            </div>
+
+            {/* Page 2 */}
+            <div className="modal__page-card card">
+              <div className="modal__page-header">
+                <span className="badge badge--cyan">Page 2 of 2</span>
+                <span className="modal__page-hint">Key Projects & Certifications</span>
+              </div>
+              <div className="modal__page-image-box">
+                <picture>
+                  <source srcSet={page2Webp} type="image/webp" />
+                  <img
+                    src={page2Png}
+                    alt={`${candidateName} Resume - Page 2`}
+                    className="modal__page-img"
+                    loading="lazy"
+                  />
+                </picture>
+              </div>
+            </div>
+
+            {/* End of Document footer */}
+            <div className="modal__doc-footer">
+              <p>End of Resume • 2 of 2 Pages</p>
+              <button
+                type="button"
+                className="btn btn--outline btn--sm"
+                onClick={handleDownload}
+              >
+                Download Original PDF (Print Ready)
+              </button>
+            </div>
           </div>
         </div>
       </div>
