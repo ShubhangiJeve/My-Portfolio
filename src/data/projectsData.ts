@@ -173,7 +173,7 @@ sequenceDiagram
     media: [
       {
         type: 'video',
-        url: 'https://drive.google.com/file/d/1SS35s8H_n8yY0lrow4dFkb-HHvZ4VQJx/view?usp=sharing',
+        url: `${import.meta.env.BASE_URL}meetops/meetops-demo.mp4`,
         title: 'Full Product Walkthrough & Live Demo',
         caption: 'Watch the live end-to-end demonstration of MeetOps: automated Teams meeting transcription, real-time context streaming, AI summaries, project repositories, and agentic actions.',
       },

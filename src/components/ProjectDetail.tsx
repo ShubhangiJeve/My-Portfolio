@@ -303,8 +303,10 @@ export default function ProjectDetail() {
                               <video
                                 src={item.url}
                                 controls
+                                autoPlay
+                                muted
                                 playsInline
-                                preload="metadata"
+                                preload="auto"
                                 className="project-detail__video"
                                 poster={project.featuredImage}
                               >
