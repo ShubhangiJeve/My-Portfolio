@@ -138,7 +138,7 @@ export default function ResumeModal({
             </div>
             <div>
               <h2 className="modal__title">{candidateName}</h2>
-              <p className="modal__subtitle">Curriculum Vitae • 2 Pages</p>
+              <p className="modal__subtitle">PDF Document</p>
             </div>
           </div>
 
@@ -224,63 +224,39 @@ export default function ResumeModal({
           </div>
         </div>
 
-        {/* Modal Body / Viewer */}
+        {/* Modal Body / Pure PDF Viewer */}
         <div className="modal__viewer" ref={viewerScrollRef}>
           <div
-            className="modal__doc-scroll-area"
+            className="modal__pdf-pages"
             style={{
               width: zoomLevel !== 100 ? `${zoomLevel}%` : '100%',
-              maxWidth: zoomLevel !== 100 ? `${Math.round(820 * (zoomLevel / 100))}px` : '820px',
+              maxWidth: zoomLevel !== 100 ? `${Math.round(840 * (zoomLevel / 100))}px` : '840px',
             }}
           >
             {/* Page 1 */}
-            <div className="modal__page-card card">
-              <div className="modal__page-header">
-                <span className="badge badge--cyan">Page 1 of 2</span>
-                <span className="modal__page-hint">Shubhangi Jeve • AI Engineer</span>
-              </div>
-              <div className="modal__page-image-box">
-                <picture>
-                  <source srcSet={page1Webp} type="image/webp" />
-                  <img
-                    src={page1Png}
-                    alt={`${candidateName} Resume - Page 1`}
-                    className="modal__page-img"
-                    loading="eager"
-                  />
-                </picture>
-              </div>
+            <div className="modal__pdf-page">
+              <picture>
+                <source srcSet={page1Webp} type="image/webp" />
+                <img
+                  src={page1Png}
+                  alt={`${candidateName} Resume - Page 1`}
+                  className="modal__pdf-sheet"
+                  loading="eager"
+                />
+              </picture>
             </div>
 
             {/* Page 2 */}
-            <div className="modal__page-card card">
-              <div className="modal__page-header">
-                <span className="badge badge--cyan">Page 2 of 2</span>
-                <span className="modal__page-hint">Key Projects & Certifications</span>
-              </div>
-              <div className="modal__page-image-box">
-                <picture>
-                  <source srcSet={page2Webp} type="image/webp" />
-                  <img
-                    src={page2Png}
-                    alt={`${candidateName} Resume - Page 2`}
-                    className="modal__page-img"
-                    loading="lazy"
-                  />
-                </picture>
-              </div>
-            </div>
-
-            {/* End of Document footer */}
-            <div className="modal__doc-footer">
-              <p>End of Resume • 2 of 2 Pages</p>
-              <button
-                type="button"
-                className="btn btn--outline btn--sm"
-                onClick={handleDownload}
-              >
-                Download Original PDF (Print Ready)
-              </button>
+            <div className="modal__pdf-page">
+              <picture>
+                <source srcSet={page2Webp} type="image/webp" />
+                <img
+                  src={page2Png}
+                  alt={`${candidateName} Resume - Page 2`}
+                  className="modal__pdf-sheet"
+                  loading="lazy"
+                />
+              </picture>
             </div>
           </div>
         </div>
