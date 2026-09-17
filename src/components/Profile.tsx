@@ -105,7 +105,7 @@ export default function Profile({ personalInfo }: ProfileProps) {
           {PROFILE_STATS.map((stat, i) => (
             <div
               key={stat.label}
-              className={`profile__stat reveal reveal-delay-${Math.min(i + 1, 5)}`}
+              className={`profile__stat reveal reveal-delay-${Math.min(i + 1, 5)} ${isVisible ? 'is-visible' : ''}`}
             >
               <span className="profile__stat-value gradient-text">{stat.value}</span>
               <span className="profile__stat-label">{stat.label}</span>

@@ -174,6 +174,28 @@ export default function Hero({ personalInfo, onResumeOpen }: HeroProps) {
           </div>
         </div>
 
+        {/* Profile Avatar Card */}
+        {personalInfo.avatarUrl && (
+          <div className="hero__avatar-col animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+            <div className="hero__avatar-card">
+              <div className="hero__avatar-ring" aria-hidden="true" />
+              <div className="hero__avatar-img-box">
+                <img
+                  src={personalInfo.avatarUrl}
+                  alt={personalInfo.name}
+                  className="hero__avatar-img"
+                  width="320"
+                  height="360"
+                />
+              </div>
+              <div className="hero__avatar-badge">
+                <span className="hero__avatar-status-dot" aria-hidden="true" />
+                <span>Available for AI Roles</span>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Scroll indicator */}
         <div className="hero__scroll-indicator" aria-hidden="true">
           <div className="hero__scroll-line" />

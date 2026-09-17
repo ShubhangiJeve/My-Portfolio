@@ -15,6 +15,7 @@ export interface PersonalInfo {
   location: string;
   objective: string;
   profileSummary: string[];
+  avatarUrl?: string;
 }
 
 export interface Education {
@@ -77,6 +78,14 @@ export interface ProjectMetric {
   value: string;
 }
 
+export interface ProjectMedia {
+  type: 'image' | 'video';
+  url: string;
+  title: string;
+  caption?: string;
+  thumbnail?: string;
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -93,6 +102,8 @@ export interface Project {
   liveUrl?: string;
   /** Which experience entry this belongs to (optional) */
   experienceId?: string;
+  featuredImage?: string;
+  media?: ProjectMedia[];
 }
 
 // ─── Portfolio Root ────────────────────────────

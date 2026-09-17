@@ -55,6 +55,38 @@
   outline-offset: 3px;
 }
 
+/* Card Thumbnail */
+.project-card__thumbnail {
+  position: relative;
+  width: calc(100% + var(--space-6) * 2);
+  margin-left: calc(var(--space-6) * -1);
+  margin-right: calc(var(--space-6) * -1);
+  margin-top: calc(var(--space-6) * -1);
+  margin-bottom: var(--space-4);
+  height: 175px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+  background: #000;
+}
+
+.project-card__thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.project-card:hover .project-card__thumbnail img {
+  transform: scale(1.05);
+}
+
+.project-card__thumbnail-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(15, 23, 42, 0.9) 100%);
+}
+
 /* Card Header */
 .project-card__header {
   display: flex;

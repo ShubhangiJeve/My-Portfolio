@@ -98,6 +98,18 @@ export default function Projects({ projects }: ProjectsProps) {
                 {/* Top glow border */}
                 <div className="project-card__top-border" aria-hidden="true" />
 
+                {/* Visual Thumbnail (if available) */}
+                {project.featuredImage && (
+                  <div className="project-card__thumbnail">
+                    <img
+                      src={project.featuredImage}
+                      alt={`${project.name} preview`}
+                      loading="lazy"
+                    />
+                    <div className="project-card__thumbnail-overlay" />
+                  </div>
+                )}
+
                 {/* Card Header */}
                 <div className="project-card__header">
                   <div className="project-card__badges">

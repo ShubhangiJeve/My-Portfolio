@@ -169,6 +169,27 @@ sequenceDiagram
       { label: 'Bot Spin-up Time',     value: '<3s' },
       { label: 'Streaming Latency',    value: '<500ms TTFT' },
     ],
+    featuredImage: `${import.meta.env.BASE_URL}meetops/meetops-hero.png`,
+    media: [
+      {
+        type: 'video',
+        url: `${import.meta.env.BASE_URL}meetops/meetops-demo.mp4`,
+        title: 'Full Product Walkthrough & Live Demo',
+        caption: 'Watch the live end-to-end demonstration of MeetOps: automated Teams meeting transcription, real-time context streaming, AI summaries, project repositories, and agentic actions.',
+      },
+      {
+        type: 'image',
+        url: `${import.meta.env.BASE_URL}meetops/meetops-hero.png`,
+        title: 'MeetOps Landing Page & Real-Time Intelligence Engine',
+        caption: 'Modern AI-driven user interface featuring real-time meeting transcription, automated executive summaries, actionable insights, and privacy-first architecture.',
+      },
+      {
+        type: 'image',
+        url: `${import.meta.env.BASE_URL}meetops/meetops-repositories.png`,
+        title: 'Isolated Project Repositories & Knowledge Base',
+        caption: 'Multi-tenant knowledge stores with isolated scoped AI: tracking meetings, documents, and vector chunks (e.g. Legal Aid & MeetOps knowledge bases with live status indicators).',
+      },
+    ],
     diagrams: [
       {
         type: 'mermaid',

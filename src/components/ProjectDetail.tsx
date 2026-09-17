@@ -262,6 +262,70 @@ export default function ProjectDetail() {
               </ul>
             </section>
 
+            {/* Project Media & Live Walkthrough */}
+            {project.media && project.media.length > 0 && (
+              <section className="project-detail__section" aria-labelledby="media-heading">
+                <h2 id="media-heading" className="project-detail__section-title">
+                  Live Walkthrough & Interface
+                </h2>
+                <div className="project-detail__media-grid">
+                  {project.media.map((item, idx) => (
+                    <div key={item.title} className="project-detail__media-card card">
+                      <div className="project-detail__media-header">
+                        <h3 className="project-detail__media-title">
+                          <span className="project-detail__media-num">0{idx + 1}</span>
+                          {item.title}
+                        </h3>
+                        <span className="badge badge--cyan">{item.type.toUpperCase()}</span>
+                      </div>
+                      {item.type === 'video' ? (
+                        <div className="project-detail__video-wrapper">
+                          <video
+                            src={item.url}
+                            controls
+                            playsInline
+                            preload="metadata"
+                            className="project-detail__video"
+                            poster={project.featuredImage}
+                          >
+                            <source src={item.url} type="video/mp4" />
+                            Your browser does not support the video tag.
+                          </video>
+                          <div className="project-detail__video-actions">
+                            <a
+                              href={item.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="project-detail__video-action-link"
+                            >
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                              </svg>
+                              <span>Open / Download Original Demo (1080p MP4)</span>
+                            </a>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="project-detail__image-wrapper">
+                          <img
+                            src={item.url}
+                            alt={item.title}
+                            className="project-detail__image"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+                      {item.caption && (
+                        <p className="project-detail__media-caption">{item.caption}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
             {/* Architecture diagrams */}
             {project.diagrams.length > 0 && (
               <section className="project-detail__section" aria-labelledby="diagrams-heading">

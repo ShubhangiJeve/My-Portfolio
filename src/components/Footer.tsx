@@ -47,39 +47,37 @@ const SOCIAL_LINKS = (personalInfo: PersonalInfo) => [
 export default function Footer({ personalInfo, onResumeOpen }: FooterProps) {
   const year = new Date().getFullYear();
   const links = SOCIAL_LINKS(personalInfo);
-  // Default to exactly 1,254 right from the first render
-  const [visitCount, setVisitCount] = useState<number>(1254);
+  // Default to 0 right from the first render
+  const [visitCount, setVisitCount] = useState<number>(0);
 
   // Free visitor count integration that increments on every refresh/load
   useEffect(() => {
     let isMounted = true;
-    const BASE_VISITS = 1254;
-    const STORAGE_KEY = 'sj_portfolio_visitor_count';
+    const STORAGE_KEY = 'sj_portfolio_visits_v2';
 
     // 1. Calculate local increment first (instant UI update)
-    let localVisits = BASE_VISITS;
+    let localVisits = 1;
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         localVisits = parseInt(stored, 10) + 1;
       } else {
-        localVisits = BASE_VISITS;
+        localVisits = 1;
       }
       localStorage.setItem(STORAGE_KEY, localVisits.toString());
       if (isMounted) setVisitCount(localVisits);
     } catch {
-      if (isMounted) setVisitCount(BASE_VISITS);
+      if (isMounted) setVisitCount(1);
     }
 
     // 2. Sync with free public counter API
     const syncCounter = async () => {
       try {
-        const res = await fetch('https://api.counterapi.dev/v1/shubhangijeve-portfolio/visits/up');
+        const res = await fetch('https://api.counterapi.dev/v1/shubhangijeve-official-portfolio/visits/up');
         if (res.ok) {
           const data = await res.json();
           if (data && typeof data.count === 'number' && isMounted) {
-            const finalCount = Math.max(data.count + BASE_VISITS, localVisits);
-            setVisitCount(finalCount);
+            setVisitCount(Math.max(data.count, localVisits));
           }
         }
       } catch {
