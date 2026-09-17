@@ -4,6 +4,7 @@
 // ─────────────────────────────────────────────
 
 import type { PortfolioData } from '../types';
+import profileImg from '../assets/profile.png';
 import { skillCategories } from './skillsData';
 import { projects } from './projectsData';
 
@@ -19,7 +20,7 @@ export const portfolioData: PortfolioData = {
     github: 'https://github.com/ShubhangiJeve',
     linkedin: 'https://linkedin.com/in/shubhangi-jeve-97445b235',
     location: 'Hyderabad, Telangana',
-    avatarUrl: `${import.meta.env.BASE_URL}profile.jpg`,
+    avatarUrl: profileImg,
     objective:
       'AI Engineer with hands-on production experience building end-to-end LLM-powered systems, RAG pipelines, and full-stack AI applications. Proficient in Python, FastAPI, vector databases, and LLM integration using Groq, Gemini, and Hugging Face. Seeking an AI Engineer role to architect and deploy scalable, enterprise-grade intelligent systems.',
     profileSummary: [
