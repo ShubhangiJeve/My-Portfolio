@@ -304,7 +304,7 @@ export default function CustomVideoPlayer({
           </div>
         )}
 
-        {/* Big Glowing Center Play Overlay Button */}
+        {/* Center play button */}
         {(!isPlaying || !hasStartedOnce) && (
           <button
             type="button"
@@ -321,7 +321,7 @@ export default function CustomVideoPlayer({
               </svg>
             </div>
             <span className="cv-player__big-play-text">
-              {!hasStartedOnce ? 'Play Walkthrough (Sound ON)' : 'Click to Resume'}
+              {!hasStartedOnce ? 'Play demo' : 'Resume'}
             </span>
           </button>
         )}

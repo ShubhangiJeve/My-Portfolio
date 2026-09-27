@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import type { PersonalInfo } from '../types';
 import './Footer.css';
 
@@ -47,64 +46,13 @@ const SOCIAL_LINKS = (personalInfo: PersonalInfo) => [
 export default function Footer({ personalInfo, onResumeOpen }: FooterProps) {
   const year = new Date().getFullYear();
   const links = SOCIAL_LINKS(personalInfo);
-  // Default to 0 right from the first render
-  const [visitCount, setVisitCount] = useState<number>(0);
-
-  // Free visitor count integration that increments on every refresh/load
-  useEffect(() => {
-    let isMounted = true;
-    const STORAGE_KEY = 'sj_portfolio_visits_v2';
-
-    // 1. Calculate local increment first (instant UI update)
-    let localVisits = 1;
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        localVisits = parseInt(stored, 10) + 1;
-      } else {
-        localVisits = 1;
-      }
-      localStorage.setItem(STORAGE_KEY, localVisits.toString());
-      if (isMounted) setVisitCount(localVisits);
-    } catch {
-      if (isMounted) setVisitCount(1);
-    }
-
-    // 2. Sync with free public counter API
-    const syncCounter = async () => {
-      try {
-        const res = await fetch('https://api.counterapi.dev/v1/shubhangijeve-official-portfolio/visits/up');
-        if (res.ok) {
-          const data = await res.json();
-          if (data && typeof data.count === 'number' && isMounted) {
-            setVisitCount(Math.max(data.count, localVisits));
-          }
-        }
-      } catch {
-        // Fallback already running smoothly from local storage
-      }
-    };
-
-    syncCounter();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   return (
     <footer className="footer" role="contentinfo">
       <div className="container footer__container">
         {/* Left */}
         <div className="footer__left">
           <div className="footer__brand">
-            <div className="footer__logo-mark" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="3" />
-                <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
-                <path d="M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12" />
-              </svg>
-            </div>
+            <div className="footer__logo-mark" aria-hidden="true">SJ</div>
             <div>
               <p className="footer__name">{personalInfo.name}</p>
               <p className="footer__role">{personalInfo.role}</p>
@@ -115,11 +63,11 @@ export default function Footer({ personalInfo, onResumeOpen }: FooterProps) {
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
               <circle cx="12" cy="10" r="3" />
             </svg>
-            Hyderabad, Telangana &mdash; Open to Pune, Ahmedabad, Bengaluru & Remote
+            Hyderabad, India. Open to Bengaluru, Pune, and remote.
           </p>
         </div>
 
-        {/* Middle — quick links */}
+        {/* Middle: quick links */}
         <nav className="footer__nav" aria-label="Footer navigation">
           <p className="footer__nav-title">Quick links</p>
           <ul className="footer__nav-links">
@@ -144,7 +92,7 @@ export default function Footer({ personalInfo, onResumeOpen }: FooterProps) {
           </ul>
         </nav>
 
-        {/* Right — contact & colored social links */}
+        {/* Right: contact links */}
         <div className="footer__right">
           <p className="footer__nav-title">Connect</p>
           <div className="footer__social">
@@ -177,40 +125,16 @@ export default function Footer({ personalInfo, onResumeOpen }: FooterProps) {
         </div>
       </div>
 
-      {/* Bottom bar with Copyright on Left, Total Visits in Center, Status on Right */}
+      {/* Bottom bar: copyright and availability */}
       <div className="footer__bottom">
         <div className="container footer__bottom-content">
           <p className="footer__copyright">
             &copy; {year} {personalInfo.name}. All rights reserved.
           </p>
 
-          {/* Placed prominently in the middle */}
-          <div className="footer__visit-counter" title="Total site visits (increments on refresh)">
-            <span className="footer__visit-pulse" aria-hidden="true" />
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="footer__visit-icon"
-              aria-hidden="true"
-            >
-              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
-            <span className="footer__visit-label">Total Visits:</span>
-            <span className="footer__visit-count">
-              {visitCount.toLocaleString()}
-            </span>
-          </div>
-
           <p className="footer__status-badge">
             <span className="footer__status-dot" aria-hidden="true" />
-            Available for Hire
+            Open to AI Engineer roles
           </p>
         </div>
       </div>

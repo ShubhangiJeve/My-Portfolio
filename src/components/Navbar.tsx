@@ -60,7 +60,7 @@ export default function Navbar({ personalInfo, onResumeOpen }: NavbarProps) {
 
   // Close mobile menu on resize
   useEffect(() => {
-    const onResize = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
+    const onResize = () => { if (window.innerWidth > 860) setMobileOpen(false); };
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
@@ -96,20 +96,16 @@ export default function Navbar({ personalInfo, onResumeOpen }: NavbarProps) {
   };
 
   return (
+    <>
     <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`} role="banner">
       <div className="navbar__container container">
         {/* Logo */}
         <Link
           to="/"
           className="navbar__logo"
-          aria-label={`${personalInfo.name} — Home`}
+          aria-label={`${personalInfo.name}, home`}
         >
-          <span className="navbar__logo-icon" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="3" />
-              <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
-            </svg>
-          </span>
+          <span className="navbar__logo-icon" aria-hidden="true">SJ</span>
           <span className="navbar__logo-name">{personalInfo.name}</span>
         </Link>
 
@@ -154,49 +150,53 @@ export default function Navbar({ personalInfo, onResumeOpen }: NavbarProps) {
           </button>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      <div
-        id="mobile-menu"
-        className={`navbar__mobile ${mobileOpen ? 'navbar__mobile--open' : ''}`}
-        aria-hidden={!mobileOpen}
-      >
-        <nav aria-label="Mobile navigation">
-          <ul className="navbar__mobile-links" role="list">
-            {NAV_LINKS.map((link, i) => (
-              <li
-                key={link.href}
-                style={{ '--i': i } as React.CSSProperties}
-              >
-                <button
-                  className={`navbar__mobile-link ${isActive(link.href) ? 'navbar__mobile-link--active' : ''}`}
-                  onClick={() => handleNavClick(link.href)}
-                  tabIndex={mobileOpen ? 0 : -1}
-                >
-                  {link.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-          <button
-            className="btn btn--primary"
-            onClick={() => { setMobileOpen(false); onResumeOpen(); }}
-            style={{ marginTop: 'var(--space-6)', width: '100%' }}
-            tabIndex={mobileOpen ? 0 : -1}
-          >
-            View Resume
-          </button>
-        </nav>
-      </div>
-
-      {/* Mobile backdrop */}
-      {mobileOpen && (
-        <div
-          className="navbar__backdrop"
-          onClick={() => setMobileOpen(false)}
-          aria-hidden="true"
-        />
-      )}
     </header>
+
+    {/* Mobile Menu — rendered as a sibling of <header>, not a descendant of it.
+        <header> has backdrop-filter, which establishes a containing block for
+        fixed-position descendants; nesting this fixed panel inside it would
+        collapse its height against the 64px header instead of the viewport. */}
+    <div
+      id="mobile-menu"
+      className={`navbar__mobile ${mobileOpen ? 'navbar__mobile--open' : ''}`}
+      aria-hidden={!mobileOpen}
+    >
+      <nav aria-label="Mobile navigation">
+        <ul className="navbar__mobile-links" role="list">
+          {NAV_LINKS.map((link, i) => (
+            <li
+              key={link.href}
+              style={{ '--i': i } as React.CSSProperties}
+            >
+              <button
+                className={`navbar__mobile-link ${isActive(link.href) ? 'navbar__mobile-link--active' : ''}`}
+                onClick={() => handleNavClick(link.href)}
+                tabIndex={mobileOpen ? 0 : -1}
+              >
+                {link.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <button
+          className="btn btn--primary"
+          onClick={() => { setMobileOpen(false); onResumeOpen(); }}
+          style={{ marginTop: 'var(--space-6)', width: '100%' }}
+          tabIndex={mobileOpen ? 0 : -1}
+        >
+          View Resume
+        </button>
+      </nav>
+    </div>
+
+    {/* Mobile backdrop */}
+    {mobileOpen && (
+      <div
+        className="navbar__backdrop"
+        onClick={() => setMobileOpen(false)}
+        aria-hidden="true"
+      />
+    )}
+    </>
   );
 }

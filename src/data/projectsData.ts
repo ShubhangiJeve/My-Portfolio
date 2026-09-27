@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────
-//  Projects Data — All projects with full detail
+//  Projects Data: all projects with full detail
 //  and Mermaid.js architecture diagrams
 // ─────────────────────────────────────────────
 
@@ -11,9 +11,9 @@ export const projects: Project[] = [
     id: 'legalaid',
     name: 'LegalAID',
     shortDescription:
-      'Enterprise AI-powered Legal Research & Litigation Assistance Platform for Indian court case data.',
+      'Legal research and litigation assistant over 25 years of Indian court judgments, with hybrid retrieval and grounded answers.',
     fullDescription:
-      'LegalAID is a production-grade intelligent legal research platform designed to handle massive Indian court case corpora. It combines Retrieval-Augmented Generation (RAG), hybrid semantic search, LLM-driven legal document drafting, and a modern full-stack interface into a single deployable system capable of processing 20,000–75,000 cases per yearly dataset with sub-4-second retrieval latency.',
+      'LegalAID is a legal research platform for Indian court judgments. It ingests yearly datasets of 20,000 to 75,000 cases, indexes them for both vector and full-text search, and answers questions with citations back to the source judgments. When retrieval confidence is low, the system declines to answer instead of guessing. It also drafts notices, memos, and case briefs, and compares cases side by side. Search returns in under 4 seconds across the full 25-year corpus.',
     category: 'enterprise',
     status: 'production',
     experienceId: 'cognitbotz',
@@ -23,19 +23,19 @@ export const projects: Project[] = [
       'LangChain', 'Groq API', 'Docker', 'BAAI/bge-m3',
     ],
     capabilities: [
-      'Multi-stage hybrid RAG pipeline (dense + lexical)',
+      'Hybrid retrieval: pgvector similarity plus PostgreSQL full-text, fused with reciprocal rank fusion',
       'Parent-child chunk retrieval with entity-aware strategies',
-      'Strict hallucination guardrails with abstention policy',
+      'Abstention policy: declines to answer below a retrieval confidence threshold',
       'AI legal document drafting (notices, memos, case briefs)',
       'Side-by-side litigation case comparison',
       'Admin ingestion pipeline console',
       'Sub-4-second search on full 25-year corpus',
     ],
     metrics: [
-      { label: 'Cases Processed',   value: '75K+' },
-      { label: 'Search Latency',    value: '<4s' },
-      { label: 'Years of Data',     value: '25+' },
-      { label: 'Fields Normalized', value: '30+' },
+      { label: 'Cases per yearly dataset', value: '20K to 75K' },
+      { label: 'Search latency',    value: '<4s' },
+      { label: 'Years of judgments', value: '25' },
+      { label: 'Fields normalized', value: '30+' },
     ],
     diagrams: [
       {
@@ -51,16 +51,16 @@ flowchart TD
     E --> F
     F --> G["Parent-Child Chunk Retriever"]
     G --> H{Confidence Threshold}
-    H -- "Below 0.75" --> I(["Abstention — Insufficient Evidence"])
+    H -- "Below 0.75" --> I(["Abstain: insufficient evidence"])
     H -- "Above threshold" --> J[Context Builder]
     J --> K["Groq LLM llama-3.3-70b"]
     K --> L["Response Validator and Citation Verifier"]
     L --> M(["Grounded Legal Answer with Source Citations"])
 
-    style A fill:#6366f1,color:#fff,stroke:none
-    style M fill:#22d3ee,color:#0a0f1e,stroke:none
-    style I fill:#ef4444,color:#fff,stroke:none
-    style K fill:#1e1b4b,color:#a5b4fc,stroke:#6366f1
+    style A fill:#1d4ed8,color:#fff,stroke:none
+    style M fill:#dcfce7,color:#14532d,stroke:#15803d
+    style I fill:#fee2e2,color:#7f1d1d,stroke:#b91c1c
+    style K fill:#eff6ff,color:#1e3a8a,stroke:#1d4ed8
 `,
       },
       {
@@ -68,7 +68,7 @@ flowchart TD
         title: 'System Architecture',
         code: `
 graph TB
-    subgraph Client["Frontend — Next.js 14 and TypeScript"]
+    subgraph Client["Frontend: Next.js 14 and TypeScript"]
         UI1[Natural Language Search]
         UI2[Faceted Case Explorer]
         UI3[Legal Drafting Workspace]
@@ -76,7 +76,7 @@ graph TB
         UI5[Admin Console]
     end
 
-    subgraph API["Backend — FastAPI and SQLAlchemy 2.0"]
+    subgraph API["Backend: FastAPI and SQLAlchemy 2.0"]
         EP1["POST search/rag"]
         EP2["GET cases by ID"]
         EP3["POST draft document"]
@@ -86,13 +86,13 @@ graph TB
         LLMService["Provider-Abstracted LLM Service"]
     end
 
-    subgraph Data["Data Layer — PostgreSQL 16 with pgvector"]
+    subgraph Data["Data layer: PostgreSQL 16 with pgvector"]
         DB[("PostgreSQL Structured and Vector")]
         VEC[("pgvector ANN Index bge-m3 embeddings")]
         FTS[("Full-Text Search tsvector")]
     end
 
-    subgraph Infra["Infrastructure — Docker Compose"]
+    subgraph Infra["Infrastructure: Docker Compose"]
         BE["FastAPI Container Python 3.11"]
         DBContainer["PostgreSQL 16 Container"]
         Ingestion["Ingestion Pipeline Resumable"]
@@ -106,10 +106,10 @@ graph TB
     Ingestion --> Data
     BE --- DBContainer
 
-    style Client fill:#0f172a,stroke:#6366f1,color:#e2e8f0
-    style API fill:#0f172a,stroke:#22d3ee,color:#e2e8f0
-    style Data fill:#0f172a,stroke:#f59e0b,color:#e2e8f0
-    style Infra fill:#0f172a,stroke:#10b981,color:#e2e8f0
+    style Client fill:#f8fafc,stroke:#1d4ed8,color:#0f172a
+    style API fill:#f8fafc,stroke:#0f766e,color:#0f172a
+    style Data fill:#f8fafc,stroke:#b45309,color:#0f172a
+    style Infra fill:#f8fafc,stroke:#15803d,color:#0f172a
 `,
       },
       {
@@ -132,7 +132,7 @@ sequenceDiagram
     E->>E: Generate BAAI bge-m3 embeddings
     E->>DB: Write structured data with vector indexes
     DB-->>E: Resumable checkpoint state
-    Note over E,DB: Single resumable run — no data loss on interruption
+    Note over E,DB: Resumable run, safe to restart after interruption
 `,
       },
     ],
@@ -143,9 +143,9 @@ sequenceDiagram
     id: 'meetops',
     name: 'MeetOps',
     shortDescription:
-      'AI-powered Meeting Copilot & Project Intelligence Platform with agentic LLM integration for Microsoft Teams.',
+      'Meeting copilot for Microsoft Teams that indexes transcripts live and can create Jira tickets or pull SAP GRC metrics mid-meeting.',
     fullDescription:
-      'MeetOps is an enterprise-grade AI meeting intelligence platform that joins Microsoft Teams meetings via ephemeral Dockerized Playwright bots, transcribes and understands meeting context in real time, and exposes an agentic copilot capable of creating Jira tickets, retrieving SAP GRC metrics, and synthesizing meeting transcripts into structured project intelligence — all with sub-second streaming responses.',
+      'MeetOps joins Microsoft Teams meetings through short-lived Playwright bots, one Docker container per meeting. The transcript is chunked by speaker turn and topic, embedded into pgvector, and made available to a copilot that answers questions about the meeting and related project documents. The copilot uses function calling to create Jira tickets, fetch SAP GRC metrics, and write rolling summaries. Answers stream to a React client over Server-Sent Events, and repeated questions are served from a Redis cache.',
     category: 'enterprise',
     status: 'in-progress',
     experienceId: 'cognitbotz',
@@ -158,36 +158,30 @@ sequenceDiagram
       'Ephemeral per-meeting Playwright bot orchestration',
       'Speaker-turn aware RAG chunking over transcripts',
       'Agentic tool-calling (Jira, SAP GRC, summaries)',
-      'Confidence-gated abstention guardrails',
-      'Multi-tier Redis caching for low-latency responses',
-      'SSE streaming to React frontend during live meetings',
-      'Disposable Workspace pattern — zero state contamination',
-    ],
-    metrics: [
-      { label: 'Cache Hit Reduction',  value: '~60%' },
-      { label: 'Confidence Threshold', value: '0.75' },
-      { label: 'Bot Spin-up Time',     value: '<3s' },
-      { label: 'Streaming Latency',    value: '<500ms TTFT' },
+      'Declines to answer when retrieved meeting context scores below 0.75',
+      'Redis cache that skips embedding and LLM calls for repeated questions',
+      'Server-Sent Events streaming to the React client during live meetings',
+      'One container per meeting, reaped by a TTL watchdog so no state carries over',
     ],
     featuredImage: `${import.meta.env.BASE_URL}meetops/meetops-hero.png`,
     media: [
       {
         type: 'video',
         url: `${import.meta.env.BASE_URL}meetops/meetops-demo.mp4`,
-        title: 'Full Product Walkthrough & Live Demo',
-        caption: 'Watch the live end-to-end demonstration of MeetOps: automated Teams meeting transcription, real-time context streaming, AI summaries, project repositories, and agentic actions.',
+        title: 'Product walkthrough',
+        caption: 'End-to-end demo: the bot joins a Teams meeting, the transcript is indexed, and the copilot answers questions and triggers actions.',
       },
       {
         type: 'image',
         url: `${import.meta.env.BASE_URL}meetops/meetops-hero.png`,
-        title: 'MeetOps Landing Page & Real-Time Intelligence Engine',
-        caption: 'Modern AI-driven user interface featuring real-time meeting transcription, automated executive summaries, actionable insights, and privacy-first architecture.',
+        title: 'Landing page',
+        caption: 'MeetOps landing page.',
       },
       {
         type: 'image',
         url: `${import.meta.env.BASE_URL}meetops/meetops-repositories.png`,
-        title: 'Isolated Project Repositories & Knowledge Base',
-        caption: 'Multi-tenant knowledge stores with isolated scoped AI: tracking meetings, documents, and vector chunks (e.g. Legal Aid & MeetOps knowledge bases with live status indicators).',
+        title: 'Project repositories',
+        caption: 'Each project is an isolated knowledge store with its own meetings, documents, and vector chunks. Retrieval is scoped to the selected project.',
       },
     ],
     diagrams: [
@@ -217,7 +211,7 @@ flowchart LR
     C -- Hit --> R([Cached Response via SSE])
     C -- Miss --> D["Semantic Search pgvector ANN"]
     D --> E{"Confidence Score above 0.75?"}
-    E -- No --> F(["Abstain — Insufficient meeting context"])
+    E -- No --> F(["Abstain: insufficient meeting context"])
     E -- Yes --> G["Agentic LLM OpenAI Function Calling"]
     G --> H{Tool Needed?}
     H -- Yes --> I1[Create Jira Ticket]
@@ -231,10 +225,10 @@ flowchart LR
     K --> L[React Frontend]
     K --> C
 
-    style A fill:#6366f1,color:#fff,stroke:none
-    style R fill:#22d3ee,color:#0a0f1e,stroke:none
-    style F fill:#ef4444,color:#fff,stroke:none
-    style G fill:#1e1b4b,color:#a5b4fc,stroke:#6366f1
+    style A fill:#1d4ed8,color:#fff,stroke:none
+    style R fill:#dcfce7,color:#14532d,stroke:#15803d
+    style F fill:#fee2e2,color:#7f1d1d,stroke:#b91c1c
+    style G fill:#eff6ff,color:#1e3a8a,stroke:#1d4ed8
 `,
       },
     ],
@@ -245,9 +239,9 @@ flowchart LR
     id: 'rag-doc-qa',
     name: 'RAG Document QA System',
     shortDescription:
-      'Production-grade AI question answering over PDF and TXT documents with full-stack deployment.',
+      'Question answering over uploaded PDF and TXT files, with source citations and an ingestion dashboard.',
     fullDescription:
-      'A complete end-to-end Retrieval-Augmented Generation system built for document-level Q&A. The system supports multi-document ingestion, semantic chunking, dense embedding with sentence-transformers, ChromaDB vector storage, and a FastAPI backend with an interactive React dashboard for monitoring ingestion KPIs and retrieval quality.',
+      'A retrieval-augmented question answering system for your own documents. It ingests multiple PDF and TXT files, chunks them with overlap, embeds them with sentence-transformers, and stores them in ChromaDB. A FastAPI backend serves answers with source citations, and a React dashboard shows ingestion progress and retrieval results.',
     category: 'personal',
     status: 'completed',
     tech: [
@@ -284,9 +278,9 @@ flowchart TD
         J -- No --> L([Request Clarification])
     end
 
-    style A fill:#6366f1,color:#fff,stroke:none
-    style K fill:#22d3ee,color:#0a0f1e,stroke:none
-    style E fill:#f59e0b,color:#0a0f1e,stroke:none
+    style A fill:#1d4ed8,color:#fff,stroke:none
+    style K fill:#dcfce7,color:#14532d,stroke:#15803d
+    style E fill:#fef3c7,color:#78350f,stroke:#b45309
 `,
       },
     ],
@@ -297,9 +291,9 @@ flowchart TD
     id: 'insurance-claim',
     name: 'Insurance Claim Automation',
     shortDescription:
-      'AI-powered insurance claim processing with Google Gemini AI, LangChain, and automated validation pipelines.',
+      'Extracts fields from medical claim PDFs with Gemini, validates them, and routes each claim to approve, reject, or manual review.',
     fullDescription:
-      'An intelligent insurance claim automation system that processes PDF medical documents using Google Gemini AI for vision and text extraction, routes claims through LangChain-based decision pipelines, and surfaces results via a Flask web application. The system significantly reduces manual review time by automating document extraction, field validation, and claim assessment logic.',
+      'A claim processing pipeline for medical insurance. Gemini extracts diagnosis, billing, and procedure fields from uploaded PDFs, a LangChain chain applies coverage rules, and a validator checks the extracted fields before the claim is marked approve, reject, or manual review. Results are shown in a Flask web app.',
     category: 'personal',
     status: 'completed',
     tech: ['Python', 'Flask', 'LangChain', 'Google Gemini', 'PyPDF2'],
@@ -337,14 +331,144 @@ sequenceDiagram
     ],
   },
 
+  // ─── INTERNSHIP: Argus Multi-Agent Platform ─
+  {
+    id: 'argus',
+    name: 'Argus',
+    shortDescription:
+      'Multi-agent AI platform where a planner agent delegates to specialist agents, with an LLM gateway, guardrails, and full tracing, deployed to production on Azure.',
+    fullDescription:
+      'Argus is a multi-agent AI platform built around a planner-and-specialist pattern. A planner agent decomposes an incoming request and routes sub-tasks to research, analysis, and writing agents, each restricted to its own tool allowlist. LLM calls go through OpenRouter for provider fallback and per-task model selection, and retrieval runs on NVIDIA NIM-hosted embeddings. Every agent step and tool call is traced in Langfuse, and both the input and output of the pipeline pass through guardrails before anything is logged or returned. The stack is deployed on an Azure VM behind Nginx, with Docker Compose running the API and worker processes.',
+    category: 'internship',
+    status: 'production',
+    experienceId: 'infosys',
+    tech: [
+      'Python', 'FastAPI', 'Pydantic v2', 'OpenRouter',
+      'NVIDIA NIM', 'Langfuse', 'React', 'TypeScript',
+      'Docker Compose', 'Nginx', 'Azure VM',
+    ],
+    capabilities: [
+      'Planner agent that decomposes requests and delegates to research, analysis, and writing agents',
+      'Per-agent tool allowlists so each agent can only call what its role needs',
+      'OpenRouter as an LLM gateway: provider fallback and per-task model selection instead of a single hardcoded vendor',
+      'NVIDIA NIM-hosted embedding endpoints for retrieval, decoupled from the generation layer',
+      'Input guardrails: prompt-injection pattern checks before a request reaches an agent',
+      'Output guardrails: Pydantic schema validation and PII redaction before responses are logged',
+      'Full Langfuse tracing on every agent step, tool call, and token cost, down to session-level replay',
+      'Streaming React frontend that shows the active agent and its intermediate tool calls',
+      'Deployed on an Azure VM: Docker Compose services behind Nginx, custom domain, and TLS',
+    ],
+    metrics: [
+      { label: 'Specialist agents', value: '4' },
+      { label: 'LLM providers via gateway', value: '3+' },
+      { label: 'Guardrail layers', value: 'Input + Output' },
+      { label: 'Deployment', value: 'Azure VM' },
+    ],
+    diagrams: [
+      {
+        type: 'mermaid',
+        title: 'Multi-Agent Orchestration',
+        code: `
+flowchart TD
+    A([User Request]) --> B["Planner Agent: task decomposition"]
+    B --> C{Route Sub-Tasks}
+    C --> D["Research Agent web and doc tools"]
+    C --> E["Analysis Agent data and reasoning tools"]
+    C --> F["Writing Agent drafting and formatting"]
+    D --> G["Tool Allowlist Guard"]
+    E --> G
+    F --> G
+    G --> H["Aggregator: merge agent outputs"]
+    H --> I{Output Guardrail}
+    I -- "Schema invalid or PII" --> J(["Reject or redact response"])
+    I -- "Passes validation" --> K(["Final response to user"])
+    B -.trace.-> L[(Langfuse)]
+    D -.trace.-> L
+    E -.trace.-> L
+    F -.trace.-> L
+
+    style A fill:#1d4ed8,color:#fff,stroke:none
+    style K fill:#dcfce7,color:#14532d,stroke:#15803d
+    style J fill:#fee2e2,color:#7f1d1d,stroke:#b91c1c
+    style L fill:#fef3c7,color:#78350f,stroke:#b45309
+`,
+      },
+      {
+        type: 'mermaid',
+        title: 'System Architecture',
+        code: `
+graph TB
+    subgraph Client["Frontend: React and TypeScript"]
+        UI1[Streaming Chat Interface]
+        UI2[Active Agent and Tool-Call View]
+    end
+
+    subgraph API["Backend: FastAPI and Pydantic v2"]
+        EP1["POST agent/run"]
+        EP2["GET session trace"]
+        Guardrails["Input and Output Guardrails"]
+        Orchestrator["Agent Orchestrator planner plus specialists"]
+    end
+
+    subgraph LLM["Model Layer"]
+        GW["OpenRouter Gateway"]
+        NIM["NVIDIA NIM Embeddings"]
+        Obs[("Langfuse Tracing")]
+    end
+
+    subgraph Infra["Infrastructure: Azure VM"]
+        Nginx["Nginx Reverse Proxy and TLS"]
+        API_C["FastAPI Container"]
+        Worker_C["Agent Worker Container"]
+    end
+
+    Client --> Nginx --> API
+    API --> Guardrails --> Orchestrator
+    Orchestrator --> GW
+    Orchestrator --> NIM
+    Orchestrator --> Obs
+    API_C --- Worker_C
+
+    style Client fill:#f8fafc,stroke:#1d4ed8,color:#0f172a
+    style API fill:#f8fafc,stroke:#0f766e,color:#0f172a
+    style LLM fill:#f8fafc,stroke:#b45309,color:#0f172a
+    style Infra fill:#f8fafc,stroke:#15803d,color:#0f172a
+`,
+      },
+      {
+        type: 'mermaid',
+        title: 'Production Deployment',
+        code: `
+sequenceDiagram
+    participant U as Client Browser
+    participant DNS as DNS
+    participant N as Nginx Azure VM
+    participant API as FastAPI Container
+    participant GW as OpenRouter Gateway
+    participant OBS as Langfuse
+
+    U->>DNS: Resolve domain
+    DNS-->>U: Azure VM public IP
+    U->>N: HTTPS request
+    N->>API: Reverse-proxied request
+    API->>GW: Route LLM call by task and provider fallback
+    GW-->>API: Model response
+    API->>OBS: Emit trace agent steps tool calls tokens
+    API-->>N: Streamed response
+    N-->>U: HTTPS response over TLS
+`,
+      },
+    ],
+  },
+
   // ─── INTERNSHIP: Healthcare RAG ─────────────
   {
     id: 'healthcare-rag',
     name: 'Healthcare RAG Chatbot',
     shortDescription:
-      'Medically grounded RAG chatbot built on Wikipedia health dataset with FAISS vector search.',
+      'Health Q&A chatbot over a Wikipedia medical dataset, with FAISS retrieval and source verification on every answer.',
     fullDescription:
-      'A healthcare-focused RAG chatbot developed during the Infosys Springboard internship. The system retrieves medically relevant chunks from a curated Wikipedia dataset via FAISS vector search, passes them as grounded context to an LLM, and exposes multi-turn conversation via a React frontend. All API endpoints are secured and responses are source-verified to prevent hallucinated medical information.',
+      'Built during the Infosys Springboard internship. The chatbot retrieves relevant chunks from a Wikipedia health dataset with FAISS, passes them to an LLM as context, and checks that each answer is supported by a source before returning it. If it is not, the user gets a safe fallback message. The React frontend supports multi-turn conversation, and the Flask API endpoints are secured.',
     category: 'internship',
     status: 'completed',
     experienceId: 'infosys',
@@ -373,9 +497,9 @@ flowchart LR
     H --> J[React Chat UI]
     I --> J
 
-    style A fill:#6366f1,color:#fff,stroke:none
-    style H fill:#22d3ee,color:#0a0f1e,stroke:none
-    style D fill:#f59e0b,color:#0a0f1e,stroke:none
+    style A fill:#1d4ed8,color:#fff,stroke:none
+    style H fill:#dcfce7,color:#14532d,stroke:#15803d
+    style D fill:#fef3c7,color:#78350f,stroke:#b45309
 `,
       },
     ],

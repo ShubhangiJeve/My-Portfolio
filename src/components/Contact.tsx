@@ -154,25 +154,19 @@ export default function Contact({ personalInfo }: ContactProps) {
       <div className="container">
         {/* Header */}
         <div className={`section-header reveal ${isVisible ? 'is-visible' : ''}`}>
-          <p className="section-label">Get In Touch</p>
-          <h2 className="section-title">
-            Let's <span className="gradient-text">Connect</span>
-          </h2>
+          <p className="section-label">Contact</p>
+          <h2 className="section-title">Get in touch</h2>
           <p className="section-subtitle">
-            Open to AI Engineer roles, collaborations, and interesting conversations. Drop me a message — I reply within 24 hours.
+            I'm interviewing for AI Engineer, LLM Engineer, and backend-for-AI roles. Email is the fastest way to reach me.
           </p>
         </div>
 
         <div className="contact__layout">
-          {/* Left — info cards */}
-          <div className={`contact__info reveal reveal-delay-1 ${isVisible ? 'is-visible' : ''}`}>
-            <div className="contact__availability">
+          {/* Left: contact links */}
+          <div className={`contact__info reveal ${isVisible ? 'is-visible' : ''}`}>
+            <p className="contact__availability">
               <span className="contact__availability-dot" aria-hidden="true" />
-              <span className="contact__availability-text">Available for hire · Open to opportunities</span>
-            </div>
-
-            <p className="contact__info-desc">
-              I'm actively looking for AI Engineer roles where I can architect and own intelligent systems end to end. Whether it's a full-time position, contract work, or a collaboration — let's talk.
+              Open to full-time roles in Hyderabad, Bengaluru, Pune, or remote
             </p>
 
             <div className="contact__cards">
@@ -212,8 +206,8 @@ export default function Contact({ personalInfo }: ContactProps) {
             </div>
           </div>
 
-          {/* Right — contact form */}
-          <div className={`contact__form-wrapper reveal reveal-delay-2 ${isVisible ? 'is-visible' : ''}`}>
+          {/* Right: contact form */}
+          <div className={`contact__form-wrapper reveal ${isVisible ? 'is-visible' : ''}`}>
             {status === 'success' ? (
               <div className="contact__success">
                 <div className="contact__success-icon" aria-hidden="true">
@@ -222,16 +216,17 @@ export default function Contact({ personalInfo }: ContactProps) {
                     <polyline points="22 4 12 14.01 9 11.01" />
                   </svg>
                 </div>
-                <h3 className="contact__success-title">Message Sent!</h3>
+                <h3 className="contact__success-title">Your email app should be open</h3>
                 <p className="contact__success-body">
-                  Your mail client has been opened with the message pre-filled. I'll get back to you soon.
+                  The message is pre-filled there. Press send to deliver it. If nothing opened, email me directly at{' '}
+                  <a href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>.
                 </p>
                 <button
                   type="button"
                   className="btn btn--outline"
                   onClick={handleReset}
                 >
-                  Send Another
+                  Write another message
                 </button>
               </div>
             ) : (
@@ -242,7 +237,7 @@ export default function Contact({ personalInfo }: ContactProps) {
                 noValidate
                 aria-label="Contact form"
               >
-                <h3 className="contact__form-title">Send a Message</h3>
+                <h3 className="contact__form-title">Send a message</h3>
 
                 {/* Name + Email row */}
                 <div className="contact__form-row">
@@ -355,7 +350,7 @@ export default function Contact({ personalInfo }: ContactProps) {
                     </>
                   ) : (
                     <>
-                      Send Message
+                      Open in email app
                       <svg
                         width="16"
                         height="16"

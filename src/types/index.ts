@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────
-//  Portfolio — Centralized TypeScript Types
+//  Portfolio: centralized TypeScript types
 // ─────────────────────────────────────────────
 
 export interface PersonalInfo {
@@ -14,7 +14,6 @@ export interface PersonalInfo {
   linkedin: string;
   location: string;
   objective: string;
-  profileSummary: string[];
   avatarUrl?: string;
 }
 
@@ -27,11 +26,14 @@ export interface Education {
 
 // ─── Skills ───────────────────────────────────
 
+export type ProficiencyLevel = 'core' | 'proficient' | 'familiar';
+
 export interface SkillItem {
   name: string;
   logoUrl: string;
-  /** Optional: override logo color when displayed on dark bg */
-  logoColor?: string;
+  level: ProficiencyLevel;
+  /** Where this was actually used, e.g. "LegalAID, Argus". Omitted for baseline tooling. */
+  usedIn?: string;
 }
 
 export interface SkillCategory {

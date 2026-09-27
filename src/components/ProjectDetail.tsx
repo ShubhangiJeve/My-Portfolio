@@ -5,7 +5,7 @@ import type { Diagram } from '../types';
 import CustomVideoPlayer from './CustomVideoPlayer';
 import './ProjectDetail.css';
 
-// ─── Lazy Mermaid loader — fetches the script once, caches the promise ────────
+// ─── Lazy Mermaid loader: fetches the script once, caches the promise ─────────
 
 let mermaidLoadPromise: Promise<void> | null = null;
 
@@ -67,22 +67,24 @@ function MermaidDiagram({ diagram, index }: MermaidDiagramProps) {
 
       m.initialize({
         startOnLoad: false,
-        theme: 'dark',
+        theme: 'base',
         themeVariables: {
-          primaryColor: '#6366f1',
-          primaryTextColor: '#f1f5f9',
-          primaryBorderColor: '#6366f1',
-          lineColor: '#475569',
-          secondaryColor: '#1e293b',
-          tertiaryColor: '#0f172a',
-          background: '#0a0f1e',
-          mainBkg: '#111827',
-          nodeBorder: '#6366f1',
-          clusterBkg: '#0f172a',
-          titleColor: '#f1f5f9',
-          edgeLabelBackground: '#1e293b',
-          attributeBackgroundColorEven: '#111827',
-          attributeBackgroundColorOdd: '#0f172a',
+          primaryColor: '#f8fafc',
+          primaryTextColor: '#0f172a',
+          primaryBorderColor: '#94a3b8',
+          lineColor: '#64748b',
+          secondaryColor: '#f1f5f9',
+          tertiaryColor: '#ffffff',
+          background: '#ffffff',
+          mainBkg: '#f8fafc',
+          nodeBorder: '#94a3b8',
+          clusterBkg: '#ffffff',
+          titleColor: '#0f172a',
+          edgeLabelBackground: '#ffffff',
+          actorBkg: '#f8fafc',
+          actorBorder: '#94a3b8',
+          noteBkgColor: '#fffbeb',
+          noteBorderColor: '#fde68a',
         },
         securityLevel: 'loose',
         fontFamily: "'Inter', system-ui, sans-serif",
@@ -164,7 +166,7 @@ export default function ProjectDetail() {
   return (
     <main className="project-detail">
       {/* Unified Hero Header with Breadcrumbs */}
-      <header className="project-detail__header mesh-bg">
+      <header className="project-detail__header">
         <div className="container project-detail__header-content">
           {/* Breadcrumb Navigation */}
           <nav className="project-detail__breadcrumb" aria-label="Breadcrumb">
@@ -172,7 +174,7 @@ export default function ProjectDetail() {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <polyline points="15 18 9 12 15 6" />
               </svg>
-              <span>Back to Projects</span>
+              <span>All projects</span>
             </Link>
             <span className="project-detail__breadcrumb-sep" aria-hidden="true">/</span>
             <span className="project-detail__breadcrumb-current">{project.name}</span>
@@ -181,9 +183,7 @@ export default function ProjectDetail() {
           {/* Badges */}
           <div className="project-detail__badges">
             <span className={`badge ${statusCfg.className}`}>
-              {project.status === 'production' && (
-                <span className="project-card__pulse" aria-hidden="true" />
-              )}
+              <span className="status-dot" aria-hidden="true" />
               {statusCfg.label}
             </span>
             <span className="badge badge--primary">
@@ -204,7 +204,7 @@ export default function ProjectDetail() {
             <div className="project-detail__metrics">
               {project.metrics.map((m) => (
                 <div key={m.label} className="project-detail__metric">
-                  <span className="project-detail__metric-value gradient-text">
+                  <span className="project-detail__metric-value">
                     {m.value}
                   </span>
                   <span className="project-detail__metric-label">{m.label}</span>
@@ -267,7 +267,7 @@ export default function ProjectDetail() {
             {project.media && project.media.length > 0 && (
               <section className="project-detail__section" aria-labelledby="media-heading">
                 <h2 id="media-heading" className="project-detail__section-title">
-                  Live Walkthrough & Interface
+                  Demo and screenshots
                 </h2>
                 <div className="project-detail__media-grid">
                   {project.media.map((item, idx) => (
@@ -308,11 +308,6 @@ export default function ProjectDetail() {
                               />
                             )}
                             <div className="project-detail__video-actions">
-                              <div className="project-detail__video-action-hint">
-                                <span className="badge badge--green">Custom HD Player</span>
-                                <span>Click screen or big button to play with sound active</span>
-                              </div>
-
                               <a
                                 href={item.url}
                                 target="_blank"
@@ -324,7 +319,7 @@ export default function ProjectDetail() {
                                   <polyline points="15 3 21 3 21 9" />
                                   <line x1="10" y1="14" x2="21" y2="3" />
                                 </svg>
-                                <span>Direct Video File (14 MB)</span>
+                                <span>Open video file (14.5 MB)</span>
                               </a>
                             </div>
                           </div>
@@ -352,7 +347,7 @@ export default function ProjectDetail() {
             {project.diagrams.length > 0 && (
               <section className="project-detail__section" aria-labelledby="diagrams-heading">
                 <h2 id="diagrams-heading" className="project-detail__section-title">
-                  Architecture & Diagrams
+                  Architecture
                 </h2>
                 <div className="project-detail__diagrams">
                   {project.diagrams.map((d, idx) => (
@@ -376,7 +371,7 @@ export default function ProjectDetail() {
               <h3 className="project-detail__sidebar-title">Tech Stack</h3>
               <div className="project-detail__tech-list">
                 {project.tech.map((t) => (
-                  <span key={t} className="tag tag--primary">
+                  <span key={t} className="tag">
                     {t}
                   </span>
                 ))}
@@ -395,17 +390,15 @@ export default function ProjectDetail() {
                   <dt>Status</dt>
                   <dd>
                     <span className={`badge ${statusCfg.className}`}>
-                      {project.status === 'production' && (
-                        <span className="project-card__pulse" aria-hidden="true" />
-                      )}
+                      <span className="status-dot" aria-hidden="true" />
                       {statusCfg.label}
                     </span>
                   </dd>
                 </div>
                 {project.diagrams.length > 0 && (
                   <div>
-                    <dt>Architecture Diagrams</dt>
-                    <dd>{project.diagrams.length} interactive diagrams</dd>
+                    <dt>Architecture diagrams</dt>
+                    <dd>{project.diagrams.length}</dd>
                   </div>
                 )}
               </dl>

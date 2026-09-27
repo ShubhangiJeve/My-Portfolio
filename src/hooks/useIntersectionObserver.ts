@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────
-//  useIntersectionObserver — Reveal animations
+//  useIntersectionObserver: reveal animations
 // ─────────────────────────────────────────────
 
 import { useEffect, useRef, useState, type RefObject } from 'react';

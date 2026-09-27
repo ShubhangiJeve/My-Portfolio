@@ -1,11 +1,17 @@
 import { useState, useCallback } from 'react';
-import type { SkillCategory, SkillItem } from '../types';
+import type { ProficiencyLevel, SkillCategory, SkillItem } from '../types';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import './Skills.css';
 
 interface SkillsProps {
   skillCategories: SkillCategory[];
 }
+
+const LEVEL_CONFIG: Record<ProficiencyLevel, { label: string; fill: number }> = {
+  core:       { label: 'Core',       fill: 4 },
+  proficient: { label: 'Proficient', fill: 3 },
+  familiar:   { label: 'Familiar',   fill: 2 },
+};
 
 function SkillLogo({ skill }: { skill: SkillItem }) {
   const [imgError, setImgError] = useState(false);
@@ -35,6 +41,17 @@ function SkillLogo({ skill }: { skill: SkillItem }) {
   );
 }
 
+function LevelDots({ level }: { level: ProficiencyLevel }) {
+  const cfg = LEVEL_CONFIG[level];
+  return (
+    <span className={`skill-item__dots skill-item__dots--${level}`} aria-hidden="true">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <span key={i} className={`skill-item__dot ${i < cfg.fill ? 'skill-item__dot--filled' : ''}`} />
+      ))}
+    </span>
+  );
+}
+
 export default function Skills({ skillCategories }: SkillsProps) {
   const [sectionRef, isVisible] = useIntersectionObserver<HTMLElement>();
   const [activeCategory, setActiveCategory] = useState<string>(
@@ -52,18 +69,26 @@ export default function Skills({ skillCategories }: SkillsProps) {
       <div className="container">
         {/* Header */}
         <div className={`section-header reveal ${isVisible ? 'is-visible' : ''}`}>
-          <p className="section-label">Toolbox</p>
-          <h2 className="section-title">
-            Technical <span className="gradient-text">Skills</span>
-          </h2>
+          <p className="section-label section-label--warm">Skills</p>
+          <h2 className="section-title">Technical skills</h2>
           <p className="section-subtitle">
-            Technologies I use to design, build, and deploy production AI systems.
+            Languages, frameworks, and tools I have used in shipped work, with proficiency and
+            where each one was actually used.
           </p>
+
+          <div className="skills__legend" aria-hidden="true">
+            {(Object.keys(LEVEL_CONFIG) as ProficiencyLevel[]).map((level) => (
+              <span key={level} className="skills__legend-item">
+                <LevelDots level={level} />
+                {LEVEL_CONFIG[level].label}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Category tabs */}
         <div
-          className={`skills__tabs reveal reveal-delay-1 ${isVisible ? 'is-visible' : ''}`}
+          className={`skills__tabs reveal ${isVisible ? 'is-visible' : ''}`}
           role="tablist"
           aria-label="Skill categories"
         >
@@ -77,7 +102,6 @@ export default function Skills({ skillCategories }: SkillsProps) {
               className={`skills__tab ${activeCategory === category.id ? 'skills__tab--active' : ''}`}
               onClick={() => setActiveCategory(category.id)}
             >
-              <span aria-hidden="true" className="skills__tab-icon">{category.icon}</span>
               {category.label}
             </button>
           ))}
@@ -89,19 +113,20 @@ export default function Skills({ skillCategories }: SkillsProps) {
             id={`panel-${activeGroup.id}`}
             role="tabpanel"
             aria-labelledby={`tab-${activeGroup.id}`}
-            className={`skills__panel reveal reveal-delay-2 ${isVisible ? 'is-visible' : ''}`}
+            className={`skills__panel reveal ${isVisible ? 'is-visible' : ''}`}
           >
             <div className="skills__grid">
-              {activeGroup.skills.map((skill, i) => (
+              {activeGroup.skills.map((skill) => (
                 <div
                   key={skill.name}
                   className="skill-item"
-                  style={{ '--delay': `${i * 40}ms` } as React.CSSProperties}
+                  title={skill.usedIn ? `${LEVEL_CONFIG[skill.level].label} — used in ${skill.usedIn}` : LEVEL_CONFIG[skill.level].label}
                 >
                   <div className="skill-item__logo">
                     <SkillLogo skill={skill} />
                   </div>
                   <span className="skill-item__name">{skill.name}</span>
+                  <LevelDots level={skill.level} />
                 </div>
               ))}
             </div>

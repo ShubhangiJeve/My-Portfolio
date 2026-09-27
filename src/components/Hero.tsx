@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import type { PersonalInfo } from '../types';
 import './Hero.css';
 
@@ -7,138 +6,47 @@ interface HeroProps {
   onResumeOpen: () => void;
 }
 
-const TYPEWRITER_ROLES = [
-  'AI Engineer',
-  'LLM Systems Builder',
-  'RAG Pipeline Architect',
-  'Full-Stack AI Developer',
-];
+const CORE_STACK = ['Python', 'FastAPI', 'PostgreSQL + pgvector', 'LangChain', 'Redis', 'Docker', 'Next.js'];
 
 export default function Hero({ personalInfo, onResumeOpen }: HeroProps) {
-  const typewriterRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let timeoutId: ReturnType<typeof setTimeout>;
-
-    const type = () => {
-      const el = typewriterRef.current;
-      if (!el) return;
-
-      const currentRole = TYPEWRITER_ROLES[roleIndex];
-      const speed = isDeleting ? 40 : 90;
-      const pauseAfterWord = 2200;
-      const pauseAfterDelete = 400;
-
-      if (!isDeleting) {
-        el.textContent = currentRole.slice(0, charIndex + 1);
-        charIndex++;
-        if (charIndex === currentRole.length) {
-          isDeleting = true;
-          timeoutId = setTimeout(type, pauseAfterWord);
-          return;
-        }
-      } else {
-        el.textContent = currentRole.slice(0, charIndex - 1);
-        charIndex--;
-        if (charIndex === 0) {
-          isDeleting = false;
-          roleIndex = (roleIndex + 1) % TYPEWRITER_ROLES.length;
-          timeoutId = setTimeout(type, pauseAfterDelete);
-          return;
-        }
-      }
-
-      timeoutId = setTimeout(type, speed);
-    };
-
-    timeoutId = setTimeout(type, 600);
-    return () => clearTimeout(timeoutId);
-  }, []);
-
   const scrollToProjects = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section className="hero mesh-bg dot-grid" id="home" aria-label="Introduction">
-      {/* Floating orbs — decorative only */}
-      <div className="hero__orb hero__orb--1" aria-hidden="true" />
-      <div className="hero__orb hero__orb--2" aria-hidden="true" />
-
+    <section className="hero" id="home" aria-label="Introduction">
       <div className="container hero__container">
         <div className="hero__content">
-          {/* Greeting */}
-          <p className="hero__greeting animate-fade-in-up">
-            <span className="hero__greeting-spark" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
-              </svg>
-            </span>
-            Hey there, I'm
+          <p className="hero__eyebrow">
+            {personalInfo.role} · {personalInfo.location}
           </p>
 
-          {/* Name */}
-          <h1 className="hero__name animate-fade-in-up" style={{ animationDelay: '100ms' }}>
-            {personalInfo.firstName}{' '}
-            <span className="gradient-text">{personalInfo.lastName}</span>
-          </h1>
+          <h1 className="hero__name">{personalInfo.name}</h1>
 
-          {/* Typewriter role */}
-          <div className="hero__role animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-            <span
-              ref={typewriterRef}
-              className="hero__role-text"
-              aria-label={`Role: ${personalInfo.role}`}
-            />
-            <span className="hero__cursor" aria-hidden="true" />
-          </div>
+          <p className="hero__tagline">{personalInfo.tagline}</p>
 
-          {/* Tagline */}
-          <p
-            className="hero__tagline animate-fade-in-up"
-            style={{ animationDelay: '300ms' }}
-          >
-            {personalInfo.tagline}
-          </p>
+          <p className="hero__objective">{personalInfo.objective}</p>
 
-          {/* Objective snippet */}
-          <p
-            className="hero__objective animate-fade-in-up"
-            style={{ animationDelay: '400ms' }}
-          >
-            {personalInfo.objective}
-          </p>
+          <ul className="hero__stack" aria-label="Core stack">
+            {CORE_STACK.map((item) => (
+              <li key={item} className="tag">{item}</li>
+            ))}
+          </ul>
 
-          {/* CTA buttons */}
-          <div
-            className="hero__cta animate-fade-in-up"
-            style={{ animationDelay: '500ms' }}
-          >
-            <button className="btn btn--primary btn--lg" onClick={scrollToProjects}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-              </svg>
-              View Projects
+          <div className="hero__cta">
+            <button type="button" className="btn btn--primary btn--lg" onClick={scrollToProjects}>
+              View projects
             </button>
-            <button className="btn btn--ghost btn--lg" onClick={onResumeOpen}>
+            <button type="button" className="btn btn--ghost btn--lg" onClick={onResumeOpen}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                 <polyline points="14 2 14 8 20 8" />
               </svg>
-              View Resume
+              Resume
             </button>
           </div>
 
-          {/* Social links */}
-          <div
-            className="hero__social animate-fade-in-up"
-            style={{ animationDelay: '600ms' }}
-          >
+          <div className="hero__social">
             <a
               href={personalInfo.github}
               target="_blank"
@@ -174,33 +82,24 @@ export default function Hero({ personalInfo, onResumeOpen }: HeroProps) {
           </div>
         </div>
 
-        {/* Profile Avatar Card */}
         {personalInfo.avatarUrl && (
-          <div className="hero__avatar-col animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-            <div className="hero__avatar-card">
-              <div className="hero__avatar-ring" aria-hidden="true" />
-              <div className="hero__avatar-img-box">
-                <img
-                  src={personalInfo.avatarUrl}
-                  alt={personalInfo.name}
-                  className="hero__avatar-img"
-                  width="320"
-                  height="360"
-                />
-              </div>
-              <div className="hero__avatar-badge">
-                <span className="hero__avatar-status-dot" aria-hidden="true" />
-                <span>Available for AI Roles</span>
-              </div>
-            </div>
-          </div>
+          <figure className="hero__avatar">
+            <img
+              src={personalInfo.avatarUrl}
+              alt={`Portrait of ${personalInfo.name}`}
+              className="hero__avatar-img"
+              width="320"
+              height="380"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
+            <figcaption className="hero__avatar-caption">
+              <span className="hero__avatar-dot" aria-hidden="true" />
+              Open to AI Engineer roles
+            </figcaption>
+          </figure>
         )}
-
-        {/* Scroll indicator */}
-        <div className="hero__scroll-indicator" aria-hidden="true">
-          <div className="hero__scroll-line" />
-          <span>scroll</span>
-        </div>
       </div>
     </section>
   );

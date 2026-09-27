@@ -4,7 +4,7 @@ import './ResumeModal.css';
 interface ResumeModalProps {
   isOpen: boolean;
   onClose: () => void;
-  /** Path relative to public dir — e.g. '/resume.pdf' */
+  /** Path relative to public dir, e.g. '/resume.pdf' */
   resumePath: string;
   candidateName: string;
 }

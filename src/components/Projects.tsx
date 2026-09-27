@@ -65,23 +65,21 @@ export default function Projects({ projects }: ProjectsProps) {
     <section
       id="projects"
       ref={sectionRef}
-      className="section projects-section mesh-bg"
+      className="section projects-section"
     >
       <div className="container">
         {/* Header */}
         <div className={`section-header reveal ${isVisible ? 'is-visible' : ''}`}>
-          <p className="section-label">What I've Built</p>
-          <h2 className="section-title">
-            Featured <span className="gradient-text">Projects</span>
-          </h2>
+          <p className="section-label">Projects</p>
+          <h2 className="section-title">Selected projects</h2>
           <p className="section-subtitle">
-            Enterprise-grade RAG systems, agentic workflows, and high-performance AI architectures with interactive system diagrams.
+            Two enterprise platforms from my current role, a production multi-agent system, plus earlier RAG and document AI work. Each page covers the architecture, the design decisions, and the tech stack.
           </p>
         </div>
 
         {/* Grid */}
         <div className="projects__grid" role="list">
-          {projects.map((project, index) => {
+          {projects.map((project) => {
             const statusCfg   = STATUS_CONFIG[project.status];
             const categoryCfg = CATEGORY_CONFIG[project.category];
 
@@ -89,15 +87,12 @@ export default function Projects({ projects }: ProjectsProps) {
               <article
                 key={project.id}
                 role="listitem"
-                className={`project-card reveal reveal-delay-${Math.min((index % 3) + 1, 5)} ${isVisible ? 'is-visible' : ''}`}
+                className={`project-card reveal ${isVisible ? 'is-visible' : ''}`}
                 onClick={() => handleCardClick(project.id)}
                 onKeyDown={(e) => handleKeyDown(e, project.id)}
                 tabIndex={0}
-                aria-label={`${project.name} — click to view architecture and details`}
+                aria-label={`${project.name}: view architecture and details`}
               >
-                {/* Top glow border */}
-                <div className="project-card__top-border" aria-hidden="true" />
-
                 {/* Visual Thumbnail (if available) */}
                 {project.featuredImage && (
                   <div className="project-card__thumbnail">
@@ -106,7 +101,6 @@ export default function Projects({ projects }: ProjectsProps) {
                       alt={`${project.name} preview`}
                       loading="lazy"
                     />
-                    <div className="project-card__thumbnail-overlay" />
                   </div>
                 )}
 
@@ -114,9 +108,7 @@ export default function Projects({ projects }: ProjectsProps) {
                 <div className="project-card__header">
                   <div className="project-card__badges">
                     <span className={`badge ${statusCfg.className}`}>
-                      {project.status === 'production' && (
-                        <span className="project-card__pulse" aria-hidden="true" />
-                      )}
+                      <span className="status-dot" aria-hidden="true" />
                       {statusCfg.label}
                     </span>
                     <span className="badge badge--primary project-card__category-badge">
@@ -167,7 +159,7 @@ export default function Projects({ projects }: ProjectsProps) {
                   </div>
 
                   <div className="project-card__cta">
-                    <span>Architecture & Code</span>
+                    <span>Architecture and details</span>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="5" y1="12" x2="19" y2="12" />
                       <polyline points="12 5 19 12 12 19" />

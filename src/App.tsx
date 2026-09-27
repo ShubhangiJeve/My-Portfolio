@@ -7,7 +7,7 @@ import Hero        from './components/Hero';
 import Footer      from './components/Footer';
 import ResumeModal from './components/ResumeModal';
 
-// ── Lazy-load everything below the fold ──────────────────────────────────────
+// ── Lazy-load everything below the fold ───────────────────────────────────────
 const About        = lazy(() => import('./components/About'));
 const Profile      = lazy(() => import('./components/Profile'));
 const Experience   = lazy(() => import('./components/Experience'));
@@ -19,7 +19,7 @@ const ProjectDetail = lazy(() => import('./components/ProjectDetail'));
 import './index.css';
 import './App.css';
 
-// Minimal inline fallback — no layout shift, matches dark bg
+// Minimal inline fallback: reserves space, matches page background
 function SectionFallback() {
   return (
     <div
@@ -38,11 +38,11 @@ function SectionFallback() {
 // ─── Main portfolio home page ─────────────────────
 
 function HomePage({ onResumeOpen }: { onResumeOpen: () => void }) {
-  const { personalInfo, experience, projects, skillCategories } = portfolioData;
+  const { personalInfo, education, experience, projects, skillCategories } = portfolioData;
 
   return (
     <main id="main-content">
-      {/* Hero is above the fold — always eager */}
+      {/* Hero is above the fold, always eager */}
       <Hero personalInfo={personalInfo} onResumeOpen={onResumeOpen} />
 
       {/* Everything below the fold is lazy */}
@@ -50,7 +50,7 @@ function HomePage({ onResumeOpen }: { onResumeOpen: () => void }) {
         <About personalInfo={personalInfo} />
       </Suspense>
       <Suspense fallback={<SectionFallback />}>
-        <Profile personalInfo={personalInfo} />
+        <Profile education={education} />
       </Suspense>
       <Suspense fallback={<SectionFallback />}>
         <Experience experience={experience} />
@@ -80,7 +80,7 @@ export default function App() {
 
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
-      {/* Skip to content — accessibility */}
+      {/* Skip to content link for keyboard users */}
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
