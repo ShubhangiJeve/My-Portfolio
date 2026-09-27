@@ -1,0 +1,109 @@
+/* ── Scroll Navigation Buttons ───────────────────────── */
+.scroll-buttons {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 850;
+  pointer-events: none;
+  animation: scroll-btn-fade-in 300ms var(--ease-out);
+}
+
+@keyframes scroll-btn-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.scroll-buttons__pill {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40px;
+  background: rgba(254, 252, 248, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 16px rgba(28, 23, 18, 0.12), 0 1px 3px rgba(28, 23, 18, 0.08);
+  padding: 3px;
+  transition: box-shadow var(--duration-fast), transform var(--duration-fast);
+}
+
+.scroll-buttons__pill:hover {
+  box-shadow: 0 8px 24px rgba(28, 23, 18, 0.16), 0 2px 6px rgba(28, 23, 18, 0.08);
+}
+
+.scroll-buttons__btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background var(--duration-fast), color var(--duration-fast), transform var(--duration-fast), opacity var(--duration-fast);
+}
+
+.scroll-buttons__btn:hover:not(:disabled) {
+  background: var(--color-bg-elevated);
+  color: var(--color-accent-primary);
+  transform: scale(1.1);
+}
+
+.scroll-buttons__btn:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+.scroll-buttons__btn:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+.scroll-buttons__btn--disabled {
+  opacity: 0.28;
+  cursor: default;
+  pointer-events: none;
+}
+
+.scroll-buttons__divider {
+  width: 20px;
+  height: 1px;
+  background: var(--color-border);
+  margin: 1px 0;
+  opacity: 0.7;
+}
+
+/* ── Mobile Responsive ────────────────────────── */
+@media (max-width: 600px) {
+  .scroll-buttons {
+    bottom: 16px;
+    right: 14px;
+  }
+
+  .scroll-buttons__pill {
+    width: 36px;
+    padding: 2px;
+  }
+
+  .scroll-buttons__btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .scroll-buttons__btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .scroll-buttons__divider {
+    width: 18px;
+  }
+}

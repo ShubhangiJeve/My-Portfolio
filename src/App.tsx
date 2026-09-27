@@ -5,6 +5,7 @@ import { portfolioData } from './data/portfolioData';
 import Navbar      from './components/Navbar';
 import Hero        from './components/Hero';
 import Footer      from './components/Footer';
+import ScrollButtons from './components/ScrollButtons';
 import ResumeModal from './components/ResumeModal';
 
 // ── Lazy-load everything below the fold ───────────────────────────────────────
@@ -106,6 +107,8 @@ export default function App() {
           element={<HomePage onResumeOpen={openResume} />}
         />
       </Routes>
+
+      <ScrollButtons />
 
       <Footer personalInfo={personalInfo} onResumeOpen={openResume} />
 

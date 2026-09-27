@@ -1,23 +1,180 @@
 /* ── About ───────────────────────────────────────── */
-.about__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-12);
+.about__layout {
+  max-width: 860px;
 }
 
-@media (min-width: 900px) {
-  .about__grid {
-    grid-template-columns: 1fr 340px;
-    align-items: start;
-  }
+.about__content {
+  width: 100%;
 }
 
 .about__prose {
-  max-width: var(--container-prose);
+  max-width: 100%;
 }
 
 .about__prose p {
   margin-bottom: var(--space-5);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.about__prose strong {
+  color: var(--color-text-primary);
+  font-weight: var(--weight-semibold);
+}
+
+/* Career & Location Highlight Card */
+.about__career {
+  margin-top: var(--space-8);
+  padding: clamp(var(--space-4), 4vw, var(--space-6));
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.about__looking {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-4);
+}
+
+.about__looking strong {
+  color: var(--color-text-primary);
+  font-weight: var(--weight-semibold);
+}
+
+.about__locations {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--color-border);
+}
+
+.about__locations-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+}
+
+.about__locations-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 0 3px rgba(44, 122, 75, 0.2);
+  flex-shrink: 0;
+  animation: pulse-dot 2.2s infinite ease-in-out;
+}
+
+.about__locations-based {
+  color: var(--color-text-primary);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+.about__locations-based strong {
+  color: var(--color-text-primary);
+  font-weight: var(--weight-bold);
+}
+
+.about__locations-sep {
+  color: var(--color-text-muted);
+}
+
+.about__locations-open {
+  color: var(--color-text-secondary);
+  font-weight: var(--weight-medium);
+}
+
+@media (max-width: 520px) {
+  .about__locations-status {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .about__locations-sep {
+    display: none;
+  }
+}
+
+.about__location-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+/* Individual location tags with unique highlight colors */
+.loc-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 13px;
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  font-weight: var(--weight-semibold);
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform var(--duration-fast), box-shadow var(--duration-fast);
+  cursor: default;
+}
+
+.loc-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Mumbai - Emerald / Sea Green */
+.loc-tag--mumbai {
+  color: #0b6953;
+  background: #e3f5ee;
+  border: 1px solid #a7e0ce;
+}
+
+/* Bengaluru - Deep Sapphire / Tech Cyan */
+.loc-tag--bengaluru {
+  color: #0d5f8a;
+  background: #e2f2fc;
+  border: 1px solid #a8d5f3;
+}
+
+/* Pune - Warm Terracotta / Amber */
+.loc-tag--pune {
+  color: #9c3f15;
+  background: #fdf0ea;
+  border: 1px solid #f7cbba;
+}
+
+/* Ahmedabad - Royal Violet */
+.loc-tag--ahmedabad {
+  color: #632d99;
+  background: #f4ecfd;
+  border: 1px solid #d6bdf5;
+}
+
+/* Gandhinagar - Forest Slate */
+.loc-tag--gandhinagar {
+  color: #276249;
+  background: #eaf5ef;
+  border: 1px solid #b5dec8;
+}
+
+/* Remote - Radiant Mint with Green Accent */
+.loc-tag--remote {
+  color: #0e6c46;
+  background: #dff6ea;
+  border: 1px solid #9fe2bf;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(14, 108, 70, 0.14);
 }
 
 /* Contact */
@@ -49,36 +206,4 @@
 .about__contact-item svg {
   flex-shrink: 0;
   color: var(--color-text-muted);
-}
-
-/* Focus list */
-.about__interests {
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-6);
-  position: sticky;
-  top: calc(var(--navbar-height) + var(--space-6));
-}
-
-.about__interests-title {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
-  color: var(--color-text-muted);
-  letter-spacing: var(--tracking-widest);
-  text-transform: uppercase;
-  margin-bottom: var(--space-4);
-}
-
-.about__interest-item {
-  padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--color-border);
-  font-size: var(--text-sm);
-  color: var(--color-text-secondary);
-}
-
-.about__interest-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
 }

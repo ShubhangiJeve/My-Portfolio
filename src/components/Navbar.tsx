@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import type { PersonalInfo } from '../types';
+import OpenToWorkAvatar from './OpenToWorkAvatar';
+import ProfileCardModal from './ProfileCardModal';
 import './Navbar.css';
 
 interface NavLink {
@@ -24,11 +26,14 @@ interface NavbarProps {
 }
 
 export default function Navbar({ personalInfo, onResumeOpen }: NavbarProps) {
-  const [scrolled, setScrolled]       = useState(false);
-  const [mobileOpen, setMobileOpen]   = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [scrolled, setScrolled]                     = useState(false);
+  const [mobileOpen, setMobileOpen]                 = useState(false);
+  const [activeSection, setActiveSection]           = useState('');
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const avatarSrc = personalInfo.avatarUrl || `${import.meta.env.BASE_URL}profile.jpg`;
 
   // Scroll-aware glass effect
   useEffect(() => {
@@ -71,6 +76,16 @@ export default function Navbar({ personalInfo, onResumeOpen }: NavbarProps) {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
+  // Close mobile menu on ESC key
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileOpen]);
+
   const handleNavClick = useCallback(
     (href: string) => {
       setMobileOpen(false);
@@ -99,15 +114,35 @@ export default function Navbar({ personalInfo, onResumeOpen }: NavbarProps) {
     <>
     <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`} role="banner">
       <div className="navbar__container container">
-        {/* Logo */}
-        <Link
-          to="/"
-          className="navbar__logo"
-          aria-label={`${personalInfo.name}, home`}
-        >
-          <span className="navbar__logo-icon" aria-hidden="true">SJ</span>
-          <span className="navbar__logo-name">{personalInfo.name}</span>
-        </Link>
+        {/* Logo & OpenToWork Profile */}
+        <div className="navbar__logo">
+          <button
+            type="button"
+            className="navbar__avatar-btn"
+            onClick={() => setIsProfileModalOpen(true)}
+            aria-label="View profile summary"
+            title="Click to view profile summary"
+          >
+            {avatarSrc ? (
+              <OpenToWorkAvatar
+                src={avatarSrc}
+                alt={personalInfo.name}
+                size={38}
+                showFrame={true}
+                priority={true}
+              />
+            ) : (
+              <span className="navbar__logo-icon" aria-hidden="true">SJ</span>
+            )}
+          </button>
+          <Link
+            to="/"
+            className="navbar__logo-name"
+            aria-label={`${personalInfo.name}, home`}
+          >
+            {personalInfo.name}
+          </Link>
+        </div>
 
         {/* Desktop Navigation */}
         <nav className="navbar__nav" aria-label="Main navigation">
@@ -179,9 +214,8 @@ export default function Navbar({ personalInfo, onResumeOpen }: NavbarProps) {
           ))}
         </ul>
         <button
-          className="btn btn--primary"
+          className="btn btn--primary navbar__mobile-resume"
           onClick={() => { setMobileOpen(false); onResumeOpen(); }}
-          style={{ marginTop: 'var(--space-6)', width: '100%' }}
           tabIndex={mobileOpen ? 0 : -1}
         >
           View Resume
@@ -197,6 +231,14 @@ export default function Navbar({ personalInfo, onResumeOpen }: NavbarProps) {
         aria-hidden="true"
       />
     )}
+
+    {/* Profile Card Summary Modal */}
+    <ProfileCardModal
+      isOpen={isProfileModalOpen}
+      onClose={() => setIsProfileModalOpen(false)}
+      personalInfo={personalInfo}
+      onResumeOpen={onResumeOpen}
+    />
     </>
   );
 }

@@ -17,13 +17,55 @@
   color: var(--color-text-muted);
 }
 
-/* Tabs */
+/* Tabs Wrapper with Arrow Navigation */
+.skills__tabs-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+  width: 100%;
+}
+
+.skills__arrow-btn {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  transition: all var(--duration-fast);
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+  z-index: 2;
+}
+
+.skills__arrow-btn:hover {
+  background: var(--color-bg-elevated);
+  color: var(--color-accent-primary);
+  border-color: var(--color-accent-primary);
+  transform: scale(1.08);
+}
+
 .skills__tabs {
   display: flex;
-  flex-wrap: wrap;
   gap: var(--space-1);
-  margin-bottom: var(--space-8);
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
   border-bottom: 1px solid var(--color-border);
+  flex: 1;
+  min-width: 0;
+  padding: 0 var(--space-1) 1px;
+}
+
+.skills__tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .skills__tab {
@@ -34,6 +76,10 @@
   color: var(--color-text-muted);
   white-space: nowrap;
   transition: color var(--duration-fast);
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .skills__tab:hover {
@@ -42,6 +88,7 @@
 
 .skills__tab--active {
   color: var(--color-text-primary);
+  font-weight: var(--weight-semibold);
 }
 
 .skills__tab--active::after {

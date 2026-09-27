@@ -166,7 +166,7 @@ export default function Contact({ personalInfo }: ContactProps) {
           <div className={`contact__info reveal ${isVisible ? 'is-visible' : ''}`}>
             <p className="contact__availability">
               <span className="contact__availability-dot" aria-hidden="true" />
-              Open to full-time roles in Hyderabad, Bengaluru, Pune, or remote
+              Open to full-time roles in Hyderabad, Mumbai, Bengaluru, Pune, Ahmedabad, Gandhinagar, or remote
             </p>
 
             <div className="contact__cards">
@@ -239,57 +239,56 @@ export default function Contact({ personalInfo }: ContactProps) {
               >
                 <h3 className="contact__form-title">Send a message</h3>
 
-                {/* Name + Email row */}
-                <div className="contact__form-row">
-                  <div className="contact__field">
-                    <label htmlFor="contact-name" className="contact__label">
-                      Your Name <span aria-hidden="true">*</span>
-                    </label>
-                    <input
-                      id="contact-name"
-                      type="text"
-                      name="name"
-                      value={form.name}
-                      onChange={handleChange}
-                      placeholder="Jane Smith"
-                      className={`contact__input ${errors.name ? 'contact__input--error' : ''}`}
-                      aria-describedby={errors.name ? 'name-error' : undefined}
-                      autoComplete="name"
-                    />
-                    {errors.name && (
-                      <p id="name-error" className="contact__error" role="alert">
-                        {errors.name}
-                      </p>
-                    )}
-                  </div>
+                {/* Name */}
+                <div className="contact__field">
+                  <label htmlFor="contact-name" className="contact__label">
+                    <span>Your Name</span> <span className="contact__required" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="Jane Smith"
+                    className={`contact__input ${errors.name ? 'contact__input--error' : ''}`}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
+                    autoComplete="name"
+                  />
+                  {errors.name && (
+                    <p id="name-error" className="contact__error" role="alert">
+                      {errors.name}
+                    </p>
+                  )}
+                </div>
 
-                  <div className="contact__field">
-                    <label htmlFor="contact-email" className="contact__label">
-                      Email Address <span aria-hidden="true">*</span>
-                    </label>
-                    <input
-                      id="contact-email"
-                      type="email"
-                      name="email"
-                      value={form.email}
-                      onChange={handleChange}
-                      placeholder="jane@company.com"
-                      className={`contact__input ${errors.email ? 'contact__input--error' : ''}`}
-                      aria-describedby={errors.email ? 'email-error' : undefined}
-                      autoComplete="email"
-                    />
-                    {errors.email && (
-                      <p id="email-error" className="contact__error" role="alert">
-                        {errors.email}
-                      </p>
-                    )}
-                  </div>
+                {/* Email */}
+                <div className="contact__field">
+                  <label htmlFor="contact-email" className="contact__label">
+                    <span>Email Address</span> <span className="contact__required" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    placeholder="jane@company.com"
+                    className={`contact__input ${errors.email ? 'contact__input--error' : ''}`}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
+                    autoComplete="email"
+                  />
+                  {errors.email && (
+                    <p id="email-error" className="contact__error" role="alert">
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
 
                 {/* Subject */}
                 <div className="contact__field">
                   <label htmlFor="contact-subject" className="contact__label">
-                    Subject <span aria-hidden="true">*</span>
+                    <span>Subject</span> <span className="contact__required" aria-hidden="true">*</span>
                   </label>
                   <input
                     id="contact-subject"
@@ -311,7 +310,7 @@ export default function Contact({ personalInfo }: ContactProps) {
                 {/* Message */}
                 <div className="contact__field">
                   <label htmlFor="contact-message" className="contact__label">
-                    Message <span aria-hidden="true">*</span>
+                    <span>Message</span> <span className="contact__required" aria-hidden="true">*</span>
                   </label>
                   <textarea
                     id="contact-message"
@@ -319,7 +318,7 @@ export default function Contact({ personalInfo }: ContactProps) {
                     value={form.message}
                     onChange={handleChange}
                     placeholder="Tell me about the role, project, or just say hi..."
-                    rows={5}
+                    rows={3}
                     className={`contact__textarea ${errors.message ? 'contact__input--error' : ''}`}
                     aria-describedby={errors.message ? 'message-error' : undefined}
                   />

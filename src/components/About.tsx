@@ -6,48 +6,51 @@ interface AboutProps {
   personalInfo: PersonalInfo;
 }
 
-const FOCUS_AREAS = [
-  'Hybrid retrieval: dense vectors plus lexical search',
-  'Grounding, citations, and abstention for high-stakes domains',
-  'Agentic tool calling and multi-step workflows (LangGraph)',
-  'Async Python APIs with FastAPI and Pydantic v2',
-  'Latency and cost: caching, streaming, smaller prompts',
-  'RAG evaluation with RAGAS',
-];
-
 export default function About({ personalInfo }: AboutProps) {
   const [sectionRef, isVisible] = useIntersectionObserver<HTMLElement>();
 
   return (
     <section id="about" ref={sectionRef} className="section about-section">
       <div className="container">
-        <div className="about__grid">
+        <div className="about__layout">
           <div className={`about__content reveal ${isVisible ? 'is-visible' : ''}`}>
             <p className="section-label">About</p>
             <h2 className="section-title">What I work on</h2>
 
             <div className="about__prose prose">
               <p>
-                I'm an AI engineer who works across the whole path of an LLM feature: getting data in,
-                retrieving the right context, calling the model with guardrails, and serving the result
-                through an API and a UI. Most of my work is retrieval-augmented generation in domains
-                where a wrong answer is costly, like law and healthcare.
+                As an AI Engineer specializing in Generative AI and LLM systems, I bridge the gap between model capabilities and enterprise production architectures. I work across the complete path of an AI feature: building high-throughput ingestion pipelines, designing hybrid retrieval architectures, enforcing strict safety guardrails and evals, and serving low-latency async APIs to end users. My work centers on high-stakes domains where reliability, groundedness, and zero hallucination are essential.
               </p>
               <p>
-                On LegalAID I designed hybrid retrieval that fuses pgvector similarity search with
-                PostgreSQL full-text search using reciprocal rank fusion, then gates the LLM behind a
-                confidence threshold so it declines to answer when the evidence is weak. Search runs in
-                under 4 seconds across 25 years of court data.
+                In production applications like <strong>LegalAID</strong>, I architected hybrid retrieval fusing pgvector dense embeddings with PostgreSQL full-text lexical search via Reciprocal Rank Fusion (RRF) and Cross-Encoder rerankers, reducing search latency across 25+ years of court data to under 4 seconds. In <strong>MeetOps</strong>, I engineered stateful agentic workflows (LangGraph, function calling) that orchestrate live tool execution—such as automatically generating Jira tickets and pulling SAP GRC compliance metrics mid-meeting through headless Playwright bots and strict Pydantic v2 schemas.
               </p>
               <p>
-                On MeetOps I built a copilot that joins Microsoft Teams calls through short-lived
-                Playwright bots, indexes the transcript as it arrives, and uses function calling to
-                create Jira tickets or pull SAP GRC metrics while the meeting is still running.
+                Shipping enterprise AI requires rigorous validation and monitoring. I build automated evaluation frameworks using <strong>RAGAS</strong> and LLM-as-a-judge pipelines to systematically benchmark faithfulness, context recall, and answer relevancy before every release. In production, I integrate distributed tracing (monitoring P95/P99 latency, token costs, and prompt drift) with multi-layered guardrails that detect prompt injections, enforce grounded source citations, and execute confidence-based abstention when context support is insufficient.
               </p>
-              <p>
-                I'm looking for AI Engineer, LLM Engineer, or backend-for-AI roles where I can own a
-                system end to end. Based in Hyderabad and open to Bengaluru, Pune, and remote.
+            </div>
+
+            <div className="about__career">
+              <p className="about__looking">
+                I am actively interviewing for <strong>AI Engineer, Generative AI / LLM Engineer, RAG Engineer, or Backend-for-AI roles</strong> where I can architect, evaluate, and scale production AI systems end to end.
               </p>
+              <div className="about__locations">
+                <div className="about__locations-status">
+                  <span className="about__locations-dot" aria-hidden="true" />
+                  <span className="about__locations-based">
+                    Based in <strong>Hyderabad</strong>
+                  </span>
+                  <span className="about__locations-sep" aria-hidden="true">·</span>
+                  <span className="about__locations-open">Open to relocation &amp; remote:</span>
+                </div>
+                <div className="about__location-tags" role="list">
+                  <span className="loc-tag loc-tag--mumbai" role="listitem">Mumbai</span>
+                  <span className="loc-tag loc-tag--bengaluru" role="listitem">Bengaluru</span>
+                  <span className="loc-tag loc-tag--pune" role="listitem">Pune</span>
+                  <span className="loc-tag loc-tag--ahmedabad" role="listitem">Ahmedabad</span>
+                  <span className="loc-tag loc-tag--gandhinagar" role="listitem">Gandhinagar</span>
+                  <span className="loc-tag loc-tag--remote" role="listitem">Remote</span>
+                </div>
+              </div>
             </div>
 
             <div className="about__contact">
@@ -66,15 +69,6 @@ export default function About({ personalInfo }: AboutProps) {
               </a>
             </div>
           </div>
-
-          <aside className={`about__interests reveal ${isVisible ? 'is-visible' : ''}`}>
-            <h3 className="about__interests-title">Current focus</h3>
-            <ul>
-              {FOCUS_AREAS.map((text) => (
-                <li key={text} className="about__interest-item">{text}</li>
-              ))}
-            </ul>
-          </aside>
         </div>
       </div>
     </section>

@@ -6,7 +6,17 @@ interface HeroProps {
   onResumeOpen: () => void;
 }
 
-const CORE_STACK = ['Python', 'FastAPI', 'PostgreSQL + pgvector', 'LangChain', 'Redis', 'Docker', 'Next.js'];
+const CORE_STACK = [
+  'Python',
+  'FastAPI',
+  'PostgreSQL + pgvector',
+  'LangChain & LangGraph',
+  'Agentic Tool Calling',
+  'RAG Evals (RAGAS)',
+  'Redis',
+  'Docker',
+  'Next.js',
+];
 
 export default function Hero({ personalInfo, onResumeOpen }: HeroProps) {
   const scrollToProjects = () => {
@@ -17,6 +27,11 @@ export default function Hero({ personalInfo, onResumeOpen }: HeroProps) {
     <section className="hero" id="home" aria-label="Introduction">
       <div className="container hero__container">
         <div className="hero__content">
+          <div className="hero__badge">
+            <span className="hero__badge-dot" aria-hidden="true" />
+            <span>Open to AI & LLM Engineer Roles</span>
+          </div>
+
           <p className="hero__eyebrow">
             {personalInfo.role} · {personalInfo.location}
           </p>
@@ -81,25 +96,6 @@ export default function Hero({ personalInfo, onResumeOpen }: HeroProps) {
             </a>
           </div>
         </div>
-
-        {personalInfo.avatarUrl && (
-          <figure className="hero__avatar">
-            <img
-              src={personalInfo.avatarUrl}
-              alt={`Portrait of ${personalInfo.name}`}
-              className="hero__avatar-img"
-              width="320"
-              height="380"
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-            />
-            <figcaption className="hero__avatar-caption">
-              <span className="hero__avatar-dot" aria-hidden="true" />
-              Open to AI Engineer roles
-            </figcaption>
-          </figure>
-        )}
       </div>
     </section>
   );

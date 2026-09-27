@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <!-- Circular clip for the photo -->
+    <clipPath id="photo-circle">
+      <circle cx="200" cy="200" r="186" />
+    </clipPath>
+    <!-- Text path for curved #OPEN TO WORK -->
+    <path id="photo-opentowork-text-path" d="M 40 252 A 168 168 0 0 0 360 252" fill="none" />
+  </defs>
+
+  <!-- Profile Image clipped to circle -->
+  <g clip-path="url(#photo-circle)">
+    <image
+      href="./profile.jpg"
+      xlink:href="./profile.jpg"
+      x="14"
+      y="14"
+      width="372"
+      height="372"
+      preserveAspectRatio="xMidYMid slice"
+    />
+  </g>
+
+  <!-- Outer green border -->
+  <circle cx="200" cy="200" r="188" fill="none" stroke="#0a8754" stroke-width="8" />
+
+  <!-- Shadow under banner -->
+  <path
+    d="M 32 248 A 175 175 0 0 0 368 248"
+    fill="none"
+    stroke="#034828"
+    stroke-width="52"
+    stroke-linecap="round"
+  />
+
+  <!-- Green curved banner -->
+  <path
+    d="M 34 248 A 175 175 0 0 0 366 248"
+    fill="none"
+    stroke="#0a8754"
+    stroke-width="46"
+    stroke-linecap="round"
+  />
+
+  <!-- Curved white text -->
+  <text
+    fill="#ffffff"
+    font-size="25"
+    font-weight="800"
+    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+    letter-spacing="0.14em"
+  >
+    <textPath href="#photo-opentowork-text-path" startOffset="50%" text-anchor="middle">
+      #OPEN TO WORK
+    </textPath>
+  </text>
+</svg>

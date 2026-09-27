@@ -13,8 +13,8 @@ export const portfolioData: PortfolioData = {
     name: 'Shubhangi Jeve',
     firstName: 'Shubhangi',
     lastName: 'Jeve',
-    role: 'AI Engineer',
-    tagline: 'I build retrieval-augmented generation systems and the backends that serve them.',
+    role: 'AI & Generative AI Engineer',
+    tagline: 'Architecting enterprise RAG systems, agentic LLM workflows, and resilient backends for production AI applications.',
     phone: '+91-9579122372',
     email: 'shubhangijeve@gmail.com',
     github: 'https://github.com/ShubhangiJeve',
@@ -22,7 +22,7 @@ export const portfolioData: PortfolioData = {
     location: 'Hyderabad, India',
     avatarUrl: profileImg,
     objective:
-      'At COGNITBOTZ I own the AI architecture for LegalAID, a legal research platform with hybrid search over 25 years of Indian court judgments, and MeetOps, a Microsoft Teams meeting copilot that can call tools like Jira mid-meeting. I work across ingestion, retrieval, LLM integration, APIs, and the frontend.',
+      'At COGNITBOTZ, I drive the core AI architecture for high-stakes production applications — including LegalAID (a high-precision legal intelligence engine fusing dense + lexical search across 25+ years of court judgments with strict hallucination guardrails) and MeetOps (an autonomous Teams copilot executing real-time speech indexing and live tool orchestration). I own the entire AI engineering lifecycle: document ingestion, vector retrieval, model evals, and high-concurrency async APIs.',
   },
 
   education: [

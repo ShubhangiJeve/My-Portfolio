@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import type { ProficiencyLevel, SkillCategory, SkillItem } from '../types';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import './Skills.css';
@@ -57,14 +57,73 @@ export default function Skills({ skillCategories }: SkillsProps) {
   const [activeCategory, setActiveCategory] = useState<string>(
     skillCategories[0]?.id ?? ''
   );
+  const [isPaused, setIsPaused] = useState(false);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
 
   const activeGroup = skillCategories.find((c) => c.id === activeCategory);
+
+  const scrollToTab = useCallback((categoryId: string) => {
+    const container = tabsContainerRef.current;
+    const tabEl = document.getElementById(`tab-${categoryId}`);
+    if (container && tabEl) {
+      const containerRect = container.getBoundingClientRect();
+      const tabRect = tabEl.getBoundingClientRect();
+      const currentScrollLeft = container.scrollLeft;
+      const targetScrollLeft =
+        currentScrollLeft +
+        (tabRect.left - containerRect.left) -
+        (containerRect.width / 2) +
+        (tabRect.width / 2);
+
+      container.scrollTo({
+        left: Math.max(0, targetScrollLeft),
+        behavior: 'smooth',
+      });
+    }
+  }, []);
+
+  // Automatically center the active tab in view whenever it changes
+  useEffect(() => {
+    scrollToTab(activeCategory);
+  }, [activeCategory, scrollToTab]);
+
+  // Automatic cycle through skill categories every 4.5 seconds (pauses on hover/interaction)
+  useEffect(() => {
+    if (!isVisible || isPaused || skillCategories.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setActiveCategory((curr) => {
+        const currentIndex = skillCategories.findIndex((c) => c.id === curr);
+        const nextIndex = (currentIndex + 1) % skillCategories.length;
+        return skillCategories[nextIndex].id;
+      });
+    }, 4500);
+
+    return () => clearInterval(timer);
+  }, [isVisible, isPaused, skillCategories]);
+
+  const handlePrevCategory = () => {
+    const currentIndex = skillCategories.findIndex((c) => c.id === activeCategory);
+    const prevIndex = (currentIndex - 1 + skillCategories.length) % skillCategories.length;
+    setActiveCategory(skillCategories[prevIndex].id);
+    setIsPaused(true);
+  };
+
+  const handleNextCategory = () => {
+    const currentIndex = skillCategories.findIndex((c) => c.id === activeCategory);
+    const nextIndex = (currentIndex + 1) % skillCategories.length;
+    setActiveCategory(skillCategories[nextIndex].id);
+    setIsPaused(true);
+  };
 
   return (
     <section
       id="skills"
       ref={sectionRef}
       className="section section--alt skills-section"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
     >
       <div className="container">
         {/* Header */}
@@ -86,25 +145,55 @@ export default function Skills({ skillCategories }: SkillsProps) {
           </div>
         </div>
 
-        {/* Category tabs */}
-        <div
-          className={`skills__tabs reveal ${isVisible ? 'is-visible' : ''}`}
-          role="tablist"
-          aria-label="Skill categories"
-        >
-          {skillCategories.map((category) => (
-            <button
-              key={category.id}
-              role="tab"
-              id={`tab-${category.id}`}
-              aria-selected={activeCategory === category.id}
-              aria-controls={`panel-${category.id}`}
-              className={`skills__tab ${activeCategory === category.id ? 'skills__tab--active' : ''}`}
-              onClick={() => setActiveCategory(category.id)}
-            >
-              {category.label}
-            </button>
-          ))}
+        {/* Category tabs with smooth auto-scroll & arrow navigation */}
+        <div className={`skills__tabs-wrapper reveal ${isVisible ? 'is-visible' : ''}`}>
+          <button
+            type="button"
+            className="skills__arrow-btn skills__arrow-btn--prev"
+            onClick={handlePrevCategory}
+            aria-label="Previous skill category"
+            title="Previous category"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          <div
+            ref={tabsContainerRef}
+            className="skills__tabs"
+            role="tablist"
+            aria-label="Skill categories"
+          >
+            {skillCategories.map((category) => (
+              <button
+                key={category.id}
+                role="tab"
+                id={`tab-${category.id}`}
+                aria-selected={activeCategory === category.id}
+                aria-controls={`panel-${category.id}`}
+                className={`skills__tab ${activeCategory === category.id ? 'skills__tab--active' : ''}`}
+                onClick={() => {
+                  setActiveCategory(category.id);
+                  setIsPaused(true);
+                }}
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            className="skills__arrow-btn skills__arrow-btn--next"
+            onClick={handleNextCategory}
+            aria-label="Next skill category"
+            title="Next category"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
         </div>
 
         {/* Skills panel */}
