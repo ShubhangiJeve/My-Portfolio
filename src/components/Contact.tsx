@@ -157,7 +157,7 @@ export default function Contact({ personalInfo }: ContactProps) {
           <p className="section-label">Contact</p>
           <h2 className="section-title">Get in touch</h2>
           <p className="section-subtitle">
-            I'm interviewing for AI Engineer, LLM Engineer, and backend-for-AI roles. Email is the fastest way to reach me.
+            I'm available for full-time AI Engineer, LLM Engineer, and backend-for-AI roles. Email is the fastest way to reach me.
           </p>
         </div>
 

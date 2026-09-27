@@ -82,7 +82,7 @@ export default function ProfileCardModal({
         {/* Availability Badge */}
         <div className="profile-modal__badge">
           <span className="profile-modal__badge-dot" aria-hidden="true" />
-          <span>Actively Interviewing for AI & GenAI Roles</span>
+          <span>Available for Full-Time AI & GenAI Roles</span>
         </div>
 
         {/* 2-3 lines of summary */}

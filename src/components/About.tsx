@@ -31,7 +31,7 @@ export default function About({ personalInfo }: AboutProps) {
 
             <div className="about__career">
               <p className="about__looking">
-                I am actively interviewing for <strong>AI Engineer, Generative AI / LLM Engineer, RAG Engineer, or Backend-for-AI roles</strong> where I can architect, evaluate, and scale production AI systems end to end.
+                I am available for full-time <strong>AI Engineer, Generative AI / LLM Engineer, RAG Engineer, or Backend-for-AI roles</strong> where I can architect, evaluate, and scale production AI systems end to end.
               </p>
               <div className="about__locations">
                 <div className="about__locations-status">
