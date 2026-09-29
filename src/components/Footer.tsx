@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { PersonalInfo } from '../types';
 import OpenToWorkAvatar from './OpenToWorkAvatar';
 import ProfileCardModal from './ProfileCardModal';
+import VisitorCounter from './VisitorCounter';
 import './Footer.css';
 
 interface FooterProps {
@@ -152,12 +153,14 @@ export default function Footer({ personalInfo, onResumeOpen }: FooterProps) {
         </nav>
       </div>
 
-      {/* Bottom bar: copyright and availability */}
+      {/* Bottom bar: copyright, visitor counter, and availability */}
       <div className="footer__bottom">
         <div className="container footer__bottom-content">
           <p className="footer__copyright">
             &copy; {year} {personalInfo.name}. All rights reserved.
           </p>
+
+          <VisitorCounter />
 
           <p className="footer__status-badge">
             <span className="footer__status-dot" aria-hidden="true" />
