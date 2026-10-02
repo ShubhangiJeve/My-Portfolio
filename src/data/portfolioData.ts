@@ -22,7 +22,8 @@ export const portfolioData: PortfolioData = {
     location: 'Hyderabad, India',
     avatarUrl: profileImg,
     objective:
-      'At COGNITBOTZ, I drive the core AI architecture for high-stakes production applications — including LegalAID (a high-precision legal intelligence engine fusing dense + lexical search across 25+ years of court judgments with strict hallucination guardrails) and MeetOps (an autonomous Teams copilot executing real-time speech indexing and live tool orchestration). I own the entire AI engineering lifecycle: document ingestion, vector retrieval, model evals, and high-concurrency async APIs.',
+      'At COGNITBOTZ, I drive the core AI architecture for high-stakes production applications — including LegalAID (a high-precision legal intelligence engine fusing dense + lexical search across 25+ years of court judgments with strict hallucination guardrails), MeetOps (an autonomous Teams copilot executing real-time speech indexing and live tool orchestration), and Granite Buyer Intelligence (a solo-built, local-first B2B lead generation platform with a production-grade multi-provider LLM gateway, evidence-backed qualification, and SSRF-hardened web acquisition). I own the entire AI engineering lifecycle: document ingestion, vector retrieval, model evals, and high-concurrency async APIs.',
+
   },
 
   education: [
@@ -41,11 +42,11 @@ export const portfolioData: PortfolioData = {
       company: 'COGNITBOTZ',
       companyUrl: undefined,
       location: 'Hyderabad, Telangana',
-      period: 'January 2026 – Present',
-      startDate: '2026-01',
+      period: 'November 2025 – Present',
+      startDate: '2025-11',
       endDate: 'Present',
       type: 'internship',
-      highlight: 'Owned the AI architecture for two enterprise platforms, from design through deployment.',
+      highlight: 'Owned the AI architecture for enterprise platforms, from design through deployment.',
       projects: [
         {
           name: 'LegalAID',
@@ -69,6 +70,20 @@ export const portfolioData: PortfolioData = {
             'Implemented agentic function-calling to trigger mid-conversation actions: Jira ticket creation, rolling meeting summaries, and live SAP GRC metrics retrieval.',
             'Ran each meeting bot in its own Docker container with a TTL watchdog, so containers are reaped after the meeting and no state leaks between meetings.',
             'Added a Redis cache that skips the embedding and LLM calls for repeated queries, and streamed responses to the React client over Server-Sent Events (SSE).',
+          ],
+        },
+        {
+          name: 'Granite Buyer Intelligence',
+          description:
+            'Local-first B2B intelligence and lead generation platform for an Indian granite exporter — automating buyer discovery, evidence-backed qualification, and Office 365 email outreach, with a production-grade multi-provider LLM gateway for AI buyer briefings.',
+          points: [
+            'Architected a full-stack modular monolith covering 9 lifecycle domains: identity, product catalogue, discovery, evidence, buyers, intelligence, jobs, email, and reporting — solo from requirements to delivery.',
+            'Built a durable SQLite-backed job queue (DuckDuckGo → Bing fallback) with 180s leases, heartbeats, and automatic crash recovery; SSRF controls validated at connection time (not preflight) to block DNS-rebinding attacks.',
+            'Implemented a production-grade three-tier LLM failover gateway: OpenRouter (Nemotron-550B) → NVIDIA Build (Nemotron-120B) → Groq; plus a two-tier embedding failover with a zero-dependency local TF lexical fallback guaranteeing 100% uptime for semantic ranking.',
+            'Enforced evidence-first data quality at schema level: FACT vs. AI_INTERPRETATION CHECK CONSTRAINT, A/B/C/D priority grading, and 0–100 quality scores — every buyer claim traces to a sourced, timestamped Evidence row.',
+            'Added PII redaction (email + phone regexes) before any text reaches an LLM, and a reasoning-token cleaner to strip <think> model scratchpads from outputs.',
+            'Delivered Microsoft 365 SMTP email outreach with RFC-compliant headers, dual MIME, and full audit trail; 13-worksheet openpyxl Excel export with formula-safe text escaping.',
+            'Secured the platform end-to-end: Argon2 password hashing, opaque session tokens, CSRF, SSRF, RBAC, parameterized ORM, CSP headers, and a login-throttle middleware.',
           ],
         },
       ],

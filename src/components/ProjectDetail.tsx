@@ -191,13 +191,10 @@ export default function ProjectDetail() {
             </span>
           </div>
 
-          {/* Title & Full Description */}
+          {/* Title */}
           <h1 className="project-detail__title">
             {project.name}
           </h1>
-          <p className="project-detail__subtitle">
-            {project.fullDescription}
-          </p>
 
           {/* Metrics row */}
           {project.metrics && project.metrics.length > 0 && (
@@ -244,7 +241,125 @@ export default function ProjectDetail() {
         <div className="project-detail__layout">
           {/* Main column */}
           <div className="project-detail__main">
-            {/* Key Capabilities */}
+
+            {/* ── Problem Statement ─────────────────────── */}
+            {project.problemStatement && (
+              <section className="project-detail__section" aria-labelledby="problem-heading">
+                <h2 id="problem-heading" className="project-detail__section-title">
+                  Problem Statement
+                </h2>
+                <p className="project-detail__narrative-lead">{project.problemStatement.headline}</p>
+                <ul className="project-detail__narrative-list">
+                  {project.problemStatement.points.map((pt) => (
+                    <li key={pt}>
+                      <span className="project-detail__cap-check" aria-hidden="true">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                      </span>
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {/* ── Objective ─────────────────────────────── */}
+            {project.objective && project.objective.length > 0 && (
+              <section className="project-detail__section" aria-labelledby="objective-heading">
+                <h2 id="objective-heading" className="project-detail__section-title">
+                  Objective
+                </h2>
+                <div className="project-detail__table-wrapper">
+                  <table className="project-detail__table">
+                    <thead>
+                      <tr><th>#</th><th>Goal</th></tr>
+                    </thead>
+                    <tbody>
+                      {project.objective.map((o) => (
+                        <tr key={o.number}>
+                          <td className="project-detail__table-num">{o.number}</td>
+                          <td>{o.goal}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            )}
+
+            {/* ── My Role & Contribution ────────────────── */}
+            {project.roleRows && project.roleRows.length > 0 && (
+              <section className="project-detail__section" aria-labelledby="role-heading">
+                <h2 id="role-heading" className="project-detail__section-title">
+                  My Role &amp; Contribution
+                </h2>
+                {project.roleType === 'solo' && (
+                  <p className="project-detail__role-badge">
+                    <span className="badge badge--primary">Solo Build</span>
+                    {project.roleHighlight && (
+                      <span className="project-detail__role-highlight"> — {project.roleHighlight}</span>
+                    )}
+                  </p>
+                )}
+                <div className="project-detail__table-wrapper">
+                  <table className="project-detail__table">
+                    <thead>
+                      <tr><th>Area</th><th>Contribution</th></tr>
+                    </thead>
+                    <tbody>
+                      {project.roleRows.map((r) => (
+                        <tr key={r.area}>
+                          <td className="project-detail__table-area">{r.area}</td>
+                          <td>{r.contribution}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            )}
+
+            {/* ── Dataset ───────────────────────────────── */}
+            {project.dataset && (
+              <section className="project-detail__section" aria-labelledby="dataset-heading">
+                <h2 id="dataset-heading" className="project-detail__section-title">
+                  Dataset
+                </h2>
+                <p className="project-detail__narrative-lead">{project.dataset.summary}</p>
+                <div className="project-detail__table-wrapper">
+                  <table className="project-detail__table">
+                    <thead>
+                      <tr><th>Source / Dimension</th><th>Detail</th></tr>
+                    </thead>
+                    <tbody>
+                      {project.dataset.sources.map((s) => (
+                        <tr key={s.label}>
+                          <td className="project-detail__table-area">{s.label}</td>
+                          <td>{s.value}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {project.dataset.notes && project.dataset.notes.length > 0 && (
+                  <ul className="project-detail__narrative-list project-detail__narrative-list--muted">
+                    {project.dataset.notes.map((n) => (
+                      <li key={n}>
+                        <span className="project-detail__cap-check" aria-hidden="true">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                        </span>
+                        {n}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            )}
+
+            {/* ── Key Capabilities ──────────────────────── */}
             <section className="project-detail__section" aria-labelledby="capabilities-heading">
               <h2 id="capabilities-heading" className="project-detail__section-title">
                 Key Capabilities
@@ -262,6 +377,62 @@ export default function ProjectDetail() {
                 ))}
               </ul>
             </section>
+
+            {/* ── Tools, Frameworks & Methodology ──────── */}
+            {project.methodologyRows && project.methodologyRows.length > 0 && (
+              <section className="project-detail__section" aria-labelledby="tools-heading">
+                <h2 id="tools-heading" className="project-detail__section-title">
+                  Tools, Frameworks &amp; Methodology
+                </h2>
+                <div className="project-detail__table-wrapper">
+                  <table className="project-detail__table">
+                    <thead>
+                      <tr><th>Category</th><th>Tool / Approach</th><th>Why</th></tr>
+                    </thead>
+                    <tbody>
+                      {project.methodologyRows.map((m) => (
+                        <tr key={m.category}>
+                          <td className="project-detail__table-area">{m.category}</td>
+                          <td><span className="tag tag--sm">{m.detail}</span></td>
+                          <td>{m.rationale}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            )}
+
+            {/* ── Process ───────────────────────────────── */}
+            {project.process && project.process.length > 0 && (
+              <section className="project-detail__section" aria-labelledby="process-heading">
+                <h2 id="process-heading" className="project-detail__section-title">
+                  Process
+                </h2>
+                <ol className="project-detail__process-list">
+                  {project.process.map((step, i) => (
+                    <li key={step.phase} className="project-detail__process-item">
+                      <div className="project-detail__process-header">
+                        <span className="project-detail__process-num">Phase {i + 1}</span>
+                        <h3 className="project-detail__process-phase">{step.phase}</h3>
+                      </div>
+                      <ul className="project-detail__process-points">
+                        {step.points.map((pt) => (
+                          <li key={pt}>
+                            <span className="project-detail__cap-check" aria-hidden="true">
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="20 6 9 17 4 12" />
+                              </svg>
+                            </span>
+                            {pt}
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            )}
 
             {/* Project Media & Live Walkthrough */}
             {project.media && project.media.length > 0 && (
@@ -362,7 +533,55 @@ export default function ProjectDetail() {
                 </div>
               </section>
             )}
+
+            {/* ── Challenges & Learnings ────────────────── */}
+            {project.challenges && project.challenges.length > 0 && (
+              <section className="project-detail__section" aria-labelledby="challenges-heading">
+                <h2 id="challenges-heading" className="project-detail__section-title">
+                  Challenges &amp; Learnings
+                </h2>
+                <div className="project-detail__challenges">
+                  {project.challenges.map((c, i) => (
+                    <div key={c.title} className="project-detail__challenge-card card">
+                      <div className="project-detail__challenge-header">
+                        <span className="project-detail__challenge-num">{String(i + 1).padStart(2, '0')}</span>
+                        <h3 className="project-detail__challenge-title">{c.title}</h3>
+                      </div>
+                      <div className="project-detail__challenge-body">
+                        <div className="project-detail__challenge-row">
+                          <span className="project-detail__challenge-label project-detail__challenge-label--problem">Problem</span>
+                          <p>{c.problem}</p>
+                        </div>
+                        <div className="project-detail__challenge-row">
+                          <span className="project-detail__challenge-label project-detail__challenge-label--resolution">Resolution</span>
+                          <p>{c.resolution}</p>
+                        </div>
+                        <div className="project-detail__challenge-row">
+                          <span className="project-detail__challenge-label project-detail__challenge-label--learning">Learning</span>
+                          <p>{c.learning}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* ── Conclusion ───────────────────────────── */}
+            {project.conclusion && (
+              <section className="project-detail__section" aria-labelledby="conclusion-heading">
+                <h2 id="conclusion-heading" className="project-detail__section-title">
+                  Conclusion
+                </h2>
+                <div className="project-detail__conclusion">
+                  <p>{project.conclusion}</p>
+                </div>
+              </section>
+            )}
+
           </div>
+
+
 
           {/* Sidebar */}
           <aside className="project-detail__sidebar" aria-label="Project details">

@@ -144,7 +144,7 @@ export default function ExperienceSection({ experience }: ExperienceProps) {
           <p className="section-label section-label--warm">Experience</p>
           <h2 className="section-title">Work Experience</h2>
           <p className="section-subtitle">
-            Most recently owning the AI architecture for two enterprise platforms at COGNITBOTZ.
+            Most recently owning the AI architecture for enterprise platforms at COGNITBOTZ.
           </p>
         </div>
 
