@@ -22,7 +22,7 @@ export const portfolioData: PortfolioData = {
     location: 'Hyderabad, India',
     avatarUrl: profileImg,
     objective:
-      'At COGNITBOTZ, I drive the core AI architecture for high-stakes production applications — including LegalAID (a high-precision legal intelligence engine fusing dense + lexical search across 25+ years of court judgments with strict hallucination guardrails), MeetOps (an autonomous Teams copilot executing real-time speech indexing and live tool orchestration), and Granite Buyer Intelligence (a solo-built, local-first B2B lead generation platform with a production-grade multi-provider LLM gateway, evidence-backed qualification, and SSRF-hardened web acquisition). I own the entire AI engineering lifecycle: document ingestion, vector retrieval, model evals, and high-concurrency async APIs.',
+      'With 1.5+ years of core AI systems development experience, I drive the core AI architecture for high-stakes production applications at COGNITBOTZ — including LegalAID (a high-precision legal intelligence engine fusing dense + lexical search across 25+ years of court judgments with strict hallucination guardrails), MeetOps (an autonomous Teams copilot executing real-time speech indexing and live tool orchestration), and Granite Buyer Intelligence (a solo-built, local-first B2B lead generation platform with a production-grade multi-provider LLM gateway, evidence-backed qualification, and SSRF-hardened web acquisition). I own the entire AI engineering lifecycle: document ingestion, vector retrieval, model evals, and high-concurrency async APIs.',
 
   },
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
+import ResumeTexRenderer from './ResumeTexRenderer';
 import './ResumeModal.css';
 
 interface ResumeModalProps {
@@ -71,7 +72,7 @@ export default function ResumeModal({
     [onClose]
   );
 
-  const downloadFileName = 'Shubhangi_Jeve_Resume.pdf';
+  const downloadFileName = 'Shubhangi_Jeve_AIML.pdf';
 
   // Ensure path correctly handles GitHub Pages subpath (/My-Portfolio/)
   const resolvedResumePath = resumePath.startsWith('http')
@@ -80,12 +81,7 @@ export default function ResumeModal({
     ? resumePath
     : `${import.meta.env.BASE_URL}${resumePath.replace(/^\//, '')}`;
 
-  const page1Webp = `${import.meta.env.BASE_URL}resume-page-1.webp`;
-  const page1Png = `${import.meta.env.BASE_URL}resume-page-1.png`;
-  const page2Webp = `${import.meta.env.BASE_URL}resume-page-2.webp`;
-  const page2Png = `${import.meta.env.BASE_URL}resume-page-2.png`;
-
-  const handleDownload = async () => {
+  const handleDownloadPdf = async () => {
     try {
       const response = await fetch(resolvedResumePath);
       if (!response.ok) throw new Error('Download failed');
@@ -99,8 +95,14 @@ export default function ResumeModal({
       document.body.removeChild(link);
       setTimeout(() => URL.revokeObjectURL(blobUrl), 1500);
     } catch {
-      // Fallback: open in new tab
-      window.open(resolvedResumePath, '_blank');
+      // Fallback: trigger download link with specified filename
+      const link = document.createElement('a');
+      link.href = resolvedResumePath;
+      link.download = downloadFileName;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -124,7 +126,7 @@ export default function ResumeModal({
         aria-modal="true"
         aria-label={`${candidateName}'s Resume`}
       >
-        {/* Modal header */}
+        {/* Modal header (Clean, professional recruiter design) */}
         <div className="modal__header">
           <div className="modal__header-left">
             <div className="modal__icon" aria-hidden="true">
@@ -138,7 +140,7 @@ export default function ResumeModal({
             </div>
             <div>
               <h2 className="modal__title">{candidateName}</h2>
-              <p className="modal__subtitle">PDF Document</p>
+              <p className="modal__subtitle">Curriculum Vitae</p>
             </div>
           </div>
 
@@ -179,30 +181,30 @@ export default function ResumeModal({
             </button>
           </div>
 
-          {/* Action buttons */}
+          {/* Recruiter Action buttons */}
           <div className="modal__actions">
             <button
-              onClick={handleDownload}
+              onClick={handleDownloadPdf}
               className="btn btn--primary btn--sm"
-              aria-label="Download resume as PDF"
+              aria-label="Download resume"
               type="button"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
-              <span>Download PDF</span>
+              <span>Download Resume</span>
             </button>
 
             <a
               href={resolvedResumePath}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn--ghost btn--sm"
+              className="btn btn--ghost btn--sm modal__open-tab-btn"
               aria-label="Open resume in new tab"
             >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
@@ -224,41 +226,9 @@ export default function ResumeModal({
           </div>
         </div>
 
-        {/* Modal Body / Pure PDF Viewer */}
+        {/* Modal Body: Pure Native Document Render (Zero Images) */}
         <div className="modal__viewer" ref={viewerScrollRef}>
-          <div
-            className="modal__pdf-pages"
-            style={{
-              width: zoomLevel !== 100 ? `${zoomLevel}%` : '100%',
-              maxWidth: zoomLevel !== 100 ? `${Math.round(840 * (zoomLevel / 100))}px` : '840px',
-            }}
-          >
-            {/* Page 1 */}
-            <div className="modal__pdf-page">
-              <picture>
-                <source srcSet={page1Webp} type="image/webp" />
-                <img
-                  src={page1Png}
-                  alt={`${candidateName} Resume - Page 1`}
-                  className="modal__pdf-sheet"
-                  loading="eager"
-                />
-              </picture>
-            </div>
-
-            {/* Page 2 */}
-            <div className="modal__pdf-page">
-              <picture>
-                <source srcSet={page2Webp} type="image/webp" />
-                <img
-                  src={page2Png}
-                  alt={`${candidateName} Resume - Page 2`}
-                  className="modal__pdf-sheet"
-                  loading="lazy"
-                />
-              </picture>
-            </div>
-          </div>
+          <ResumeTexRenderer zoomLevel={zoomLevel} />
         </div>
       </div>
     </div>

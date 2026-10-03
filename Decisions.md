@@ -321,10 +321,24 @@ My-Portfolio/
   - Harmonized location and relocation text across all sections ([Profile.tsx](file:///d:/Shubhangi/My-Portfolio/src/components/Profile.tsx), [About.tsx](file:///d:/Shubhangi/My-Portfolio/src/components/About.tsx), [Footer.tsx](file:///d:/Shubhangi/My-Portfolio/src/components/Footer.tsx)):
   - Consistent statement: *"Hyderabad, Telangana — Open to Pune, Ahmedabad, Bengaluru & Remote"*
 - **Custom AI Favicon (No React Logo):**
-  - Completely removed default template SVGs (`react.svg`, `vite.svg`).
+  - Completely removed default template SVGs (\`react.svg\`, \`vite.svg\`).
   - Replaced favicon with a custom AI neural constellation/circuit node icon in indigo & cyan gradients ([favicon.svg](file:///d:/Shubhangi/My-Portfolio/public/favicon.svg)).
-  - Updated [index.html](file:///d:/Shubhangi/My-Portfolio/index.html) with dynamic `%BASE_URL%favicon.svg`.
+  - Updated [index.html](file:///d:/Shubhangi/My-Portfolio/index.html) with dynamic \`%BASE_URL%favicon.svg\`.
 
+---
 
-
-
+### 8. Phase 6: Native TeX Resume Rendering (Zero Raster Images, Recruiter-Focused)
+- **The Problem:**
+  - Previously, the resume modal displayed static raster images (\`resume-page-1.png\`, \`resume-page-2.png\`, \`webp\` variants).
+  - This prevented recruiters from selecting or copying text, clicking direct contact links (phone, email, GitHub, LinkedIn), or searching text via Ctrl+F.
+- **The Senior Engineering Solution:**
+  1. *Elimination of Raster Images:* Completely removed \`<img>\` and \`<picture>\` tags displaying raster images from [ResumeModal.tsx](file:///d:/Shubhangi/My-Portfolio/src/components/ResumeModal.tsx).
+  2. *Faithful Native DOM LaTeX Rendering:* Created [ResumeTexRenderer.tsx](file:///d:/Shubhangi/My-Portfolio/src/components/ResumeTexRenderer.tsx) rendering the complete content and typesetting structure of [resume.tex](file:///d:/Shubhangi/My-Portfolio/resume.tex):
+     - Exact 2-page A4 layout simulation with subtle sheet elevation and page indicators (*Page 1 of 2*, *Page 2 of 2*).
+     - Full typographic alignment: small-caps headings with horizontal rules (\`\titlerule[0.75pt]\`), clean margins, indented bullet points with en-dash (\`–\`) markers.
+     - Live interactive contact links: \`tel:+919579122372\`, \`mailto:shubhangijeve@gmail.com\`, GitHub, and LinkedIn.
+     - 100% selectable, copyable, and searchable text for recruiters and ATS scanners.
+  3. *Clean Recruiter Presentation:*
+     - Kept the interface strictly professional for recruiters: eliminated technical LaTeX buttons, source toggles, and developer jargon.
+     - Subtitle set cleanly to *"Curriculum Vitae"*.
+     - Preserved smooth zoom controls (70% – 150%) and standard actions (*Download PDF*, *Open Tab*).

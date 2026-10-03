@@ -1114,6 +1114,57 @@ flowchart LR
       },
     ],
   },
+  // ─── PERSONAL: AI Engineering Portfolio ──────
+  {
+    id: 'portfolio',
+    name: 'AI Engineering Portfolio',
+    shortDescription:
+      'Production-grade single-page AI engineer portfolio with native vector resume rendering, interactive system architecture flows, and live metric tracking.',
+    fullDescription:
+      'High-performance developer portfolio built with React 18, TypeScript, and Vite. Designed specifically for technical recruiters and engineering leaders, featuring native vector DOM rendering of LaTeX curriculum vitae (eliminating blurry raster image artifacts), interactive Mermaid.js architecture diagrams for enterprise RAG and multi-agent pipelines, automated category carousel, and full WCAG accessibility.',
+    category: 'personal',
+    status: 'production',
+    tech: [
+      'React 18', 'TypeScript', 'Vite', 'CSS3', 'Mermaid.js',
+      'HTML5', 'GitHub Actions', 'GitHub Pages',
+    ],
+    capabilities: [
+      'Native DOM vector typeset for LaTeX CV matching Cambria typography and exact ATS margins',
+      'One-click PDF resume download with custom naming (Shubhangi_Jeve_AIML.pdf)',
+      'Interactive Mermaid architecture diagrams for multi-agent and hybrid RAG systems',
+      'Dynamic technical skill proficiency matrix synchronized with production stack',
+      'Responsive modal viewers with keyboard navigation and focus management',
+    ],
+    metrics: [
+      { label: 'Lighthouse Performance', value: '98+' },
+      { label: 'Initial Page Load', value: '<0.8s' },
+      { label: 'Raster Artifacts', value: '0 (100% Vector/DOM)' },
+      { label: 'Diagrams Rendered', value: '10+' },
+    ],
+    diagrams: [
+      {
+        type: 'mermaid',
+        title: 'Portfolio Architecture & Component Hierarchy',
+        code: `
+flowchart TD
+    A([Client Browser]) --> B[Vite SPA Bundle]
+    B --> C[Navbar & Header Actions]
+    B --> D[Hero & Quick Profiles]
+    B --> E[Work Experience & Systems Breakdown]
+    B --> F[Projects Showcase with Mermaid Diagrams]
+    B --> G[Skills Matrix: 4-Pillar Core Stack]
+    B --> H[Native Resume DOM Renderer]
+    H --> I[Download: Shubhangi_Jeve_AIML.pdf]
+
+    style A fill:#0e356b,color:#fff,stroke:none
+    style H fill:#dcfce7,color:#14532d,stroke:#15803d
+    style I fill:#fef3c7,color:#78350f,stroke:#b45309
+`,
+      },
+    ],
+    liveUrl: 'https://shubhangijeve.github.io/My-Portfolio/',
+    githubUrl: 'https://github.com/ShubhangiJeve/My-Portfolio',
+  },
 ];
 
 /** Helper: get a project by its slug ID */

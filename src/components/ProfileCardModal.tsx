@@ -88,10 +88,10 @@ export default function ProfileCardModal({
         {/* 2-3 lines of summary */}
         <div className="profile-modal__summary">
           <p>
-            AI Engineer specializing in enterprise RAG architectures, autonomous agentic tool workflows, and low-latency backends.
+            AI Engineer with 1.5+ years of core AI systems development experience specializing in enterprise RAG architectures, multi-agent LLM orchestration, and high-concurrency async backends.
           </p>
           <p>
-            At COGNITBOTZ, I designed LegalAID's hybrid vector search over 25+ years of court data and built MeetOps' real-time Teams copilot with automated evaluations and strict guardrails.
+            At COGNITBOTZ, I architected LegalAID's hybrid retrieval across 25+ years of court data, built MeetOps' real-time agentic Teams copilot, and developed Granite Buyer Intelligence with a resilient multi-tier LLM gateway.
           </p>
         </div>
 

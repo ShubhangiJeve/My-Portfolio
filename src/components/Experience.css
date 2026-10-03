@@ -30,7 +30,7 @@
   border: 2px solid var(--color-border-hover);
   background: var(--color-bg-card);
   flex-shrink: 0;
-  transition: border-color var(--duration-normal), background var(--duration-normal);
+  transition: border-color 0.45s cubic-bezier(0.25, 1, 0.5, 1), background 0.45s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .timeline__dot--active {
@@ -52,11 +52,16 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   padding: var(--space-6);
-  transition: border-color var(--duration-normal), box-shadow var(--duration-normal);
+  transition: border-color 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.45s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.timeline__card:hover {
-  border-color: var(--color-border-hover);
+@media (hover: hover) and (pointer: fine) {
+  .timeline__card:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.08);
+  }
 }
 
 .timeline__card--expanded {
@@ -164,7 +169,7 @@ a.timeline__company:hover {
 }
 
 .timeline__chevron {
-  transition: transform var(--duration-normal) var(--ease-out);
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
   flex-shrink: 0;
 }
 
@@ -172,12 +177,38 @@ a.timeline__company:hover {
   transform: rotate(180deg);
 }
 
-/* Expandable body */
-.timeline__card-body {
+/* Expandable body using CSS Grid height interpolation for silky-smooth, gentle opening and closing */
+.timeline__card-body-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+}
+
+.timeline__card-body-wrapper--expanded {
+  grid-template-rows: 1fr;
+}
+
+.timeline__card-body-inner {
+  min-height: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+              margin-top 0.55s cubic-bezier(0.25, 1, 0.5, 1),
+              padding-top 0.55s cubic-bezier(0.25, 1, 0.5, 1),
+              border-color 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 1px solid transparent;
+}
+
+.timeline__card-body-wrapper--expanded .timeline__card-body-inner {
+  opacity: 1;
+  transform: translateY(0);
   margin-top: var(--space-5);
   padding-top: var(--space-5);
-  border-top: 1px solid var(--color-border);
-  animation: fadeIn var(--duration-normal) var(--ease-out);
+  border-top-color: var(--color-border);
 }
 
 .timeline__project + .timeline__project {

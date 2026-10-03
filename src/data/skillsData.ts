@@ -1,8 +1,11 @@
 // ─────────────────────────────────────────────
 //  Skills Data: single source of truth
-//  Every skill carries a proficiency level and,
-//  where it applies, the project it was used in.
-//  Logo sources: devicons, simpleicons, and lobehub CDNs
+//  Synchronized with resume Core Stack:
+//  1. AI / LLMs
+//  2. RAG & Search
+//  3. Backend & APIs
+//  4. MLOps & Cloud
+//  Every skill carries proficiency level and project usage.
 // ─────────────────────────────────────────────
 
 import type { SkillCategory } from '../types';
@@ -13,74 +16,78 @@ const LOBEHUB = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1.95.1/i
 
 export const skillCategories: SkillCategory[] = [
   {
+    id: 'ai-llms',
+    label: 'AI / LLMs',
+    icon: '',
+    skills: [
+      { name: 'OpenAI (GPT-4o)',            logoUrl: `${LOBEHUB}/openai.svg`,                 level: 'core', usedIn: 'MeetOps, LedgerLens-AI' },
+      { name: 'DeepSeek R1',                logoUrl: `${LOBEHUB}/deepseek.svg`,               level: 'core', usedIn: 'LedgerLens-AI (forensic deduction & multi-model routing)' },
+      { name: 'Claude 3.5',                 logoUrl: `${LOBEHUB}/claude.svg`,                 level: 'core', usedIn: 'LedgerLens-AI, Granite Buyer Intelligence' },
+      { name: 'Azure OpenAI',               logoUrl: `${DEVICONS}/azure/azure-original.svg`,   level: 'proficient', usedIn: 'Enterprise AI & secure tenant deployments' },
+      { name: 'Llama 3.3',                  logoUrl: `${SIMPLEICONS}/meta/0081fb`,             level: 'proficient', usedIn: 'LegalAID, MeetOps' },
+      { name: 'Google Gemini',              logoUrl: `${SIMPLEICONS}/googlegemini/8e75b3`,    level: 'proficient', usedIn: 'Text-to-SQL, Insurance Claim Automation' },
+      { name: 'Fine-Tuning & Integration',  logoUrl: `${SIMPLEICONS}/huggingface/ff9d00`,        level: 'proficient', usedIn: 'Domain adaptation & custom embedding fine-tuning' },
+      { name: 'LangChain',                  logoUrl: `${SIMPLEICONS}/langchain/1c3c3c`,       level: 'core', usedIn: 'Text-to-SQL, Insurance Claim Automation' },
+      { name: 'LangGraph',                  logoUrl: `${SIMPLEICONS}/langgraph/1c3c3c`,       level: 'core', usedIn: 'MeetOps (stateful multi-agent workflows)' },
+      { name: 'AI Orchestration',           logoUrl: `${SIMPLEICONS}/openrouter/000000`,      level: 'core', usedIn: 'Argus, LedgerLens-AI (dynamic routing & failover)' },
+      { name: 'Multi-Agent Architectures',  logoUrl: `${LOBEHUB}/anthropic.svg`,              level: 'core', usedIn: 'Argus (hierarchical planner-specialist framework)' },
+      { name: 'Prompt Engineering',         logoUrl: `${LOBEHUB}/openai.svg`,                 level: 'core', usedIn: 'Structured outputs, system prompts & hallucination guardrails' },
+      { name: 'Prompt-Caching & Registry',  logoUrl: `${DEVICONS}/redis/redis-original.svg`,   level: 'core', usedIn: 'LedgerLens-AI, LegalAID (reduced TTFT by 350ms)' },
+    ],
+  },
+  {
+    id: 'rag-search',
+    label: 'RAG & Search',
+    icon: '',
+    skills: [
+      { name: 'Retrieval-Augmented Gen (RAG)', logoUrl: `${SIMPLEICONS}/huggingface/ff9d00`,     level: 'core', usedIn: 'LegalAID, MeetOps, Healthcare RAG, RAG QA' },
+      { name: 'Semantic Search',            logoUrl: `${SIMPLEICONS}/huggingface/ff9d00`,     level: 'core', usedIn: 'LegalAID (dense-lexical fusion & parent-child chunking)' },
+      { name: 'Azure AI Search',            logoUrl: `${DEVICONS}/azure/azure-original.svg`,   level: 'proficient', usedIn: 'Enterprise hybrid RAG & index orchestration' },
+      { name: 'Weaviate',                   logoUrl: `${import.meta.env.BASE_URL}weaviate.svg`, level: 'proficient', usedIn: 'Hybrid vector retrieval & multi-tenant indexing' },
+      { name: 'FAISS',                      logoUrl: `${SIMPLEICONS}/meta/0081fb`,             level: 'proficient', usedIn: 'Healthcare RAG' },
+      { name: 'pgvector (Azure PostgreSQL)', logoUrl: `${SIMPLEICONS}/postgresql/336791`,       level: 'core', usedIn: 'LegalAID, MeetOps, Granite Buyer Intelligence' },
+      { name: 'ChromaDB',                   logoUrl: `${SIMPLEICONS}/chroma/000000`,           level: 'proficient', usedIn: 'RAG Document QA System' },
+    ],
+  },
+  {
+    id: 'backend-apis',
+    label: 'Backend & APIs',
+    icon: '',
+    skills: [
+      { name: 'Python',                     logoUrl: `${DEVICONS}/python/python-original.svg`, level: 'core', usedIn: 'All core AI pipelines & services' },
+      { name: 'FastAPI',                    logoUrl: `${SIMPLEICONS}/fastapi/009688`,         level: 'core', usedIn: 'LegalAID, MeetOps, Argus, LedgerLens-AI, Granite' },
+      { name: 'Flask',                      logoUrl: `${SIMPLEICONS}/flask/000000`,           level: 'proficient', usedIn: 'Healthcare RAG, Insurance Claim Automation' },
+      { name: 'REST APIs & Microservices',  logoUrl: `${SIMPLEICONS}/fastapi/009688`,         level: 'core', usedIn: 'Async AI microservices across production systems' },
+      { name: 'Pydantic',                   logoUrl: `${SIMPLEICONS}/pydantic/E92063`,        level: 'core', usedIn: 'Data contracts, schema validation, LedgerLens-AI' },
+      { name: 'Structured Outputs',         logoUrl: `${LOBEHUB}/openai.svg`,                 level: 'core', usedIn: 'JSON schema repair loops (99.4% adherence)' },
+      { name: 'PostgreSQL, PgSQL',          logoUrl: `${DEVICONS}/postgresql/postgresql-original.svg`, level: 'core', usedIn: 'LegalAID, MeetOps, Granite, LedgerLens-AI' },
+      { name: 'Async Programming',          logoUrl: `${SIMPLEICONS}/aiohttp/2C5BB4`,         level: 'core', usedIn: 'FastAPI async handlers, aiohttp, concurrent execution' },
+    ],
+  },
+  {
+    id: 'mlops-cloud',
+    label: 'MLOps & Cloud',
+    icon: '',
+    skills: [
+      { name: 'Databricks (Unity Catalog)', logoUrl: `${SIMPLEICONS}/databricks/FF3621`,      level: 'core', usedIn: 'LedgerLens-AI (Delta Lake, RBAC governance, audit logging)' },
+      { name: 'Delta Lake & PySpark',       logoUrl: `${SIMPLEICONS}/apachespark/E25A1C`,     level: 'proficient', usedIn: 'High-throughput financial ETL & distributed batching' },
+      { name: 'MLflow',                     logoUrl: `${SIMPLEICONS}/mlflow/0194E2`,          level: 'proficient', usedIn: 'Model tracking, evaluation metrics & prompt versioning' },
+      { name: 'MLOps & Model Monitoring',   logoUrl: `${SIMPLEICONS}/langfuse/000000`,        level: 'core', usedIn: 'Model deployment, latency tracking & quality tuning' },
+      { name: 'Containerization (Docker)',  logoUrl: `${DEVICONS}/docker/docker-original.svg`, level: 'core', usedIn: 'LegalAID, MeetOps, Argus, LedgerLens-AI, RAG QA' },
+      { name: 'Kubernetes',                 logoUrl: `${DEVICONS}/kubernetes/kubernetes-plain.svg`, level: 'proficient', usedIn: 'Container orchestration & scalable cluster deployment' },
+      { name: 'Azure Cloud Platform',       logoUrl: `${DEVICONS}/azure/azure-original.svg`,   level: 'core', usedIn: 'Argus production VM, Azure AI Search, Azure PostgreSQL' },
+      { name: 'CI/CD',                      logoUrl: `${DEVICONS}/github/github-original.svg`, level: 'core', usedIn: 'Automated test suites & deployment pipelines' },
+      { name: 'Git & GitLab',               logoUrl: `${DEVICONS}/gitlab/gitlab-original.svg`, level: 'core', usedIn: 'Enterprise version control & collaborative workflows' },
+    ],
+  },
+  {
     id: 'languages',
     label: 'Languages',
     icon: '',
     skills: [
-      { name: 'Python',     logoUrl: `${DEVICONS}/python/python-original.svg`,         level: 'core', usedIn: 'LegalAID, MeetOps, Argus, Text-to-SQL, Healthcare RAG' },
-      { name: 'TypeScript', logoUrl: `${DEVICONS}/typescript/typescript-original.svg`, level: 'proficient', usedIn: 'LegalAID, MeetOps, Argus frontends' },
-      { name: 'SQL',        logoUrl: `${DEVICONS}/postgresql/postgresql-original.svg`, level: 'core', usedIn: 'LegalAID, Text-to-SQL, MeetOps' },
-    ],
-  },
-  {
-    id: 'backend',
-    label: 'Backend & APIs',
-    icon: '',
-    skills: [
-      { name: 'FastAPI',      logoUrl: `${SIMPLEICONS}/fastapi/009688`,     level: 'core', usedIn: 'LegalAID, MeetOps, Argus, Granite Buyer Intelligence' },
-      { name: 'Pydantic v2',  logoUrl: `${SIMPLEICONS}/pydantic/E92063`,    level: 'core', usedIn: 'LegalAID, Argus, Granite Buyer Intelligence' },
-      { name: 'SQLAlchemy',   logoUrl: `${SIMPLEICONS}/sqlalchemy/D71F00`,  level: 'core', usedIn: 'LegalAID, Granite Buyer Intelligence' },
-      { name: 'Alembic',      logoUrl: `${SIMPLEICONS}/alembic/000000`,     level: 'proficient', usedIn: 'Granite Buyer Intelligence (versioned schema migrations)' },
-      { name: 'Flask',        logoUrl: `${SIMPLEICONS}/flask/000000`,       level: 'proficient', usedIn: 'Healthcare RAG, Insurance Claim Automation' },
-      { name: 'Streamlit',    logoUrl: `${SIMPLEICONS}/streamlit/ff4b4b`,   level: 'familiar', usedIn: 'Text-to-SQL' },
-      { name: 'aiohttp',      logoUrl: `${SIMPLEICONS}/aiohttp/2C5BB4`,     level: 'proficient', usedIn: 'Granite Buyer Intelligence (bounded async web acquisition)' },
-      { name: 'openpyxl',     logoUrl: `${SIMPLEICONS}/microsoftexcel/217346`, level: 'proficient', usedIn: 'Granite Buyer Intelligence (13-worksheet Excel export)' },
-    ],
-  },
-  {
-    id: 'ai-ml',
-    label: 'AI & Machine Learning',
-    icon: '',
-    skills: [
-      { name: 'TensorFlow',   logoUrl: `${DEVICONS}/tensorflow/tensorflow-original.svg`, level: 'familiar' },
-      { name: 'PyTorch',      logoUrl: `${DEVICONS}/pytorch/pytorch-original.svg`,       level: 'familiar' },
-      { name: 'Scikit-learn', logoUrl: `${DEVICONS}/scikitlearn/scikitlearn-original.svg`, level: 'familiar' },
-      { name: 'NumPy',        logoUrl: `${DEVICONS}/numpy/numpy-original.svg`,           level: 'proficient' },
-      { name: 'Pandas',       logoUrl: `${DEVICONS}/pandas/pandas-original.svg`,         level: 'proficient' },
-      { name: 'Keras',        logoUrl: `${DEVICONS}/keras/keras-original.svg`,           level: 'familiar' },
-      { name: 'Hugging Face', logoUrl: `${SIMPLEICONS}/huggingface/ff9d00`,              level: 'familiar', usedIn: 'Healthcare RAG' },
-    ],
-  },
-  {
-    id: 'genai',
-    label: 'Generative AI & Agents',
-    icon: '',
-    skills: [
-      { name: 'LangChain',     logoUrl: `${SIMPLEICONS}/langchain/1c3c3c`,     level: 'core', usedIn: 'Text-to-SQL, Insurance Claim Automation' },
-      { name: 'LangGraph',     logoUrl: `${SIMPLEICONS}/langgraph/1c3c3c`,     level: 'proficient', usedIn: 'MeetOps' },
-      { name: 'OpenAI',        logoUrl: `${LOBEHUB}/openai.svg`,               level: 'proficient', usedIn: 'MeetOps' },
-      { name: 'Google Gemini', logoUrl: `${SIMPLEICONS}/googlegemini/8e75b3`,  level: 'proficient', usedIn: 'Text-to-SQL, Insurance Claim Automation' },
-      { name: 'Groq',          logoUrl: `${LOBEHUB}/groq.svg`,                 level: 'proficient', usedIn: 'LegalAID, Text-to-SQL, Granite Buyer Intelligence (tertiary LLM failover)' },
-      { name: 'OpenRouter',    logoUrl: `${SIMPLEICONS}/openrouter/000000`,    level: 'proficient', usedIn: 'Argus, Granite Buyer Intelligence (primary LLM gateway + embedding failover)' },
-      { name: 'NVIDIA NIM',    logoUrl: `${SIMPLEICONS}/nvidia/76B900`,        level: 'proficient', usedIn: 'Argus, Granite Buyer Intelligence (Nemotron embed + chat generation)' },
-      { name: 'Ollama',        logoUrl: `${SIMPLEICONS}/ollama/000000`,        level: 'familiar' },
-      { name: 'Langfuse',      logoUrl: `${SIMPLEICONS}/langfuse/000000`,      level: 'proficient', usedIn: 'Argus (agent, tool call, and token-level tracing)' },
-      { name: 'RAGAS',         logoUrl: `${SIMPLEICONS}/ragas/000000`,         level: 'proficient', usedIn: 'Text-to-SQL (context precision, helpfulness scoring)' },
-    ],
-  },
-  {
-    id: 'vector-db',
-    label: 'Retrieval & Databases',
-    icon: '',
-    skills: [
-      { name: 'pgvector',            logoUrl: `${SIMPLEICONS}/postgresql/336791`,     level: 'core', usedIn: 'LegalAID, MeetOps' },
-      { name: 'PostgreSQL',          logoUrl: `${DEVICONS}/postgresql/postgresql-original.svg`, level: 'core', usedIn: 'LegalAID, MeetOps' },
-      { name: 'SQLite',              logoUrl: `${SIMPLEICONS}/sqlite/003B57`,          level: 'core', usedIn: 'Granite Buyer Intelligence (WAL mode, durable job queue, quota enforcement)' },
-      { name: 'MySQL',               logoUrl: `${DEVICONS}/mysql/mysql-original.svg`, level: 'proficient', usedIn: 'Text-to-SQL' },
-      { name: 'Redis',               logoUrl: `${DEVICONS}/redis/redis-original.svg`, level: 'proficient', usedIn: 'MeetOps (response caching)' },
-      { name: 'FAISS',               logoUrl: `${SIMPLEICONS}/meta/0081fb`,           level: 'proficient', usedIn: 'Healthcare RAG' },
-      { name: 'ChromaDB',            logoUrl: `${SIMPLEICONS}/chroma/000000`,         level: 'familiar', usedIn: 'RAG Document QA System' },
-      { name: 'sentence-transformers', logoUrl: `${SIMPLEICONS}/huggingface/ff9d00`,  level: 'familiar', usedIn: 'RAG Document QA System' },
+      { name: 'Python',            logoUrl: `${DEVICONS}/python/python-original.svg`,         level: 'core', usedIn: 'LegalAID, MeetOps, Argus, LedgerLens-AI' },
+      { name: 'TypeScript',        logoUrl: `${DEVICONS}/typescript/typescript-original.svg`, level: 'proficient', usedIn: 'LegalAID, MeetOps, Argus, Portfolio' },
+      { name: 'SQL',               logoUrl: `${DEVICONS}/postgresql/postgresql-original.svg`, level: 'core', usedIn: 'LegalAID, Text-to-SQL, MeetOps, PgSQL' },
     ],
   },
   {
@@ -88,24 +95,22 @@ export const skillCategories: SkillCategory[] = [
     label: 'Frontend',
     icon: '',
     skills: [
-      { name: 'React',        logoUrl: `${DEVICONS}/react/react-original.svg`,     level: 'core', usedIn: 'MeetOps, Argus, Healthcare RAG, RAG Document QA' },
-      { name: 'Next.js',      logoUrl: `${DEVICONS}/nextjs/nextjs-original.svg`,   level: 'proficient', usedIn: 'LegalAID' },
-      { name: 'Tailwind CSS', logoUrl: `${SIMPLEICONS}/tailwindcss/06B6D4`,        level: 'proficient', usedIn: 'Healthcare RAG' },
+      { name: 'React',             logoUrl: `${DEVICONS}/react/react-original.svg`,     level: 'core', usedIn: 'MeetOps, Argus, Healthcare RAG, Portfolio' },
+      { name: 'Next.js',           logoUrl: `${DEVICONS}/nextjs/nextjs-original.svg`,   level: 'proficient', usedIn: 'LegalAID' },
+      { name: 'Tailwind CSS',      logoUrl: `${SIMPLEICONS}/tailwindcss/06B6D4`,        level: 'proficient', usedIn: 'Healthcare RAG, Portfolio' },
     ],
   },
   {
-    id: 'devops',
-    label: 'DevOps & Deployment',
+    id: 'ai-ml',
+    label: 'AI & Machine Learning',
     icon: '',
     skills: [
-      { name: 'Docker',   logoUrl: `${DEVICONS}/docker/docker-original.svg`, level: 'core', usedIn: 'LegalAID, MeetOps, Argus, RAG Document QA' },
-      { name: 'Nginx',    logoUrl: `${SIMPLEICONS}/nginx/009639`,            level: 'proficient', usedIn: 'Argus (reverse proxy, TLS)' },
-      { name: 'Azure VM', logoUrl: `${SIMPLEICONS}/microsoftazure/0078D4`,   level: 'proficient', usedIn: 'Argus (production deployment)' },
-      { name: 'Git',      logoUrl: `${DEVICONS}/git/git-original.svg`,       level: 'core', usedIn: 'All projects' },
-      { name: 'GitHub',   logoUrl: `${DEVICONS}/github/github-original.svg`, level: 'core', usedIn: 'All projects' },
-      { name: 'VS Code',  logoUrl: `${DEVICONS}/vscode/vscode-original.svg`, level: 'core' },
-      { name: 'Jupyter',  logoUrl: `${DEVICONS}/jupyter/jupyter-original.svg`, level: 'proficient' },
-      { name: 'N8N',      logoUrl: `${SIMPLEICONS}/n8n/ea4b71`,              level: 'familiar' },
+      { name: 'TensorFlow',        logoUrl: `${DEVICONS}/tensorflow/tensorflow-original.svg`, level: 'familiar' },
+      { name: 'PyTorch',           logoUrl: `${DEVICONS}/pytorch/pytorch-original.svg`,       level: 'familiar' },
+      { name: 'Scikit-learn',      logoUrl: `${DEVICONS}/scikitlearn/scikitlearn-original.svg`, level: 'familiar' },
+      { name: 'NumPy',             logoUrl: `${DEVICONS}/numpy/numpy-original.svg`,           level: 'proficient' },
+      { name: 'Pandas',            logoUrl: `${DEVICONS}/pandas/pandas-original.svg`,         level: 'proficient' },
+      { name: 'Hugging Face',      logoUrl: `${SIMPLEICONS}/huggingface/ff9d00`,              level: 'familiar', usedIn: 'Healthcare RAG, sentence-transformers' },
     ],
   },
 ];

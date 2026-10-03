@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { Experience } from '../types';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import './Experience.css';
@@ -7,7 +7,7 @@ interface ExperienceProps {
   experience: Experience[];
 }
 
-// ── Individual card, owns its own open/close state ───────────────────────────
+// ── Individual card: Hover-to-preview on desktop, Tap-to-toggle on mobile ────
 function ExperienceCard({
   exp,
   index,
@@ -17,10 +17,53 @@ function ExperienceCard({
   index: number;
   isLast: boolean;
 }) {
-  const [isExpanded, setIsExpanded] = useState(index === 0);
+  const [isHoverDevice, setIsHoverDevice] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPinned, setIsPinned] = useState(false);
   const bodyId = `exp-body-${exp.id}`;
 
-  const toggle = () => setIsExpanded((v) => !v);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+      setIsHoverDevice(mediaQuery.matches);
+
+      // On mobile (touchscreens), start first card expanded for instant context
+      if (!mediaQuery.matches && index === 0) {
+        setIsPinned(true);
+      }
+
+      const handler = (e: MediaQueryListEvent) => {
+        setIsHoverDevice(e.matches);
+      };
+      mediaQuery.addEventListener('change', handler);
+      return () => mediaQuery.removeEventListener('change', handler);
+    }
+  }, [index]);
+
+  // On desktop: opens when hovered OR pinned by click.
+  // On mobile: opens when tapped/pinned.
+  const isExpanded = isHoverDevice ? (isHovered || isPinned) : isPinned;
+
+  const handleMouseEnter = () => {
+    if (isHoverDevice) {
+      setIsHovered(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (isHoverDevice) {
+      setIsHovered(false);
+    }
+  };
+
+  const handleToggleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsPinned((prev) => !prev);
+  };
+
+  const handleHeaderClick = () => {
+    setIsPinned((prev) => !prev);
+  };
 
   return (
     <li className="timeline__item">
@@ -30,9 +73,13 @@ function ExperienceCard({
         {!isLast && <div className="timeline__line" />}
       </div>
 
-      <article className={`timeline__card ${isExpanded ? 'timeline__card--expanded' : ''}`}>
-        {/* Header: clicking anywhere toggles for mouse users; the button is the accessible control */}
-        <div className="timeline__card-header" onClick={toggle}>
+      <article
+        className={`timeline__card ${isExpanded ? 'timeline__card--expanded' : ''}`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {/* Header: clicking anywhere toggles for touch/mouse users */}
+        <div className="timeline__card-header" onClick={handleHeaderClick}>
           <div className="timeline__card-left">
             {exp.endDate === 'Present' && (
               <div className="timeline__badges">
@@ -79,10 +126,7 @@ function ExperienceCard({
             <button
               type="button"
               className="timeline__toggle"
-              onClick={(e) => {
-                e.stopPropagation();
-                toggle();
-              }}
+              onClick={handleToggleClick}
               aria-expanded={isExpanded}
               aria-controls={bodyId}
             >
@@ -106,23 +150,29 @@ function ExperienceCard({
           </div>
         </div>
 
-        {/* Details body stays in the DOM so aria-controls always resolves */}
-        <div id={bodyId} className="timeline__card-body" hidden={!isExpanded}>
-          {exp.projects.map((project) => (
-            <div key={project.name} className="timeline__project">
-              {project.name && (
-                <h4 className="timeline__project-name">{project.name}</h4>
-              )}
-              {project.description && (
-                <p className="timeline__project-desc">{project.description}</p>
-              )}
-              <ul className="timeline__points">
-                {project.points.map((point) => (
-                  <li key={point} className="timeline__point">{point}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        {/* Details body with smooth CSS grid height interpolation */}
+        <div
+          id={bodyId}
+          className={`timeline__card-body-wrapper ${isExpanded ? 'timeline__card-body-wrapper--expanded' : ''}`}
+          aria-hidden={!isExpanded}
+        >
+          <div className="timeline__card-body-inner">
+            {exp.projects.map((project) => (
+              <div key={project.name} className="timeline__project">
+                {project.name && (
+                  <h4 className="timeline__project-name">{project.name}</h4>
+                )}
+                {project.description && (
+                  <p className="timeline__project-desc">{project.description}</p>
+                )}
+                <ul className="timeline__points">
+                  {project.points.map((point) => (
+                    <li key={point} className="timeline__point">{point}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </article>
     </li>
