@@ -13,8 +13,6 @@ html_content = """<!DOCTYPE html>
 <title>Shubhangi Jeve - Resume</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-@import url('https://fonts.cdnfonts.com/css/computer-modern');
-
 @page {
   size: A4;
   margin: 0;
@@ -27,9 +25,9 @@ html_content = """<!DOCTYPE html>
 }
 
 body {
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 9.1pt;
-  line-height: 1.32;
+  font-family: 'Cambria', 'Georgia', 'Times New Roman', serif;
+  font-size: 9.2pt;
+  line-height: 1.34;
   color: #111111;
   background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
@@ -38,7 +36,7 @@ body {
 .page {
   width: 210mm;
   height: 297mm;
-  padding: 10mm 13mm 10mm 13mm;
+  padding: 10mm 12mm 10mm 12mm;
   position: relative;
   page-break-after: always;
   box-sizing: border-box;
@@ -55,8 +53,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 6px;
-  padding-bottom: 1px;
+  margin-bottom: 5px;
+  padding-bottom: 2px;
 }
 
 .header-left {
@@ -64,33 +62,35 @@ body {
 }
 
 .name {
-  font-size: 19pt;
+  font-size: 21pt;
   font-weight: 700;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
   color: #000000;
-  margin-bottom: 2px;
+  line-height: 1.1;
+  margin-bottom: 3px;
 }
 
 .subtitle {
-  font-size: 9.2pt;
-  color: #222222;
-  margin-bottom: 1.5px;
+  font-size: 9.3pt;
+  color: #1a1a1a;
+  margin-bottom: 2px;
 }
 
 .institution {
-  font-size: 8.8pt;
+  font-size: 9pt;
   color: #333333;
-  margin-bottom: 1.5px;
+  margin-bottom: 2px;
 }
 
 .location {
-  font-size: 8.8pt;
+  font-size: 8.9pt;
+  font-style: italic;
   color: #444444;
 }
 
 .header-right {
   text-align: right;
-  font-size: 8.8pt;
+  font-size: 8.9pt;
   line-height: 1.45;
 }
 
@@ -99,56 +99,56 @@ body {
   align-items: center;
   justify-content: flex-end;
   gap: 6px;
-  color: #222222;
+  color: #111111;
 }
 
 .contact-item a {
-  color: #111111;
+  color: #000000;
   text-decoration: none;
 }
 
 .contact-item i {
   font-size: 8.5pt;
-  width: 12px;
+  width: 13px;
   text-align: center;
-  color: #222222;
+  color: #111111;
 }
 
 /* Section styling */
 .section {
-  margin-top: 5px;
+  margin-top: 6px;
   margin-bottom: 3px;
 }
 
 .section-title {
-  font-size: 10.3pt;
+  font-size: 10.5pt;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: #000000;
-  border-bottom: 0.75pt solid #222222;
+  border-bottom: 0.75pt solid #000000;
   padding-bottom: 1.5px;
-  margin-bottom: 3.5px;
+  margin-bottom: 4px;
 }
 
 /* Objective */
 .objective-text {
-  font-size: 9.05pt;
-  line-height: 1.30;
+  font-size: 9.2pt;
+  line-height: 1.34;
   text-align: justify;
   color: #1a1a1a;
 }
 
 /* Experience & Projects entry */
 .entry {
-  margin-bottom: 4.5px;
+  margin-bottom: 4px;
 }
 
 .entry-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 9.25pt;
+  font-size: 9.4pt;
   margin-bottom: 1px;
 }
 
@@ -157,15 +157,10 @@ body {
   color: #000000;
 }
 
-.entry-title::before {
-  content: "• ";
-  font-weight: 700;
-}
-
 .entry-date {
-  font-size: 9pt;
-  font-weight: 600;
-  color: #222222;
+  font-size: 9.1pt;
+  font-weight: 700;
+  color: #000000;
   white-space: nowrap;
 }
 
@@ -173,119 +168,122 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 9.1pt;
-  margin-bottom: 2px;
+  font-size: 9.2pt;
+  margin-bottom: 3px;
 }
 
 .entry-company {
-  font-weight: 600;
-  color: #111111;
+  font-weight: 700;
+  color: #000000;
 }
 
 .entry-location {
   font-style: italic;
   color: #444444;
-  font-size: 8.8pt;
+  font-size: 8.9pt;
 }
 
 .project-lead {
-  font-size: 9.05pt;
+  font-size: 9.2pt;
+  margin-top: 2px;
   margin-bottom: 2.5px;
-  line-height: 1.28;
+  line-height: 1.30;
   color: #111111;
-  padding-left: 10px;
 }
 
-.project-lead strong {
+.project-title {
   font-weight: 700;
+  color: #0e356b;
 }
 
-/* Bullets */
+.project-tagline {
+  font-size: 8.8pt;
+  font-style: italic;
+  color: #333333;
+  margin-bottom: 2px;
+  display: block;
+}
+
+/* Bullet list */
 .bullet-list {
   list-style: none;
-  padding-left: 10px;
+  padding-left: 12pt;
+  margin-bottom: 4px;
 }
 
 .bullet-item {
   position: relative;
-  padding-left: 11px;
-  margin-bottom: 2.2px;
-  font-size: 8.85pt;
-  line-height: 1.26;
+  font-size: 9.05pt;
+  line-height: 1.32;
+  margin-bottom: 1.8pt;
+  color: #141414;
   text-align: justify;
-  color: #1c1c1c;
 }
 
 .bullet-item::before {
-  content: "–";
+  content: "--";
   position: absolute;
-  left: 0;
-  top: 0;
-  color: #222222;
+  left: -12pt;
+  color: #333333;
 }
 
-.bullet-item strong {
+.bullet-label {
   font-weight: 700;
   color: #000000;
 }
 
-/* Skills list */
-.skills-group {
-  margin-bottom: 2px;
-  font-size: 8.85pt;
-  line-height: 1.27;
+/* Skills */
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5pt;
+  font-size: 9.05pt;
+  line-height: 1.34;
+  margin-top: 3px;
 }
 
-.skills-group strong {
+.skill-row {
+  display: block;
+  text-align: justify;
+}
+
+.skill-label {
   font-weight: 700;
   color: #000000;
 }
 
-/* Education entry */
-.edu-entry {
-  margin-top: 2.5px;
+/* Education */
+.edu-block {
+  margin-top: 3px;
 }
-.edu-row-1 {
+
+.edu-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 9.25pt;
-  margin-bottom: 1.5px;
-}
-.edu-title {
+  font-size: 9.3pt;
   font-weight: 700;
   color: #000000;
 }
-.edu-title::before {
-  content: "• ";
-  font-weight: 700;
-}
-.edu-date {
+
+.edu-subrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   font-size: 9pt;
-  font-weight: 600;
   color: #222222;
-  white-space: nowrap;
+  margin-top: 1px;
 }
-.edu-row-2 {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-size: 8.9pt;
-  color: #333333;
-  padding-left: 10px;
-}
-.edu-school {
-  color: #333333;
-}
+
 .edu-cgpa {
-  font-weight: 600;
-  color: #222222;
+  font-weight: 700;
+  color: #000000;
 }
 </style>
 </head>
 <body>
 
-<!-- ================= PAGE 1 ================= -->
+<!-- PAGE 1 -->
 <div class="page">
   <!-- Header -->
   <div class="header">
@@ -296,242 +294,210 @@ body {
       <div class="location">Hyderabad, Telangana</div>
     </div>
     <div class="header-right">
-      <div class="contact-item">
-        <a href="tel:+919579122372">+91-9579122372</a>
-        <i class="fa-solid fa-phone"></i>
-      </div>
-      <div class="contact-item">
-        <a href="mailto:shubhangijeve@gmail.com">shubhangijeve@gmail.com</a>
-        <i class="fa-solid fa-envelope"></i>
-      </div>
-      <div class="contact-item">
-        <a href="https://github.com/ShubhangiJeve" target="_blank">github.com/ShubhangiJeve</a>
-        <i class="fa-brands fa-github"></i>
-      </div>
-      <div class="contact-item">
-        <a href="https://linkedin.com/in/shubhangi-jeve-97445b235" target="_blank">linkedin.com/in/shubhangi-jeve-97445b235</a>
-        <i class="fa-brands fa-linkedin"></i>
-      </div>
+      <div class="contact-item"><a href="tel:+919579122372">+91-9579122372</a> <i class="fa-solid fa-phone"></i></div>
+      <div class="contact-item"><a href="mailto:shubhangijeve@gmail.com">shubhangijeve@gmail.com</a> <i class="fa-solid fa-envelope"></i></div>
+      <div class="contact-item"><a href="https://shubhangijeve.github.io/My-Portfolio/" target="_blank">shubhangijeve.github.io/My-Portfolio</a> <i class="fa-solid fa-globe"></i></div>
+      <div class="contact-item"><a href="https://github.com/ShubhangiJeve" target="_blank">github.com/ShubhangiJeve</a> <i class="fa-brands fa-github"></i></div>
+      <div class="contact-item"><a href="https://linkedin.com/in/shubhangi-jeve-97445b235" target="_blank">linkedin.com/in/shubhangi-jeve-97445b235</a> <i class="fa-brands fa-linkedin"></i></div>
     </div>
   </div>
 
   <!-- Career Objective -->
   <div class="section">
     <div class="section-title">Career Objective</div>
-    <div class="objective-text">
-      AI Engineer with hands-on production experience building end-to-end LLM-powered systems, RAG pipelines, and full-stack AI applications. Proficient in Python, FastAPI, vector databases, and LLM integration using Groq, Gemini, and Hugging Face. Seeking an AI Engineer role to architect and deploy scalable, enterprise-grade intelligent systems.
-    </div>
+    <p class="objective-text">
+      AI Engineer with 1.5+ years of core experience architecting and deploying production-grade AI systems, hybrid RAG pipelines, and multi-agent platforms. Proficient in LLM orchestration, async backend architectures, vector databases, and enterprise AI engineering. Driven to build scalable, high-impact intelligent systems.
+    </p>
   </div>
 
   <!-- Experience -->
   <div class="section">
     <div class="section-title">Experience</div>
-    
+
+    <!-- COGNITBOTZ -->
     <div class="entry">
       <div class="entry-header">
-        <span class="entry-title">AI Engineer Intern</span>
-        <span class="entry-date">November 2025 – Present</span>
+        <span class="entry-title">&#8226; AI Engineer Intern</span>
+        <span class="entry-date">November 2025 -- Present</span>
       </div>
       <div class="entry-subheader">
         <span class="entry-company">COGNITBOTZ</span>
         <span class="entry-location">Hyderabad, Telangana</span>
       </div>
 
+      <!-- Project 1: LegalAID -->
       <div class="project-lead">
-        <strong>– Project: LegalAID</strong> — Enterprise-grade, AI-powered Legal Research and Litigation Assistance Platform for Indian court case data, combining Retrieval-Augmented Generation (RAG), semantic search, and LLM-driven drafting into a production-ready system.
+        <span class="project-title">Project 1: LegalAID</span> --- Enterprise-grade AI Legal Research and Litigation Platform combining Hybrid RAG, semantic search, and automated drafting.
       </div>
-
       <ul class="bullet-list">
-        <li class="bullet-item">
-          <strong>RAG Pipeline Architecture:</strong> Designed and implemented a multi-stage hybrid retrieval pipeline combining dense vector search (pgvector with BAAI/bge-m3 embeddings) and PostgreSQL full-text search for lexical recall. Applied parent-child chunk retrieval with entity-aware chunking strategies tailored per legal document type including case summaries, hearing history, orders, and procedural timelines to maximize citation-grounded answer quality.
-        </li>
-        <li class="bullet-item">
-          <strong>LLM Integration and Hallucination Control:</strong> Integrated Groq-hosted LLMs through a provider-abstracted service layer supporting model swapping at configuration time. Enforced a strict abstention policy where the system returns “Insufficient evidence” when retrieval confidence falls below a defined threshold. Validated every generated answer against cited source chunks to minimize hallucination in legal responses.
-        </li>
-        <li class="bullet-item">
-          <strong>Data Ingestion and Normalization Engine:</strong> Built a robust ingestion pipeline that parses yearly Indian court JSON dumps containing 20,000 to 75,000 cases spanning 25 years. The pipeline normalizes 30+ canonical fields including parties, acts, bench type, coram, and hearing history, deduplicates records, generates semantic embeddings, and writes structured data with vector indexes in a single resumable run.
-        </li>
-        <li class="bullet-item">
-          <strong>Backend API Development (FastAPI and SQLAlchemy 2.0):</strong> Developed a fully asynchronous REST API with complete Pydantic v2 schema validation, exposing endpoints for case search, RAG-based question answering, AI-assisted legal document drafting (notices, replies, case briefs, legal memos), litigation comparison, and a dashboard analytics module.
-        </li>
-        <li class="bullet-item">
-          <strong>Frontend Development (Next.js 14 and TypeScript):</strong> Built the complete frontend in Next.js 14 with TypeScript, covering a natural-language search workspace, faceted case explorer, structured case detail pages with hearing timelines, a legal drafting workspace, side-by-side case comparison view, and an admin console for ingestion pipeline management.
-        </li>
-        <li class="bullet-item">
-          <strong>Vector Database and Hybrid Search:</strong> Configured PostgreSQL with pgvector as the unified store for both structured metadata queries and approximate nearest-neighbor (ANN) vector retrieval, achieving sub-4-second search latency on the full case corpus while eliminating the overhead of a separate vector database.
-        </li>
-        <li class="bullet-item">
-          <strong>Containerized Deployment with Docker:</strong> Packaged the entire system using Docker and Docker Compose, with the FastAPI backend running in a lightweight Python 3.11 image and the vector-enabled database on PostgreSQL 16 with pgvector. Implemented health-check dependency chains ensuring correct startup order and persistent named volumes for data durability.
-        </li>
+        <li class="bullet-item"><span class="bullet-label">Hybrid RAG Architecture: </span>Engineered dense-lexical retrieval (pgvector BGE-M3 + Postgres FTS) with parent-child chunking, achieving 94% citation precision.</li>
+        <li class="bullet-item"><span class="bullet-label">LLM Gateway &amp; Guardrails: </span>Architected multi-model LLM Gateway connected with OpenRouter and NVIDIA NIM with source validation and strict abstention thresholds, driving hallucination rates below 1%.</li>
+        <li class="bullet-item"><span class="bullet-label">High-Throughput Ingestion: </span>Automated ETL pipeline parsing 75,000+ court JSON cases over 25 years with schema normalization and deduplication in a single run.</li>
+        <li class="bullet-item"><span class="bullet-label">Async Backend API (FastAPI): </span>Developed async REST endpoints with Pydantic v2 validation for sub-4s semantic case search, RAG Q&amp;A, and legal drafting.</li>
+        <li class="bullet-item"><span class="bullet-label">Full-Stack UI: </span>Built TypeScript workspace with natural language query search, faceted case explorer, drafting studio, and ingestion dashboard.</li>
+        <li class="bullet-item"><span class="bullet-label">Unified Vector DB (pgvector): </span>Leveraged PostgreSQL with pgvector for relational and ANN retrieval, eliminating external vector DB overhead and cutting latency by 45%.</li>
+        <li class="bullet-item"><span class="bullet-label">Production Containerization: </span>Containerized full stack via Docker Compose with health-check dependency chains, ensuring 99.9% uptime and data persistence.</li>
+      </ul>
+
+      <!-- Project 2: MeetOps -->
+      <div class="project-lead" style="margin-top: 4px;">
+        <span class="project-title">Project 2: MeetOps</span> --- Enterprise AI Meeting Copilot and Project Intelligence Platform integrating Teams via ephemeral bots and agentic workflows.
+      </div>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Transcript RAG Pipeline: </span>Architected semantic RAG with speaker-turn chunking and pgvector embeddings, lifting topical retrieval precision by 35%.</li>
+        <li class="bullet-item"><span class="bullet-label">Confidence Abstention Gating: </span>Implemented 0.75 cosine similarity guardrail instructing LLMs to abstain on low context, eliminating fabricated technical details.</li>
+        <li class="bullet-item"><span class="bullet-label">Agentic Tool-Calling: </span>Engineered OpenAI function-calling workflow automating Jira ticket creation, rolling summaries, and live SAP GRC metrics retrieval.</li>
+        <li class="bullet-item"><span class="bullet-label">Disposable Bot Infrastructure: </span>Built ephemeral Dockerized Playwright bots with TTL watchdogs, guaranteeing zero state contamination across client meetings.</li>
+        <li class="bullet-item"><span class="bullet-label">Low-Latency Streaming: </span>Deployed multi-tier Redis semantic cache with SSE streaming, reducing perceived generation latency by 60% during live sessions.</li>
+      </ul>
+
+      <!-- Project 3: Granite Buyer Intelligence -->
+      <div class="project-lead" style="margin-top: 4px;">
+        <span class="project-title">Project 3: Granite Buyer Intelligence</span> --- Local-first B2B intelligence and lead generation platform automating buyer discovery, evidence qualification, and M365 outreach.
+      </div>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Modular Monolith Architecture: </span>Designed 9-domain lifecycle system (Discovery, Evidence, Intelligence, Email, Jobs) delivered solo from design to production.</li>
+        <li class="bullet-item"><span class="bullet-label">Multi-Tier LLM Failover Gateway: </span>Implemented 3-tier failover (OpenRouter Nemotron-550B &rarr; NVIDIA Build &rarr; Groq) and TF lexical search, guaranteeing 100% uptime.</li>
+        <li class="bullet-item"><span class="bullet-label">Durable Task Queue: </span>Built crash-resilient PgSQL job queue with 180s leases and heartbeat recovery, handling automated multi-engine web discovery.</li>
+        <li class="bullet-item"><span class="bullet-label">Evidence-First Validation: </span>Enforced SQL check constraints separating verified facts from AI inference, with 0--100 quality scoring and audit tracking.</li>
+      </ul>
+    </div>
+
+    <!-- Infosys Springboard -->
+    <div class="entry" style="margin-top: 3px;">
+      <div class="entry-header">
+        <span class="entry-title">&#8226; Artificial Intelligence Intern</span>
+        <span class="entry-date">February 2025 -- April 2025</span>
+      </div>
+      <div class="entry-subheader">
+        <span class="entry-company">Infosys Springboard</span>
+        <span class="entry-location">Remote</span>
+      </div>
+      <ul class="bullet-list">
+        <li class="bullet-item">Built a Healthcare RAG Chatbot on a Wikipedia dataset using FAISS vector search, Flask backend, and React/Tailwind frontend for grounded clinical Q&amp;A.</li>
+        <li class="bullet-item">Implemented a real-time query processing pipeline with source verification and an interactive UI supporting multi-turn question answering sessions.</li>
+      </ul>
+    </div>
+
+    <!-- Adhyayan IT -->
+    <div class="entry" style="margin-top: 3px;">
+      <div class="entry-header">
+        <span class="entry-title">&#8226; Data Science Intern</span>
+        <span class="entry-date">January 2025 -- June 2025</span>
+      </div>
+      <div class="entry-subheader">
+        <span class="entry-company">Adhyayan IT</span>
+        <span class="entry-location">Remote</span>
+      </div>
+      <ul class="bullet-list">
+        <li class="bullet-item">Built a Text-to-SQL system using LangChain and LLMs (Gemini, Groq) with RAGAS evaluation achieving 100% context precision and high helpfulness scores.</li>
+        <li class="bullet-item">Developed an interactive Streamlit UI with secure MySQL connectivity, enabling non-technical users to query databases efficiently.</li>
+      </ul>
+    </div>
+
+    <!-- Cyber Police Station -->
+    <div class="entry" style="margin-top: 3px;">
+      <div class="entry-header">
+        <span class="entry-title">&#8226; Data Analyst Intern</span>
+        <span class="entry-date">October 2023 -- January 2024</span>
+      </div>
+      <div class="entry-subheader">
+        <span class="entry-company">Cyber Police Station</span>
+        <span class="entry-location">Dharashiv, Maharashtra</span>
+      </div>
+      <ul class="bullet-list">
+        <li class="bullet-item">Managed 500+ user credentials for the National Cyber Crime Portal and organized 1,000+ complaints, improving case resolution efficiency by 30%.</li>
+        <li class="bullet-item">Communicated with victims to provide timely status updates, enhancing overall satisfaction by 15%.</li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- ================= PAGE 2 ================= -->
+<!-- PAGE 2 -->
 <div class="page">
-  <!-- Continuation of Experience -->
-  <div class="entry" style="margin-top: 1px;">
-    <div class="project-lead" style="padding-left: 0; margin-bottom: 2.5px;">
-      <strong>– Project: MeetOps (May 2026 – Present)</strong> — Enterprise-grade AI-powered Meeting Copilot and Project Intelligence Platform integrating Microsoft Teams via ephemeral Dockerized Playwright bots, a RAG-driven knowledge engine, and an agentic LLM layer that transforms live meeting context into structured, actionable project intelligence.
-    </div>
+  <!-- Projects -->
+  <div class="section">
+    <div class="section-title">Projects</div>
 
-    <ul class="bullet-list" style="padding-left: 0;">
-      <li class="bullet-item">
-        <strong>RAG Pipeline and Vector Intelligence:</strong> Designed a semantic RAG pipeline over meeting transcripts, BRDs, and project artifacts using OpenAI embeddings stored in pgvector. Applied speaker-turn and topical-boundary chunking (over fixed character splits) to preserve semantic coherence, significantly improving top-K retrieval precision for time-sensitive project queries.
-      </li>
-      <li class="bullet-item">
-        <strong>Hallucination Control and Confidence Gating:</strong> Enforced a strict abstention guardrail where the LLM is instructed to respond “Insufficient meeting context” when cosine similarity of retrieved chunks falls below 0.75, preventing fabricated technical details in high-stakes project conversations.
-      </li>
-      <li class="bullet-item">
-        <strong>Agentic Tool-Calling and LLM Orchestration:</strong> Implemented an agentic workflow using OpenAI function-calling to trigger structured actions mid-conversation, including Jira ticket creation, rolling meeting summaries, and live SAP GRC metrics retrieval, transforming the copilot from reactive Q&A into an autonomous project action layer.
-      </li>
-      <li class="bullet-item">
-        <strong>Ephemeral Bot Orchestration (Docker + Playwright):</strong> Engineered a Disposable Workspace bot pattern where per-meeting Playwright instances are dynamically provisioned and reaped via Docker with TTL watchdogs and health checks, ensuring zero state contamination across client sessions and efficient compute utilization.
-      </li>
-      <li class="bullet-item">
-        <strong>Low-Latency Streaming and Caching:</strong> Implemented a multi-tier Redis caching layer that short-circuits the full embedding and LLM generation cycle on repeated or semantically identical queries, and streamed LLM output directly to the React frontend via Server-Sent Events (SSE) to minimize perceived latency during live meetings.
-      </li>
-    </ul>
-  </div>
-
-  <div class="entry" style="margin-top: 3.5px;">
-    <div class="entry-header">
-      <span class="entry-title">Artificial Intelligence Intern</span>
-      <span class="entry-date">February 2025 – April 2025</span>
-    </div>
-    <div class="entry-subheader">
-      <span class="entry-company">Infosys Springboard</span>
-      <span class="entry-location">Remote</span>
-    </div>
-    <ul class="bullet-list" style="padding-left: 0;">
-      <li class="bullet-item">
-        Built a Healthcare RAG Chatbot on a Wikipedia dataset using FAISS vector search, a Flask backend, and a React with Tailwind CSS frontend, with secure API endpoints designed for medically grounded responses.
-      </li>
-      <li class="bullet-item">
-        Implemented a real-time query processing pipeline with source verification and an interactive UI supporting multi-turn question answering sessions.
-      </li>
-    </ul>
-  </div>
-
-  <div class="entry" style="margin-top: 3.5px;">
-    <div class="entry-header">
-      <span class="entry-title">Data Science Intern</span>
-      <span class="entry-date">January 2025 – June 2025</span>
-    </div>
-    <div class="entry-subheader">
-      <span class="entry-company">Adhyayan IT</span>
-      <span class="entry-location">Remote</span>
-    </div>
-    <ul class="bullet-list" style="padding-left: 0;">
-      <li class="bullet-item">
-        Built a Text-to-SQL application using LangChain and LLMs (Google Gemini, Groq) that converts natural language queries to executable SQL, with RAGAS evaluation achieving 100% context precision and high helpfulness scores.
-      </li>
-      <li class="bullet-item">
-        Developed an interactive Streamlit UI with secure MySQL connectivity, enabling non-technical users to query databases efficiently with reliable, context-aware responses.
-      </li>
-    </ul>
-  </div>
-
-  <div class="entry" style="margin-top: 3.5px;">
-    <div class="entry-header">
-      <span class="entry-title">Data Analyst Intern</span>
-      <span class="entry-date">October 2023 – January 2024</span>
-    </div>
-    <div class="entry-subheader">
-      <span class="entry-company">Cyber Police Station</span>
-      <span class="entry-location">Dharashiv, Maharashtra</span>
-    </div>
-    <ul class="bullet-list" style="padding-left: 0;">
-      <li class="bullet-item">
-        Managed 500+ user credentials for the National Cyber Crime Reporting Portal and organized 1,000+ complaint records, improving case resolution efficiency by 30% and accelerating case progression by 20%.
-      </li>
-      <li class="bullet-item">
-        Communicated with victims to provide timely status updates, enhancing overall satisfaction by 15%.
-      </li>
-    </ul>
-  </div>
-
-  <!-- Personal Projects -->
-  <div class="section" style="margin-top: 4.5px;">
-    <div class="section-title">Personal Projects</div>
-
-    <div class="entry" style="margin-bottom: 3.5px;">
-      <div class="entry-header">
-        <span class="entry-title">RAG Document QA System</span>
-      </div>
-      <div style="font-style: italic; font-size: 8.8pt; color: #333333; margin-bottom: 1.5px; padding-left: 10px;">
-        Production-grade AI-powered question answering on PDF and TXT documents using FastAPI and React
-      </div>
-      <ul class="bullet-list" style="padding-left: 0;">
-        <li class="bullet-item">
-          Engineered a full-stack RAG system with a FastAPI backend and a React (TypeScript, Tailwind CSS) frontend, integrating document chunking, sentence-transformers embeddings, and ChromaDB vector search with source verification for accurate and traceable answers.
-        </li>
-        <li class="bullet-item">
-          Built asynchronous RESTful APIs and deployed the complete stack using Docker, with an interactive dashboard for monitoring ingestion KPIs and retrieval quality metrics in real time.
-        </li>
+    <!-- Project 1: Argus -->
+    <div class="entry" style="margin-bottom: 5px;">
+      <div class="project-title" style="font-size: 9.4pt;">Project 1: Argus — Multi-Agent AI Platform</div>
+      <span class="project-tagline">Autonomous hierarchical multi-agent platform with specialized tool routing, runtime guardrails, and full observability</span>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Hierarchical Agent Routing: </span>Architected planner-specialist framework decomposing goals across research, analysis, and writing agents with scoped tool permissions.</li>
+        <li class="bullet-item"><span class="bullet-label">Decoupled Async Backend (FastAPI): </span>Built async service routing requests through OpenRouter for dynamic task-based model selection and provider failover.</li>
+        <li class="bullet-item"><span class="bullet-label">Dual-Ended Guardrail Pipeline: </span>Enforced input prompt-injection detection, strict tool allowlists, and Pydantic output schema validation with PII scrubbing.</li>
+        <li class="bullet-item"><span class="bullet-label">Full Observability with Langfuse: </span>Instrumented end-to-end agent traces tracking latency, tool invocations, and token expenses to evaluate prompt revisions.</li>
+        <li class="bullet-item"><span class="bullet-label">Real-Time Streaming UI &amp; Azure Cloud: </span>Created React/TypeScript UI streaming agent step execution; deployed on Azure VM with Docker, Nginx, and TLS.</li>
       </ul>
     </div>
 
-    <div class="entry" style="margin-bottom: 3.5px;">
-      <div class="entry-header">
-        <span class="entry-title">Insurance Claim Automation System</span>
-      </div>
-      <div style="font-style: italic; font-size: 8.8pt; color: #333333; margin-bottom: 1.5px; padding-left: 10px;">
-        AI-powered insurance claim processing using Google Gemini AI, LangChain, and Flask
-      </div>
-      <ul class="bullet-list" style="padding-left: 0;">
-        <li class="bullet-item">
-          Developed an AI-powered insurance claim automation system using Google Gemini AI to process and validate medical claims from PDF documents, extracting key medical and billing information using natural language processing.
-        </li>
-        <li class="bullet-item">
-          Built a Flask web application with LangChain integration for intelligent claim assessment and decision-making, with robust error handling and data validation pipelines to ensure accurate processing and reduce manual review time.
-        </li>
+    <!-- Project 2: LedgerLens-AI -->
+    <div class="entry" style="margin-bottom: 5px;">
+      <div class="project-title" style="font-size: 9.4pt;">Project 2: LedgerLens-AI — Multi-LLM Document Intelligence &amp; Forensic Engine</div>
+      <span class="project-tagline">Production-grade multi-model orchestration engine leveraging Databricks Unity Catalog, FastAPI, and OpenRouter for high-throughput financial extraction and contract reconciliation</span>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Multi-Model LLM Routing: </span>Engineered dynamic routing via OpenRouter directing forensic deduction to DeepSeek R1 and entity extraction to GPT-4o, cutting API inference costs by 42%.</li>
+        <li class="bullet-item"><span class="bullet-label">Databricks Lakehouse &amp; Unity Catalog: </span>Architected data pipelines on Databricks Unity Catalog and Delta Lake, enforcing data lineage, audit logging, and RBAC governance across 100,000+ financial documents.</li>
+        <li class="bullet-item"><span class="bullet-label">Structured Output Validation &amp; Caching: </span>Developed Pydantic schema-repair pipelines with PostgreSQL prompt-caching, achieving 99.4% adherence and reducing TTFT by 350ms.</li>
+        <li class="bullet-item"><span class="bullet-label">Chain-of-Thought Forensics: </span>Implemented automated reasoning cross-examining balance sheets against vendor agreements, identifying $1.8M+ in unapplied volume rebates.</li>
+      </ul>
+    </div>
+
+    <!-- Project 3: RAG Document QA -->
+    <div class="entry" style="margin-bottom: 5px;">
+      <div class="project-title" style="font-size: 9.4pt;">Project 3: RAG Document QA System</div>
+      <span class="project-tagline">Production-grade AI-powered question answering on PDF and TXT documents using FastAPI and React</span>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Full-Stack Document QA: </span>Engineered FastAPI and React/TypeScript system with ChromaDB and sentence-transformers for verified Q&amp;A across PDF/TXT files.</li>
+        <li class="bullet-item"><span class="bullet-label">Dockerized API Deployment: </span>Built async REST APIs and deployed complete stack via Docker with an interactive dashboard for monitoring ingestion KPIs.</li>
+      </ul>
+    </div>
+
+    <!-- Project 4: Insurance Claim -->
+    <div class="entry" style="margin-bottom: 5px;">
+      <div class="project-title" style="font-size: 9.4pt;">Project 4: Insurance Claim Automation System</div>
+      <span class="project-tagline">AI-powered insurance claim processing using Google Gemini AI, LangChain, and Flask</span>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Gemini-Powered Claim Extraction: </span>Developed automated medical claim validation pipeline using Google Gemini AI and NLP, reducing manual review time by 70%.</li>
+        <li class="bullet-item"><span class="bullet-label">LangChain Decision Engine: </span>Built Flask web application with LangChain integration for intelligent claim assessment, error handling, and data validation.</li>
       </ul>
     </div>
   </div>
 
-  <!-- Technical Skills (Moved after Personal Projects) -->
-  <div class="section" style="margin-top: 4.5px;">
+  <!-- Technical Skills -->
+  <div class="section" style="margin-top: 6px;">
     <div class="section-title">Technical Skills</div>
-    <div class="skills-group">
-      <strong>Languages &amp; Frameworks:</strong> Python, SQL, FastAPI, Flask, Next.js 14 (TypeScript), Streamlit
-    </div>
-    <div class="skills-group">
-      <strong>AI and Machine Learning:</strong> Regression, Classification, Clustering, Feature Engineering, ANN, CNN, Fine-tuning, Prompt Engineering
-    </div>
-    <div class="skills-group">
-      <strong>Generative AI and LLMs:</strong> Retrieval-Augmented Generation (RAG), LangChain, LangGraph, Groq API, Google Gemini, Ollama, Open-source LLMs
-    </div>
-    <div class="skills-group">
-      <strong>Embeddings and Vector Search:</strong> sentence-transformers (BGE-M3, multilingual-e5), FAISS, ChromaDB, pgvector, Hybrid Semantic and Lexical Search
-    </div>
-    <div class="skills-group">
-      <strong>Libraries:</strong> NumPy, Pandas, Scikit-learn, TensorFlow/Keras, PyTorch, NLTK, spaCy, Hugging Face Transformers, Pydantic v2, SQLAlchemy 2.0
-    </div>
-    <div class="skills-group">
-      <strong>Databases:</strong> PostgreSQL with pgvector, MySQL, ChromaDB, FAISS Vector Store, SQLite
-    </div>
-    <div class="skills-group">
-      <strong>DevOps and Tools:</strong> Docker, Docker Compose, Git, GitHub, VS Code, Jupyter Notebook, N8N, Observability Tools
+    <div class="skills-container">
+      <div class="skill-row">
+        <span class="skill-label">AI / LLMs: </span>Large Language Models (OpenAI, DeepSeek R1, Claude, Azure OpenAI, Llama, Gemini), Fine-Tuning &amp; Integration, LangChain, LangGraph, AI Orchestration, Multi-Agent Architectures, Prompt Engineering, Prompt-Caching &amp; Registry
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">RAG &amp; Search: </span>Retrieval-Augmented Generation (RAG), Semantic Search, Azure AI Search, Weaviate, FAISS, pgvector (Azure PostgreSQL), ChromaDB
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Backend &amp; APIs: </span>Python, FastAPI, Flask, REST APIs &amp; Microservices for AI Applications, Pydantic, Structured Outputs, PostgreSQL, PgSQL, Async Programming
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">MLOps &amp; Cloud: </span>Databricks (Unity Catalog, Delta Lake, PySpark, MLflow), MLOps (Model Deployment, Monitoring, Evaluation &amp; Quality Tuning), Containerization (Docker, Kubernetes), Azure Cloud Platform, CI/CD, Git, GitLab
+      </div>
     </div>
   </div>
 
-  <!-- Education (Moved to the very end) -->
-  <div class="section" style="margin-top: 4.5px;">
+  <!-- Education -->
+  <div class="section" style="margin-top: 7px;">
     <div class="section-title">Education</div>
-    <div class="edu-entry">
-      <div class="edu-row-1">
-        <span class="edu-title">Bachelor of Technology in Artificial Intelligence and Data Science</span>
-        <span class="edu-date">2021 – 2025</span>
+    <div class="edu-block">
+      <div class="edu-row">
+        <span>&#8226; Bachelor of Technology in Artificial Intelligence and Data Science</span>
+        <span>2021 -- 2025</span>
       </div>
-      <div class="edu-row-2">
-        <span class="edu-school">Terna Public Charitable Trust’s College of Engineering, Dharashiv</span>
+      <div class="edu-subrow">
+        <span>Terna Public Charitable Trust's College of Engineering, Dharashiv</span>
         <span class="edu-cgpa">CGPA: 8.5</span>
       </div>
     </div>
   </div>
-
 </div>
 
 </body>
