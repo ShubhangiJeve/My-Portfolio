@@ -1,0 +1,239 @@
+%-------------------------------------------------------------------------------
+% Shubhangi Jeve - Curriculum Vitae / Resume
+% Compile with pdflatex / xelatex / lualatex (e.g. on Overleaf)
+%-------------------------------------------------------------------------------
+
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{iftex}
+
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{charter}
+\else
+  \usepackage{fontspec}
+  \setmainfont{Cambria}[
+    BoldFont = * Bold,
+    ItalicFont = * Italic,
+    BoldItalicFont = * Bold Italic
+  ]
+\fi
+
+\usepackage[margin=0.48in,top=0.42in,bottom=0.42in]{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{xcolor}
+
+% Document settings
+\pagestyle{empty}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Colors
+\definecolor{primary}{RGB}{0, 0, 0}
+\definecolor{textdark}{RGB}{20, 20, 20}
+\definecolor{textgray}{RGB}{70, 70, 70}
+\definecolor{projecttitle}{RGB}{14, 53, 107}
+
+% Hyperlink styling
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    urlcolor=primary,
+    pdftitle={Shubhangi Jeve - Resume},
+    pdfauthor={Shubhangi Jeve}
+}
+
+% Section formatting: Small caps with bottom rule
+\titleformat{\section}
+  {\scshape\large\bfseries\color{primary}}
+  {}
+  {0em}
+  {}
+  [{\titlerule[0.75pt]}]
+\titlespacing*{\section}{0pt}{5pt}{3pt}
+
+% Custom list styling
+\setlist[itemize]{
+    leftmargin=12pt,
+    label={--},
+    itemsep=1.8pt,
+    parsep=0pt,
+    topsep=1.5pt
+}
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+% HEADER
+%-------------------------------------------------------------------------------
+\begin{tabularx}{\textwidth}{@{} X r @{}}
+  \textbf{\Huge Shubhangi Jeve} & \href{tel:+919579122372}{+91-9579122372} \hspace{1pt} \faPhone* \\
+  \vspace{1pt}\small B.Tech in Artificial Intelligence \& Data Science & \href{mailto:shubhangijeve@gmail.com}{shubhangijeve@gmail.com} \hspace{1pt} \faEnvelope \\
+  \small Terna College of Engineering, Dharashiv \textbar{} CGPA: 8.5 & \href{https://shubhangijeve.github.io/My-Portfolio/}{shubhangijeve.github.io/My-Portfolio} \hspace{1pt} \faGlobe \\
+  \small\textit{Hyderabad, Telangana} & \href{https://github.com/ShubhangiJeve}{github.com/ShubhangiJeve} \hspace{1pt} \faGithub \\
+  & \href{https://linkedin.com/in/shubhangi-jeve-97445b235}{linkedin.com/in/shubhangi-jeve-97445b235} \hspace{1pt} \faLinkedin
+\end{tabularx}
+
+\vspace{-2pt}
+
+%-------------------------------------------------------------------------------
+% CAREER OBJECTIVE
+%-------------------------------------------------------------------------------
+\section{Career Objective}
+\small
+AI Engineer with 1.5+ years of core experience architecting and deploying production-grade AI systems, hybrid RAG pipelines, and multi-agent platforms. Proficient in LLM orchestration, async backend architectures, vector databases, and enterprise AI engineering. Driven to build scalable, high-impact intelligent systems.
+
+%-------------------------------------------------------------------------------
+% EXPERIENCE
+%-------------------------------------------------------------------------------
+\section{Experience}
+
+% --- COGNITBOTZ ---
+\noindent
+\textbf{\normalsize $\bullet$ AI Engineer Intern} \hfill \textbf{November 2025 -- Present} \\
+\textbf{COGNITBOTZ} \hfill \textit{Hyderabad, Telangana} \\[2pt]
+
+\noindent
+\textbf{\color{projecttitle}Project 1: LegalAID} --- Enterprise-grade AI Legal Research and Litigation Platform combining Hybrid RAG, semantic search, and automated drafting.
+\begin{itemize}
+    \item \textbf{Hybrid RAG Architecture:} Engineered dense-lexical retrieval (pgvector BGE-M3 + Postgres FTS) with parent-child chunking, achieving 94\% citation precision.
+    \item \textbf{LLM Gateway \& Guardrails:} Architected multi-model LLM Gateway connected with OpenRouter and NVIDIA NIM with source validation and strict abstention thresholds, driving hallucination rates below 1\%.
+    \item \textbf{High-Throughput Ingestion:} Automated ETL pipeline parsing 75,000+ court JSON cases over 25 years with schema normalization and deduplication in a single run.
+    \item \textbf{Async Backend API (FastAPI):} Developed async REST endpoints with Pydantic v2 validation for sub-4s semantic case search, RAG Q\&A, and legal drafting.
+    \item \textbf{Full-Stack UI:} Built TypeScript workspace with natural language query search, faceted case explorer, drafting studio, and ingestion dashboard.
+    \item \textbf{Unified Vector DB (pgvector):} Leveraged PostgreSQL with pgvector for relational and ANN retrieval, eliminating external vector DB overhead and cutting latency by 45\%.
+    \item \textbf{Production Containerization:} Containerized full stack via Docker Compose with health-check dependency chains, ensuring 99.9\% uptime and data persistence.
+\end{itemize}
+
+\vspace{5pt}
+
+\noindent
+\textbf{\color{projecttitle}Project 2: MeetOps} --- Enterprise AI Meeting Copilot and Project Intelligence Platform integrating Teams via ephemeral bots and agentic workflows.
+\begin{itemize}
+    \item \textbf{Transcript RAG Pipeline:} Architected semantic RAG with speaker-turn chunking and pgvector embeddings, lifting topical retrieval precision by 35\%.
+    \item \textbf{Confidence Abstention Gating:} Implemented 0.75 cosine similarity guardrail instructing LLMs to abstain on low context, eliminating fabricated technical details.
+    \item \textbf{Agentic Tool-Calling:} Engineered OpenAI function-calling workflow automating Jira ticket creation, rolling summaries, and live SAP GRC metrics retrieval.
+    \item \textbf{Disposable Bot Infrastructure:} Built ephemeral Dockerized Playwright bots with TTL watchdogs, guaranteeing zero state contamination across client meetings.
+    \item \textbf{Low-Latency Streaming:} Deployed multi-tier Redis semantic cache with SSE streaming, reducing perceived generation latency by 60\% during live sessions.
+\end{itemize}
+
+\vspace{5pt}
+
+\noindent
+\textbf{\color{projecttitle}Project 3: Granite Buyer Intelligence} --- Local-first B2B intelligence and lead generation platform automating buyer discovery, evidence qualification, and M365 outreach.
+\begin{itemize}
+    \item \textbf{Modular Monolith Architecture:} Designed 9-domain lifecycle system (Discovery, Evidence, Intelligence, Email, Jobs) delivered solo from design to production.
+    \item \textbf{Multi-Tier LLM Failover Gateway:} Implemented 3-tier failover (OpenRouter Nemotron-550B $\rightarrow$ NVIDIA Build $\rightarrow$ Groq) and TF lexical search, guaranteeing 100\% uptime.
+    \item \textbf{Durable Task Queue:} Built crash-resilient PgSQL job queue with 180s leases and heartbeat recovery, handling automated multi-engine web discovery.
+    \item \textbf{Evidence-First Validation:} Enforced SQL check constraints separating verified facts from AI inference, with 0--100 quality scoring and audit tracking.
+\end{itemize}
+
+\vspace{5pt}
+
+% --- Infosys Springboard ---
+\noindent
+\textbf{\normalsize $\bullet$ Artificial Intelligence Intern} \hfill \textbf{February 2025 -- April 2025} \\
+\textbf{Infosys Springboard} \hfill \textit{Remote}
+\begin{itemize}
+    \item Built a Healthcare RAG Chatbot on a Wikipedia dataset using FAISS vector search, Flask backend, and React/Tailwind frontend for grounded clinical Q\&A.
+    \item Implemented a real-time query processing pipeline with source verification and an interactive UI supporting multi-turn question answering sessions.
+\end{itemize}
+
+\vspace{3pt}
+
+% --- Adhyayan IT ---
+\noindent
+\textbf{\normalsize $\bullet$ Data Science Intern} \hfill \textbf{January 2025 -- June 2025} \\
+\textbf{Adhyayan IT} \hfill \textit{Remote}
+\begin{itemize}
+    \item Built a Text-to-SQL system using LangChain and LLMs (Gemini, Groq) with RAGAS evaluation achieving 100\% context precision and high helpfulness scores.
+    \item Developed an interactive Streamlit UI with secure MySQL connectivity, enabling non-technical users to query databases efficiently.
+\end{itemize}
+
+\vspace{3pt}
+
+% --- Cyber Police Station ---
+\noindent
+\textbf{\normalsize $\bullet$ Data Analyst Intern} \hfill \textbf{October 2023 -- January 2024} \\
+\textbf{Cyber Police Station} \hfill \textit{Dharashiv, Maharashtra}
+\begin{itemize}
+    \item Managed 500+ user credentials for the National Cyber Crime Portal and organized 1,000+ complaints, improving case resolution efficiency by 30\%.
+    \item Communicated with victims to provide timely status updates, enhancing overall satisfaction by 15\%.
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+% PROJECTS
+%-------------------------------------------------------------------------------
+\section{Projects}
+
+\noindent
+\textbf{\color{projecttitle}Project 1: Argus — Multi-Agent AI Platform} \\
+\textit{\small Autonomous hierarchical multi-agent platform with specialized tool routing, runtime guardrails, and full observability}
+\begin{itemize}
+    \item \textbf{Hierarchical Agent Routing:} Architected planner-specialist framework decomposing goals across research, analysis, and writing agents with scoped tool permissions.
+    \item \textbf{Decoupled Async Backend (FastAPI):} Built async service routing requests through OpenRouter for dynamic task-based model selection and provider failover.
+    \item \textbf{Dual-Ended Guardrail Pipeline:} Enforced input prompt-injection detection, strict tool allowlists, and Pydantic output schema validation with PII scrubbing.
+    \item \textbf{Full Observability with Langfuse:} Instrumented end-to-end agent traces tracking latency, tool invocations, and token expenses to evaluate prompt revisions.
+    \item \textbf{Real-Time Streaming UI \& Azure Cloud:} Created React/TypeScript UI streaming agent step execution; deployed on Azure VM with Docker, Nginx, and TLS.
+\end{itemize}
+
+\vspace{6pt}
+
+\noindent
+\textbf{\color{projecttitle}Project 2: LedgerLens-AI — Multi-LLM Document Intelligence \& Forensic Engine} \\
+\textit{\small Production-grade multi-model orchestration engine leveraging Databricks Unity Catalog, FastAPI, and OpenRouter for high-throughput financial extraction and contract reconciliation}
+\begin{itemize}
+    \item \textbf{Multi-Model LLM Routing:} Engineered dynamic routing via OpenRouter directing forensic deduction to DeepSeek R1 and entity extraction to GPT-4o, cutting API inference costs by 42\%.
+    \item \textbf{Databricks Lakehouse \& Unity Catalog:} Architected data pipelines on Databricks Unity Catalog and Delta Lake, enforcing data lineage, audit logging, and RBAC governance across 100,000+ financial documents.
+    \item \textbf{Structured Output Validation \& Caching:} Developed Pydantic schema-repair pipelines with PostgreSQL prompt-caching, achieving 99.4\% adherence and reducing TTFT by 350ms.
+    \item \textbf{Chain-of-Thought Forensics:} Implemented automated reasoning cross-examining balance sheets against vendor agreements, identifying \$1.8M+ in unapplied volume rebates.
+\end{itemize}
+
+\vspace{6pt}
+
+\noindent
+\textbf{\color{projecttitle}Project 3: RAG Document QA System} \\
+\textit{\small Production-grade AI-powered question answering on PDF and TXT documents using FastAPI and React}
+\begin{itemize}
+    \item \textbf{Full-Stack Document QA:} Engineered FastAPI and React/TypeScript system with ChromaDB and sentence-transformers for verified Q\&A across PDF/TXT files.
+    \item \textbf{Dockerized API Deployment:} Built async REST APIs and deployed complete stack via Docker with an interactive dashboard for monitoring ingestion KPIs.
+\end{itemize}
+
+\vspace{6pt}
+
+\noindent
+\textbf{\color{projecttitle}Project 4: Insurance Claim Automation System} \\
+\textit{\small AI-powered insurance claim processing using Google Gemini AI, LangChain, and Flask}
+\begin{itemize}
+    \item \textbf{Gemini-Powered Claim Extraction:} Developed automated medical claim validation pipeline using Google Gemini AI and NLP, reducing manual review time by 70\%.
+    \item \textbf{LangChain Decision Engine:} Built Flask web application with LangChain integration for intelligent claim assessment, error handling, and data validation.
+\end{itemize}
+
+%-------------------------------------------------------------------------------
+% TECHNICAL SKILLS
+%-------------------------------------------------------------------------------
+\section{Technical Skills}
+\vspace{2pt}
+\small
+\textbf{AI / LLMs:} Large Language Models (OpenAI, DeepSeek R1, Claude, Azure OpenAI, Llama, Gemini), Fine-Tuning \& Integration, LangChain, LangGraph, AI Orchestration, Multi-Agent Architectures, Prompt Engineering, Prompt-Caching \& Registry \\[3.5pt]
+\textbf{RAG \& Search:} Retrieval-Augmented Generation (RAG), Semantic Search, Azure AI Search, Weaviate, FAISS, pgvector (Azure PostgreSQL), ChromaDB \\[3.5pt]
+\textbf{Backend \& APIs:} Python, FastAPI, Flask, REST APIs \& Microservices for AI Applications, Pydantic, Structured Outputs, PostgreSQL, PgSQL, Async Programming \\[3.5pt]
+\textbf{MLOps \& Cloud:} Databricks (Unity Catalog, Delta Lake, PySpark, MLflow), MLOps (Model Deployment, Monitoring, Evaluation \& Quality Tuning), Containerization (Docker, Kubernetes), Azure Cloud Platform, CI/CD, Git, GitLab
+
+\vspace{5pt}
+
+%-------------------------------------------------------------------------------
+% EDUCATION (At the very end)
+%-------------------------------------------------------------------------------
+\section{Education}
+\noindent
+\textbf{\normalsize $\bullet$ Bachelor of Technology in Artificial Intelligence and Data Science} \hfill \textbf{2021 -- 2025} \\
+Terna Public Charitable Trust's College of Engineering, Dharashiv \hfill \textbf{CGPA: 8.5}
+
+\end{document}
