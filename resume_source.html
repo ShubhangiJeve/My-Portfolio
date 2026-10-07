@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Shubhangi Jeve - Curriculum Vitae</title>
+<title>Shubhangi Jeve - Resume</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 @page {
   size: A4;
@@ -16,20 +17,18 @@
 }
 
 body {
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-  font-size: 8.85pt;
-  line-height: 1.28;
+  font-family: 'Cambria', 'Georgia', 'Times New Roman', serif;
+  font-size: 9.2pt;
+  line-height: 1.34;
   color: #111111;
   background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 .page {
   width: 210mm;
   height: 297mm;
-  padding: 8.5mm 12mm 7mm 12mm;
+  padding: 10mm 12mm 10mm 12mm;
   position: relative;
   page-break-after: always;
   box-sizing: border-box;
@@ -42,260 +41,233 @@ body {
 }
 
 /* Header */
-.tex-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
   padding-bottom: 2px;
 }
 
-.tex-header__left {
+.header-left {
   flex: 1;
 }
 
-.tex-header__name {
-  font-size: 20pt;
-  font-weight: 800;
-  letter-spacing: -0.2px;
+.name {
+  font-size: 21pt;
+  font-weight: 700;
+  letter-spacing: 0.2px;
   color: #000000;
   line-height: 1.1;
   margin-bottom: 3px;
 }
 
-.tex-header__subtitle {
-  font-size: 9.2pt;
-  color: #1f2937;
-  font-weight: 500;
+.subtitle {
+  font-size: 9.3pt;
+  color: #1a1a1a;
   margin-bottom: 2px;
 }
 
-.tex-header__institution {
-  font-size: 8.8pt;
-  color: #374151;
+.institution {
+  font-size: 9pt;
+  color: #333333;
   margin-bottom: 2px;
 }
 
-.tex-header__location {
-  font-size: 8.8pt;
-  color: #4b5563;
+.location {
+  font-size: 8.9pt;
   font-style: italic;
+  color: #444444;
 }
 
-.tex-header__right {
+.header-right {
+  text-align: right;
+  font-size: 8.9pt;
+  line-height: 1.45;
+}
+
+.contact-item {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 3px;
-  font-size: 8.8pt;
-}
-
-.tex-contact-link {
-  display: inline-flex;
   align-items: center;
-  gap: 5px;
-  color: #111827;
-  text-decoration: none;
-  font-weight: 400;
+  justify-content: flex-end;
+  gap: 6px;
+  color: #111111;
 }
 
-.tex-contact-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 12px;
-  height: 12px;
-  color: #374151;
-}
-
-/* Section Title - Faithful to LaTeX titlesec with titlerule */
-.tex-section-title {
-  font-size: 10.8pt;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.9px;
+.contact-item a {
   color: #000000;
-  margin-top: 8px;
-  margin-bottom: 4.5px;
-  padding-bottom: 2px;
-  border-bottom: 0.85pt solid #000000;
+  text-decoration: none;
 }
 
-/* Career Objective */
-.tex-objective-text {
-  font-size: 9.05pt;
-  line-height: 1.34;
-  color: #1f2937;
-  text-align: justify;
+.contact-item i {
+  font-size: 8.5pt;
+  width: 13px;
+  text-align: center;
+  color: #111111;
+}
+
+/* Section styling */
+.section {
+  margin-top: 6px;
   margin-bottom: 3px;
 }
 
-/* Experience Items */
-.tex-exp-block {
-  margin-bottom: 7px;
+.section-title {
+  font-size: 10.5pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #000000;
+  border-bottom: 0.75pt solid #000000;
+  padding-bottom: 1.5px;
+  margin-bottom: 4px;
 }
 
-.tex-exp-header-row {
+/* Objective */
+.objective-text {
+  font-size: 9.2pt;
+  line-height: 1.34;
+  text-align: justify;
+  color: #1a1a1a;
+}
+
+/* Experience & Projects entry */
+.entry {
+  margin-bottom: 4px;
+}
+
+.entry-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 9.35pt;
-  line-height: 1.3;
+  font-size: 9.4pt;
+  margin-bottom: 1px;
 }
 
-.tex-exp-role {
+.entry-title {
   font-weight: 700;
   color: #000000;
 }
 
-.tex-exp-date {
+.entry-date {
+  font-size: 9.1pt;
   font-weight: 700;
   color: #000000;
-  font-size: 8.95pt;
   white-space: nowrap;
 }
 
-.tex-exp-sub-row {
+.entry-subheader {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 9.05pt;
-  margin-bottom: 2.5px;
+  font-size: 9.2pt;
+  margin-bottom: 3px;
 }
 
-.tex-exp-company {
+.entry-company {
   font-weight: 700;
-  color: #111827;
+  color: #000000;
 }
 
-.tex-exp-location {
+.entry-location {
   font-style: italic;
-  color: #4b5563;
-  font-size: 8.8pt;
-  white-space: nowrap;
+  color: #444444;
+  font-size: 8.9pt;
 }
 
-.tex-project-header {
-  font-size: 9.05pt;
-  line-height: 1.32;
-  margin-top: 3.5px;
+.project-lead {
+  font-size: 9.2pt;
+  margin-top: 2px;
   margin-bottom: 2.5px;
-  color: #111827;
+  line-height: 1.30;
+  color: #111111;
 }
 
-.tex-project-title {
+.project-title {
   font-weight: 700;
   color: #0e356b;
 }
 
-/* Bullet Lists */
-.tex-bullet-list {
-  list-style: none;
-  padding-left: 14px;
-  margin: 0 0 5px 0;
+.project-tagline {
+  font-size: 8.8pt;
+  font-style: italic;
+  color: #333333;
+  margin-bottom: 2px;
+  display: block;
 }
 
-.tex-bullet-item {
+/* Bullet list */
+.bullet-list {
+  list-style: none;
+  padding-left: 12pt;
+  margin-bottom: 4px;
+}
+
+.bullet-item {
   position: relative;
-  font-size: 8.95pt;
+  font-size: 9.05pt;
   line-height: 1.32;
-  color: #1f2937;
-  margin-bottom: 1.8px;
+  margin-bottom: 1.8pt;
+  color: #141414;
   text-align: justify;
 }
 
-.tex-bullet-item::before {
-  content: '–';
+.bullet-item::before {
+  content: "--";
   position: absolute;
-  left: -13px;
-  top: 0;
-  color: #374151;
-  font-weight: 600;
+  left: -12pt;
+  color: #333333;
 }
 
-.tex-bullet-label {
+.bullet-label {
   font-weight: 700;
   color: #000000;
 }
 
-/* Personal Projects */
-.tex-personal-proj-block {
-  margin-bottom: 6px;
-}
-
-.tex-personal-proj-title {
-  font-weight: 700;
-  font-size: 9.25pt;
-  color: #0e356b;
-}
-
-.tex-personal-proj-desc {
-  font-size: 8.75pt;
-  font-style: italic;
-  color: #374151;
-  margin-top: 0.5px;
-  margin-bottom: 2px;
-}
-
-/* Technical Skills */
-.tex-skills-container {
+/* Skills */
+.skills-container {
   display: flex;
   flex-direction: column;
-  gap: 3.5px;
-  font-size: 8.95pt;
-  line-height: 1.32;
-  margin-bottom: 5px;
-  margin-top: 2px;
+  gap: 3.5pt;
+  font-size: 9.05pt;
+  line-height: 1.34;
+  margin-top: 3px;
 }
 
-.tex-skill-row {
-  color: #1f2937;
+.skill-row {
+  display: block;
   text-align: justify;
 }
 
-.tex-skill-label {
+.skill-label {
   font-weight: 700;
   color: #000000;
 }
 
 /* Education */
-.tex-edu-block {
-  margin-top: 2px;
+.edu-block {
+  margin-top: 3px;
 }
 
-.tex-edu-row {
+.edu-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 9.25pt;
-}
-
-.tex-edu-title {
+  font-size: 9.3pt;
   font-weight: 700;
   color: #000000;
 }
 
-.tex-edu-dates {
-  font-weight: 700;
-  color: #000000;
-  font-size: 8.95pt;
-  white-space: nowrap;
-}
-
-.tex-edu-subrow {
+.edu-subrow {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 8.95pt;
-  color: #374151;
+  font-size: 9pt;
+  color: #222222;
   margin-top: 1px;
 }
 
-.tex-edu-college {
-  color: #374151;
-}
-
-.tex-edu-cgpa {
+.edu-cgpa {
   font-weight: 700;
   color: #000000;
 }
@@ -303,254 +275,223 @@ body {
 </head>
 <body>
 
-<!-- ── PAGE 1 (Header + Career Objective + COGNITBOTZ) ────── -->
+<!-- PAGE 1 -->
 <div class="page">
   <!-- Header -->
-  <header class="tex-header">
-    <div class="tex-header__left">
-      <h1 class="tex-header__name">Shubhangi Jeve</h1>
-      <div class="tex-header__subtitle">B.Tech in Artificial Intelligence &amp; Data Science</div>
-      <div class="tex-header__institution">Terna College of Engineering, Dharashiv | CGPA: 8.5</div>
-      <div class="tex-header__location">Hyderabad, Telangana</div>
+  <div class="header">
+    <div class="header-left">
+      <div class="name">Shubhangi Jeve</div>
+      <div class="subtitle">B.Tech in Artificial Intelligence &amp; Data Science</div>
+      <div class="institution">Terna College of Engineering, Dharashiv | CGPA: 8.5</div>
+      <div class="location">Hyderabad, Telangana</div>
     </div>
-
-    <div class="tex-header__right">
-      <a href="tel:+919579122372" class="tex-contact-link">
-        <span>+91-9579122372</span>
-        <span class="tex-contact-icon">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-        </span>
-      </a>
-
-      <a href="mailto:shubhangijeve@gmail.com" class="tex-contact-link">
-        <span>shubhangijeve@gmail.com</span>
-        <span class="tex-contact-icon">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
-        </span>
-      </a>
-
-      <a href="https://shubhangijeve.github.io/My-Portfolio/" target="_blank" class="tex-contact-link">
-        <span>shubhangijeve.github.io/My-Portfolio</span>
-        <span class="tex-contact-icon">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg>
-        </span>
-      </a>
-
-      <a href="https://github.com/ShubhangiJeve" target="_blank" class="tex-contact-link">
-        <span>github.com/ShubhangiJeve</span>
-        <span class="tex-contact-icon">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" /></svg>
-        </span>
-      </a>
-
-      <a href="https://linkedin.com/in/shubhangi-jeve-97445b235" target="_blank" class="tex-contact-link">
-        <span>linkedin.com/in/shubhangi-jeve-97445b235</span>
-        <span class="tex-contact-icon">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.55a1.63 1.63 0 0 0-1.63 1.62 1.62 1.62 0 1 0 1.63-1.62z" /></svg>
-        </span>
-      </a>
+    <div class="header-right">
+      <div class="contact-item"><a href="tel:+919579122372">+91-9579122372</a> <i class="fa-solid fa-phone"></i></div>
+      <div class="contact-item"><a href="mailto:shubhangijeve@gmail.com">shubhangijeve@gmail.com</a> <i class="fa-solid fa-envelope"></i></div>
+      <div class="contact-item"><a href="https://shubhangijeve.github.io/My-Portfolio/" target="_blank">shubhangijeve.github.io/My-Portfolio</a> <i class="fa-solid fa-globe"></i></div>
+      <div class="contact-item"><a href="https://github.com/ShubhangiJeve" target="_blank">github.com/ShubhangiJeve</a> <i class="fa-brands fa-github"></i></div>
+      <div class="contact-item"><a href="https://linkedin.com/in/shubhangi-jeve-97445b235" target="_blank">linkedin.com/in/shubhangi-jeve-97445b235</a> <i class="fa-brands fa-linkedin"></i></div>
     </div>
-  </header>
+  </div>
 
-  <!-- Section: Career Objective -->
-  <section>
-    <h2 class="tex-section-title">Career Objective</h2>
-    <p class="tex-objective-text">
-      AI Engineer with 1.5+ years of core experience architecting and deploying production-grade AI systems, hybrid RAG pipelines, and multi-agent platforms. Proficient in LLM orchestration, async backend architectures, vector databases, and enterprise AI engineering. Driven to build scalable, high-impact intelligent systems.
+  <!-- Career Objective -->
+  <div class="section">
+    <div class="section-title">Career Objective</div>
+    <p class="objective-text">
+      AI Systems Engineer specializing in Agentic AI, Advanced RAG, and production LLM orchestration. Proven track record building end-to-end multi-agent architectures, implementing observability and automated evals (RAGAS, DeepEval, Langfuse), debugging failure modes, and optimizing inference cost and latency in enterprise environments.
     </p>
-  </section>
+  </div>
 
-  <!-- Section: Experience (COGNITBOTZ) -->
-  <section>
-    <h2 class="tex-section-title">Experience</h2>
+  <!-- Experience -->
+  <div class="section">
+    <div class="section-title">Experience</div>
 
     <!-- COGNITBOTZ -->
-    <div class="tex-exp-block">
-      <div class="tex-exp-header-row">
-        <span class="tex-exp-role">• AI Engineer Intern</span>
-        <span class="tex-exp-date">November 2025 – Present</span>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">&#8226; AI Engineer Intern</span>
+        <span class="entry-date">November 2025 -- Present</span>
       </div>
-      <div class="tex-exp-sub-row">
-        <span class="tex-exp-company">COGNITBOTZ</span>
-        <span class="tex-exp-location">Hyderabad, Telangana</span>
+      <div class="entry-subheader">
+        <span class="entry-company">COGNITBOTZ</span>
+        <span class="entry-location">Hyderabad, Telangana</span>
       </div>
 
       <!-- Project 1: LegalAID -->
-      <div class="tex-project-header" style="margin-top: 4px;">
-        <span class="tex-project-title">Project 1: LegalAID</span> — Enterprise-grade AI Legal Research and Litigation Platform combining Hybrid RAG, semantic search, and automated drafting.
+      <div class="project-lead">
+        <span class="project-title">Project 1: LegalAID</span> --- Enterprise-grade AI Legal Research and Litigation Platform combining Hybrid RAG, semantic search, and automated drafting.
       </div>
-      <ul class="tex-bullet-list">
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Hybrid RAG Architecture: </span>Engineered dense-lexical retrieval (pgvector BGE-M3 + Postgres FTS) with parent-child chunking, achieving 94% citation precision.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">LLM Gateway &amp; Guardrails: </span>Architected multi-model LLM Gateway connected with OpenRouter and NVIDIA NIM with source validation and strict abstention thresholds, driving hallucination rates below 1%.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">High-Throughput Ingestion: </span>Automated ETL pipeline parsing 75,000+ court JSON cases over 25 years with schema normalization and deduplication in a single run.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Async Backend API (FastAPI): </span>Developed async REST endpoints with Pydantic v2 validation for sub-4s semantic case search, RAG Q&amp;A, and legal drafting.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Full-Stack UI: </span>Built TypeScript workspace with natural language query search, faceted case explorer, drafting studio, and ingestion dashboard.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Unified Vector DB (pgvector): </span>Leveraged PostgreSQL with pgvector for relational and ANN retrieval, eliminating external vector DB overhead and cutting latency by 45%.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Production Containerization: </span>Containerized full stack via Docker Compose with health-check dependency chains, ensuring 99.9% uptime and data persistence.</li>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Advanced Hybrid RAG &amp; Reranking: </span>Engineered dense-lexical retrieval (pgvector BGE-M3 + Postgres FTS) with FlashRank cross-encoder reranking; eliminated keyword retrieval misses and lifted Recall@5 from 72% to 94%.</li>
+        <li class="bullet-item"><span class="bullet-label">Evals &amp; Guardrail Hardening: </span>Benchmarked generation across 500+ legal queries using RAGAS (faithfulness, context relevance); tuned abstention thresholds to catch retrieval hallucinations, slashing hallucination rates to &lt;1%.</li>
+        <li class="bullet-item"><span class="bullet-label">High-Throughput Ingestion: </span>Automated ETL pipeline parsing 75,000+ court JSON cases over 25 years with parent-child hierarchical chunking, schema normalization, and deduplication.</li>
+        <li class="bullet-item"><span class="bullet-label">Async LLM Gateway (FastAPI): </span>Architected multi-model gateway (OpenRouter + NVIDIA NIM) with semantic prompt-caching and Pydantic v2 validation, cutting median latency by 45% and API costs by 38%.</li>
+        <li class="bullet-item"><span class="bullet-label">Production Containerization: </span>Containerized full stack via Docker Compose with health-check dependency chains, ensuring 99.9% uptime and data persistence.</li>
       </ul>
 
       <!-- Project 2: MeetOps -->
-      <div class="tex-project-header" style="margin-top: 6px;">
-        <span class="tex-project-title">Project 2: MeetOps</span> — Enterprise AI Meeting Copilot and Project Intelligence Platform integrating Teams via ephemeral bots and agentic workflows.
+      <div class="project-lead" style="margin-top: 4px;">
+        <span class="project-title">Project 2: MeetOps</span> --- Enterprise AI Meeting Copilot and Project Intelligence Platform integrating Teams via ephemeral bots and agentic workflows.
       </div>
-      <ul class="tex-bullet-list">
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Transcript RAG Pipeline: </span>Architected semantic RAG with speaker-turn chunking and pgvector embeddings, lifting topical retrieval precision by 35%.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Confidence Abstention Gating: </span>Implemented 0.75 cosine similarity guardrail instructing LLMs to abstain on low context, eliminating fabricated technical details.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Agentic Tool-Calling: </span>Engineered OpenAI function-calling workflow automating Jira ticket creation, rolling summaries, and live SAP GRC metrics retrieval.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Disposable Bot Infrastructure: </span>Built ephemeral Dockerized Playwright bots with TTL watchdogs, guaranteeing zero state contamination across client meetings.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Low-Latency Streaming: </span>Deployed multi-tier Redis semantic cache with SSE streaming, reducing perceived generation latency by 60% during live sessions.</li>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Transcript RAG &amp; Speaker Chunking: </span>Architected semantic RAG with speaker-turn chunking and pgvector embeddings, lifting topical retrieval precision by 35%.</li>
+        <li class="bullet-item"><span class="bullet-label">Agentic Workflows &amp; Tool Reliability: </span>Engineered multi-step tool-calling agents (LangGraph/OpenAI) for Jira and SAP GRC; implemented deterministic fallback schemas and loop guards, boosting task success from 68% to 92%.</li>
+        <li class="bullet-item"><span class="bullet-label">AI Observability &amp; Tracing: </span>Integrated distributed tracing to monitor tool latency, token burn, and step failures, diagnosing context fragmentation during 60+ min meetings.</li>
+        <li class="bullet-item"><span class="bullet-label">Confidence Abstention Gating: </span>Enforced 0.75 cosine similarity guardrail instructing LLMs to abstain on low context, eliminating fabricated technical details.</li>
+        <li class="bullet-item"><span class="bullet-label">Low-Latency Streaming: </span>Deployed multi-tier Redis semantic cache with SSE streaming, reducing perceived generation latency by 60% during live sessions.</li>
       </ul>
 
       <!-- Project 3: Granite Buyer Intelligence -->
-      <div class="tex-project-header" style="margin-top: 6px;">
-        <span class="tex-project-title">Project 3: Granite Buyer Intelligence</span> — Local-first B2B intelligence and lead generation platform automating buyer discovery, evidence qualification, and M365 outreach.
+      <div class="project-lead" style="margin-top: 4px;">
+        <span class="project-title">Project 3: Granite Buyer Intelligence</span> --- Local-first B2B intelligence and lead generation platform automating buyer discovery, evidence qualification, and M365 outreach.
       </div>
-      <ul class="tex-bullet-list">
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Modular Monolith Architecture: </span>Designed 9-domain lifecycle system (Discovery, Evidence, Intelligence, Email, Jobs) delivered solo from design to production.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Multi-Tier LLM Failover Gateway: </span>Implemented 3-tier failover (OpenRouter Nemotron-550B → NVIDIA Build → Groq) and TF lexical search, guaranteeing 100% uptime.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Durable Task Queue: </span>Built crash-resilient PgSQL job queue with 180s leases and heartbeat recovery, handling automated multi-engine web discovery.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Evidence-First Validation: </span>Enforced SQL check constraints separating verified facts from AI inference, with 0–100 quality scoring and audit tracking.</li>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Modular Monolith Architecture: </span>Designed 9-domain lifecycle system (Discovery, Evidence, Intelligence, Email, Jobs) delivered solo from design to production.</li>
+        <li class="bullet-item"><span class="bullet-label">Multi-Tier LLM Failover Gateway: </span>Implemented 3-tier failover (OpenRouter Nemotron-550B &rarr; NVIDIA Build &rarr; Groq) and TF lexical search, guaranteeing 100% uptime.</li>
+        <li class="bullet-item"><span class="bullet-label">Durable Task Queue: </span>Built crash-resilient PgSQL job queue with 180s leases and heartbeat recovery, handling automated multi-engine web discovery.</li>
+        <li class="bullet-item"><span class="bullet-label">Evidence-First Validation: </span>Enforced SQL check constraints separating verified facts from AI inference, with 0--100 quality scoring and audit tracking.</li>
       </ul>
     </div>
-  </section>
-</div>
 
-<!-- ── PAGE 2 (Experience Continued + Projects + Skills + Education) ────── -->
-<div class="page">
-  <!-- Experience Continued -->
-  <section>
     <!-- Infosys Springboard -->
-    <div class="tex-exp-block" style="margin-bottom: 6px;">
-      <div class="tex-exp-header-row">
-        <span class="tex-exp-role">• Artificial Intelligence Intern</span>
-        <span class="tex-exp-date">February 2025 – April 2025</span>
+    <div class="entry" style="margin-top: 3px;">
+      <div class="entry-header">
+        <span class="entry-title">&#8226; Artificial Intelligence Intern</span>
+        <span class="entry-date">February 2025 -- April 2025</span>
       </div>
-      <div class="tex-exp-sub-row">
-        <span class="tex-exp-company">Infosys Springboard</span>
-        <span class="tex-exp-location">Remote</span>
+      <div class="entry-subheader">
+        <span class="entry-company">Infosys Springboard</span>
+        <span class="entry-location">Remote</span>
       </div>
-      <ul class="tex-bullet-list">
-        <li class="tex-bullet-item">Built a Healthcare RAG Chatbot on a Wikipedia dataset using FAISS vector search, Flask backend, and React/Tailwind frontend for grounded clinical Q&amp;A.</li>
-        <li class="tex-bullet-item">Implemented a real-time query processing pipeline with source verification and an interactive UI supporting multi-turn question answering sessions.</li>
+      <ul class="bullet-list">
+        <li class="bullet-item">Built a Healthcare RAG Chatbot on a Wikipedia dataset using FAISS vector search, Flask backend, and React/Tailwind frontend for grounded clinical Q&amp;A.</li>
+        <li class="bullet-item">Implemented a real-time query processing pipeline with source verification and an interactive UI supporting multi-turn question answering sessions.</li>
       </ul>
     </div>
 
     <!-- Adhyayan IT -->
-    <div class="tex-exp-block" style="margin-bottom: 6px;">
-      <div class="tex-exp-header-row">
-        <span class="tex-exp-role">• Data Science Intern</span>
-        <span class="tex-exp-date">January 2025 – June 2025</span>
+    <div class="entry" style="margin-top: 3px;">
+      <div class="entry-header">
+        <span class="entry-title">&#8226; Data Science Intern</span>
+        <span class="entry-date">January 2025 -- June 2025</span>
       </div>
-      <div class="tex-exp-sub-row">
-        <span class="tex-exp-company">Adhyayan IT</span>
-        <span class="tex-exp-location">Remote</span>
+      <div class="entry-subheader">
+        <span class="entry-company">Adhyayan IT</span>
+        <span class="entry-location">Remote</span>
       </div>
-      <ul class="tex-bullet-list">
-        <li class="tex-bullet-item">Built a Text-to-SQL system using LangChain and LLMs (Gemini, Groq) with RAGAS evaluation achieving 100% context precision and high helpfulness scores.</li>
-        <li class="tex-bullet-item">Developed an interactive Streamlit UI with secure MySQL connectivity, enabling non-technical users to query databases efficiently.</li>
+      <ul class="bullet-list">
+        <li class="bullet-item">Built a Text-to-SQL system using LangChain and LLMs (Gemini, Groq) with RAGAS evaluation achieving 100% context precision and high helpfulness scores.</li>
+        <li class="bullet-item">Developed an interactive Streamlit UI with secure MySQL connectivity, enabling non-technical users to query databases efficiently.</li>
       </ul>
     </div>
 
     <!-- Cyber Police Station -->
-    <div class="tex-exp-block" style="margin-bottom: 6px;">
-      <div class="tex-exp-header-row">
-        <span class="tex-exp-role">• Data Analyst Intern</span>
-        <span class="tex-exp-date">October 2023 – January 2024</span>
+    <div class="entry" style="margin-top: 3px;">
+      <div class="entry-header">
+        <span class="entry-title">&#8226; Data Analyst Intern</span>
+        <span class="entry-date">October 2023 -- January 2024</span>
       </div>
-      <div class="tex-exp-sub-row">
-        <span class="tex-exp-company">Cyber Police Station</span>
-        <span class="tex-exp-location">Dharashiv, Maharashtra</span>
+      <div class="entry-subheader">
+        <span class="entry-company">Cyber Police Station</span>
+        <span class="entry-location">Dharashiv, Maharashtra</span>
       </div>
-      <ul class="tex-bullet-list">
-        <li class="tex-bullet-item">Managed 500+ user credentials for the National Cyber Crime Portal and organized 1,000+ complaints, improving case resolution efficiency by 30%.</li>
-        <li class="tex-bullet-item">Communicated with victims to provide timely status updates, enhancing overall satisfaction by 15%.</li>
+      <ul class="bullet-list">
+        <li class="bullet-item">Managed 500+ user credentials for the National Cyber Crime Portal and organized 1,000+ complaints, improving case resolution efficiency by 30%.</li>
+        <li class="bullet-item">Communicated with victims to provide timely status updates, enhancing overall satisfaction by 15%.</li>
       </ul>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- Section: Projects -->
-  <section>
-    <h2 class="tex-section-title">Projects</h2>
+<!-- PAGE 2 -->
+<div class="page">
+  <!-- Projects -->
+  <div class="section">
+    <div class="section-title">Projects</div>
 
     <!-- Project 1: Argus -->
-    <div class="tex-personal-proj-block">
-      <div class="tex-personal-proj-title">Project 1: Argus — Multi-Agent AI Platform</div>
-      <div class="tex-personal-proj-desc">Autonomous hierarchical multi-agent platform with specialized tool routing, runtime guardrails, and full observability</div>
-      <ul class="tex-bullet-list">
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Hierarchical Agent Routing: </span>Architected planner-specialist framework decomposing goals across research, analysis, and writing agents with scoped tool permissions.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Decoupled Async Backend (FastAPI): </span>Built async service routing requests through OpenRouter for dynamic task-based model selection and provider failover.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Dual-Ended Guardrail Pipeline: </span>Enforced input prompt-injection detection, strict tool allowlists, and Pydantic output schema validation with PII scrubbing.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Full Observability with Langfuse: </span>Instrumented end-to-end agent traces tracking latency, tool invocations, and token expenses to evaluate prompt revisions.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Real-Time Streaming UI &amp; Azure Cloud: </span>Created React/TypeScript UI streaming agent step execution; deployed on Azure VM with Docker, Nginx, and TLS.</li>
+    <div class="entry" style="margin-bottom: 5px;">
+      <div class="project-title" style="font-size: 9.4pt;">Project 1: Argus — Multi-Agent AI Platform</div>
+      <span class="project-tagline">Autonomous hierarchical multi-agent platform with specialized tool routing, runtime guardrails, and full observability</span>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Hierarchical Agent Routing (LangGraph): </span>Architected supervisor-specialist framework decomposing goals across research, analysis, and writing agents with scoped tool permissions.</li>
+        <li class="bullet-item"><span class="bullet-label">Observability, Tracing &amp; Failure Debugging: </span>Instrumented full-lifecycle Langfuse tracing across every agent hop; diagnosed tool loops and context overflow, reducing step failure rate by 34%.</li>
+        <li class="bullet-item"><span class="bullet-label">Agent Evaluation Test Suite: </span>Benchmarked multi-step planning accuracy and tool-selection precision against golden trajectories, improving task completion from 71% to 89%.</li>
+        <li class="bullet-item"><span class="bullet-label">Dual-Ended Guardrail Pipeline: </span>Enforced input prompt-injection detection, strict tool allowlists, and Pydantic output schema validation with PII scrubbing.</li>
+        <li class="bullet-item"><span class="bullet-label">Decoupled Async Backend &amp; Deployment: </span>Built async FastAPI service with dynamic provider failover; deployed on Azure VM with Docker, Nginx, and TLS.</li>
       </ul>
     </div>
 
     <!-- Project 2: LedgerLens-AI -->
-    <div class="tex-personal-proj-block">
-      <div class="tex-personal-proj-title">Project 2: LedgerLens-AI — Multi-LLM Document Intelligence &amp; Forensic Engine</div>
-      <div class="tex-personal-proj-desc">Production-grade multi-model orchestration engine leveraging Databricks Unity Catalog, FastAPI, and OpenRouter for high-throughput financial extraction and contract reconciliation</div>
-      <ul class="tex-bullet-list">
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Multi-Model LLM Routing: </span>Engineered dynamic routing via OpenRouter directing forensic deduction to DeepSeek R1 and entity extraction to GPT-4o, cutting API inference costs by 42%.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Databricks Lakehouse &amp; Unity Catalog: </span>Architected data pipelines on Databricks Unity Catalog and Delta Lake, enforcing data lineage, audit logging, and RBAC governance across 100,000+ financial documents.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Structured Output Validation &amp; Caching: </span>Developed Pydantic schema-repair pipelines with PostgreSQL prompt-caching, achieving 99.4% adherence and reducing TTFT by 350ms.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Chain-of-Thought Forensics: </span>Implemented automated reasoning cross-examining balance sheets against vendor agreements, identifying $1.8M+ in unapplied volume rebates.</li>
+    <div class="entry" style="margin-bottom: 5px;">
+      <div class="project-title" style="font-size: 9.4pt;">Project 2: LedgerLens-AI — Multi-LLM Document Intelligence &amp; Forensic Engine</div>
+      <span class="project-tagline">Production-grade multi-model orchestration engine leveraging Databricks Unity Catalog, FastAPI, and OpenRouter for high-throughput financial extraction and contract reconciliation</span>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Multi-Model LLM Routing: </span>Engineered dynamic routing via OpenRouter directing forensic deduction to DeepSeek R1 and entity extraction to GPT-4o, cutting API inference costs by 42%.</li>
+        <li class="bullet-item"><span class="bullet-label">Databricks Lakehouse &amp; Unity Catalog: </span>Architected data pipelines on Databricks Unity Catalog and Delta Lake, enforcing data lineage, audit logging, and RBAC governance across 100,000+ financial documents.</li>
+        <li class="bullet-item"><span class="bullet-label">Structured Output Validation &amp; Caching: </span>Developed Pydantic schema-repair pipelines with PostgreSQL prompt-caching, achieving 99.4% adherence and reducing TTFT by 350ms.</li>
+        <li class="bullet-item"><span class="bullet-label">Chain-of-Thought Forensics: </span>Implemented automated reasoning cross-examining balance sheets against vendor agreements, identifying $1.8M+ in unapplied volume rebates.</li>
       </ul>
     </div>
 
-    <!-- Project 3: RAG Document QA -->
-    <div class="tex-personal-proj-block">
-      <div class="tex-personal-proj-title">Project 3: RAG Document QA System</div>
-      <div class="tex-personal-proj-desc">Production-grade AI-powered question answering on PDF and TXT documents using FastAPI and React</div>
-      <ul class="tex-bullet-list">
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Full-Stack Document QA: </span>Engineered FastAPI and React/TypeScript system with ChromaDB and sentence-transformers for verified Q&amp;A across PDF/TXT files.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Dockerized API Deployment: </span>Built async REST APIs and deployed complete stack via Docker with an interactive dashboard for monitoring ingestion KPIs.</li>
+    <!-- Project 3: Domain-Adapted LLM Fine-Tuning & Evaluation Engine -->
+    <div class="entry" style="margin-bottom: 5px;">
+      <div class="project-title" style="font-size: 9.4pt;">Project 3: Domain-Adapted LLM Fine-Tuning &amp; Evaluation Engine</div>
+      <span class="project-tagline">Parameter-efficient post-training pipeline with QLoRA, automated G-Eval benchmarking, and optimized vLLM serving</span>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">QLoRA Fine-Tuning: </span>Fine-tuned open-weights LLMs (Llama-3-8B / Mistral) using Unsloth and Hugging Face TRL on domain instruction datasets, reducing structured output formatting errors by 82%.</li>
+        <li class="bullet-item"><span class="bullet-label">Automated Evals &amp; Benchmarking: </span>Evaluated checkpoints against baseline models using DeepEval/G-Eval (reasoning, syntax adherence), validating comparable accuracy to GPT-4o-mini at 75% lower inference cost.</li>
+        <li class="bullet-item"><span class="bullet-label">Production Inference Optimization: </span>Quantized weights to 4-bit AWQ and served via vLLM with continuous batching and PagedAttention, achieving 3.8x higher throughput.</li>
       </ul>
     </div>
 
     <!-- Project 4: Insurance Claim -->
-    <div class="tex-personal-proj-block">
-      <div class="tex-personal-proj-title">Project 4: Insurance Claim Automation System</div>
-      <div class="tex-personal-proj-desc">AI-powered insurance claim processing using Google Gemini AI, LangChain, and Flask</div>
-      <ul class="tex-bullet-list">
-        <li class="tex-bullet-item"><span class="tex-bullet-label">Gemini-Powered Claim Extraction: </span>Developed automated medical claim validation pipeline using Google Gemini AI and NLP, reducing manual review time by 70%.</li>
-        <li class="tex-bullet-item"><span class="tex-bullet-label">LangChain Decision Engine: </span>Built Flask web application with LangChain integration for intelligent claim assessment, error handling, and data validation.</li>
+    <div class="entry" style="margin-bottom: 5px;">
+      <div class="project-title" style="font-size: 9.4pt;">Project 4: Insurance Claim Automation System</div>
+      <span class="project-tagline">AI-powered insurance claim processing using Google Gemini AI, LangChain, and Flask</span>
+      <ul class="bullet-list">
+        <li class="bullet-item"><span class="bullet-label">Multimodal Claim Extraction: </span>Developed automated medical claim validation pipeline using Google Gemini Vision and NLP, reducing manual review time by 70%.</li>
+        <li class="bullet-item"><span class="bullet-label">Decision Engine &amp; Validation: </span>Built Flask web application with LangChain integration for intelligent claim assessment, Pydantic error handling, and confidence-based routing.</li>
       </ul>
     </div>
-  </section>
+  </div>
 
-  <!-- Section: Technical Skills -->
-  <section style="padding-top: 2px;">
-    <h2 class="tex-section-title">Technical Skills</h2>
-    <div class="tex-skills-container">
-      <div class="tex-skill-row">
-        <span class="tex-skill-label">AI / LLMs: </span>Large Language Models (OpenAI, DeepSeek R1, Claude, Azure OpenAI, Llama, Gemini), Fine-Tuning &amp; Integration, LangChain, LangGraph, AI Orchestration, Multi-Agent Architectures, Prompt Engineering, Prompt-Caching &amp; Registry
+  <!-- Technical Skills -->
+  <div class="section" style="margin-top: 6px;">
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-container">
+      <div class="skill-row">
+        <span class="skill-label">Agentic AI &amp; LLMs: </span>Multi-Agent Systems, LangGraph, LangChain, Tool/Function-Calling, State Graphs, Supervisor-Worker Patterns, Prompt Engineering, Prompt Caching, OpenAI, Claude, DeepSeek R1, Gemini
       </div>
-      <div class="tex-skill-row">
-        <span class="tex-skill-label">RAG &amp; Search: </span>Retrieval-Augmented Generation (RAG), Semantic Search, Azure AI Search, Weaviate, FAISS, pgvector (Azure PostgreSQL), ChromaDB
+      <div class="skill-row">
+        <span class="skill-label">Advanced RAG &amp; Search: </span>Hybrid Search (Dense + BM25/FTS), Cross-Encoder Reranking (FlashRank, BGE-Reranker), Parent-Child Chunking, pgvector (PostgreSQL), Weaviate, FAISS, ChromaDB
       </div>
-      <div class="tex-skill-row">
-        <span class="tex-skill-label">Backend &amp; APIs: </span>Python, FastAPI, Flask, REST APIs &amp; Microservices for AI Applications, Pydantic, Structured Outputs, PostgreSQL, PgSQL, Async Programming
+      <div class="skill-row">
+        <span class="skill-label">AI Evals &amp; Observability: </span>LLM Evals (RAGAS, DeepEval, G-Eval), Observability &amp; Tracing (Langfuse, OpenTelemetry), Failure Mode Analysis, Guardrails (NeMo Guardrails, Pydantic, Abstention Gating)
       </div>
-      <div class="tex-skill-row">
-        <span class="tex-skill-label">MLOps &amp; Cloud: </span>Databricks (Unity Catalog, Delta Lake, PySpark, MLflow), MLOps (Model Deployment, Monitoring, Evaluation &amp; Quality Tuning), Containerization (Docker, Kubernetes), Azure Cloud Platform, CI/CD, Git, GitLab
+      <div class="skill-row">
+        <span class="skill-label">Fine-Tuning &amp; Inference: </span>PEFT, LoRA/QLoRA, Unsloth, Hugging Face (Transformers, TRL), Quantization (AWQ/GGUF), vLLM, NVIDIA NIM, Model Routing &amp; Failover
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Backend, Cloud &amp; MLOps: </span>Python, FastAPI, AsyncIO, REST APIs, PostgreSQL, Docker, Azure, Databricks (Unity Catalog, Delta Lake, MLflow), CI/CD, Git
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Section: Education -->
-  <section style="margin-top: 5px;">
-    <h2 class="tex-section-title">Education</h2>
-    <div class="tex-edu-block">
-      <div class="tex-edu-row">
-        <span class="tex-edu-title">• Bachelor of Technology in Artificial Intelligence and Data Science</span>
-        <span class="tex-edu-dates">2021 – 2025</span>
+  <!-- Education -->
+  <div class="section" style="margin-top: 7px;">
+    <div class="section-title">Education</div>
+    <div class="edu-block">
+      <div class="edu-row">
+        <span>&#8226; Bachelor of Technology in Artificial Intelligence and Data Science</span>
+        <span>2021 -- 2025</span>
       </div>
-      <div class="tex-edu-subrow">
-        <span class="tex-edu-college">Terna Public Charitable Trust's College of Engineering, Dharashiv</span>
-        <span class="tex-edu-cgpa">CGPA: 8.5</span>
+      <div class="edu-subrow">
+        <span>Terna Public Charitable Trust's College of Engineering, Dharashiv</span>
+        <span class="edu-cgpa">CGPA: 8.5</span>
       </div>
     </div>
-  </section>
+  </div>
 </div>
 
 </body>

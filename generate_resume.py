@@ -306,7 +306,7 @@ body {
   <div class="section">
     <div class="section-title">Career Objective</div>
     <p class="objective-text">
-      AI Engineer with 1.5+ years of core experience architecting and deploying production-grade AI systems, hybrid RAG pipelines, and multi-agent platforms. Proficient in LLM orchestration, async backend architectures, vector databases, and enterprise AI engineering. Driven to build scalable, high-impact intelligent systems.
+      AI Systems Engineer specializing in Agentic AI, Advanced RAG, and production LLM orchestration. Proven track record building end-to-end multi-agent architectures, implementing observability and automated evals (RAGAS, DeepEval, Langfuse), debugging failure modes, and optimizing inference cost and latency in enterprise environments.
     </p>
   </div>
 
@@ -330,12 +330,10 @@ body {
         <span class="project-title">Project 1: LegalAID</span> --- Enterprise-grade AI Legal Research and Litigation Platform combining Hybrid RAG, semantic search, and automated drafting.
       </div>
       <ul class="bullet-list">
-        <li class="bullet-item"><span class="bullet-label">Hybrid RAG Architecture: </span>Engineered dense-lexical retrieval (pgvector BGE-M3 + Postgres FTS) with parent-child chunking, achieving 94% citation precision.</li>
-        <li class="bullet-item"><span class="bullet-label">LLM Gateway &amp; Guardrails: </span>Architected multi-model LLM Gateway connected with OpenRouter and NVIDIA NIM with source validation and strict abstention thresholds, driving hallucination rates below 1%.</li>
-        <li class="bullet-item"><span class="bullet-label">High-Throughput Ingestion: </span>Automated ETL pipeline parsing 75,000+ court JSON cases over 25 years with schema normalization and deduplication in a single run.</li>
-        <li class="bullet-item"><span class="bullet-label">Async Backend API (FastAPI): </span>Developed async REST endpoints with Pydantic v2 validation for sub-4s semantic case search, RAG Q&amp;A, and legal drafting.</li>
-        <li class="bullet-item"><span class="bullet-label">Full-Stack UI: </span>Built TypeScript workspace with natural language query search, faceted case explorer, drafting studio, and ingestion dashboard.</li>
-        <li class="bullet-item"><span class="bullet-label">Unified Vector DB (pgvector): </span>Leveraged PostgreSQL with pgvector for relational and ANN retrieval, eliminating external vector DB overhead and cutting latency by 45%.</li>
+        <li class="bullet-item"><span class="bullet-label">Advanced Hybrid RAG &amp; Reranking: </span>Engineered dense-lexical retrieval (pgvector BGE-M3 + Postgres FTS) with FlashRank cross-encoder reranking; eliminated keyword retrieval misses and lifted Recall@5 from 72% to 94%.</li>
+        <li class="bullet-item"><span class="bullet-label">Evals &amp; Guardrail Hardening: </span>Benchmarked generation across 500+ legal queries using RAGAS (faithfulness, context relevance); tuned abstention thresholds to catch retrieval hallucinations, slashing hallucination rates to &lt;1%.</li>
+        <li class="bullet-item"><span class="bullet-label">High-Throughput Ingestion: </span>Automated ETL pipeline parsing 75,000+ court JSON cases over 25 years with parent-child hierarchical chunking, schema normalization, and deduplication.</li>
+        <li class="bullet-item"><span class="bullet-label">Async LLM Gateway (FastAPI): </span>Architected multi-model gateway (OpenRouter + NVIDIA NIM) with semantic prompt-caching and Pydantic v2 validation, cutting median latency by 45% and API costs by 38%.</li>
         <li class="bullet-item"><span class="bullet-label">Production Containerization: </span>Containerized full stack via Docker Compose with health-check dependency chains, ensuring 99.9% uptime and data persistence.</li>
       </ul>
 
@@ -344,10 +342,10 @@ body {
         <span class="project-title">Project 2: MeetOps</span> --- Enterprise AI Meeting Copilot and Project Intelligence Platform integrating Teams via ephemeral bots and agentic workflows.
       </div>
       <ul class="bullet-list">
-        <li class="bullet-item"><span class="bullet-label">Transcript RAG Pipeline: </span>Architected semantic RAG with speaker-turn chunking and pgvector embeddings, lifting topical retrieval precision by 35%.</li>
-        <li class="bullet-item"><span class="bullet-label">Confidence Abstention Gating: </span>Implemented 0.75 cosine similarity guardrail instructing LLMs to abstain on low context, eliminating fabricated technical details.</li>
-        <li class="bullet-item"><span class="bullet-label">Agentic Tool-Calling: </span>Engineered OpenAI function-calling workflow automating Jira ticket creation, rolling summaries, and live SAP GRC metrics retrieval.</li>
-        <li class="bullet-item"><span class="bullet-label">Disposable Bot Infrastructure: </span>Built ephemeral Dockerized Playwright bots with TTL watchdogs, guaranteeing zero state contamination across client meetings.</li>
+        <li class="bullet-item"><span class="bullet-label">Transcript RAG &amp; Speaker Chunking: </span>Architected semantic RAG with speaker-turn chunking and pgvector embeddings, lifting topical retrieval precision by 35%.</li>
+        <li class="bullet-item"><span class="bullet-label">Agentic Workflows &amp; Tool Reliability: </span>Engineered multi-step tool-calling agents (LangGraph/OpenAI) for Jira and SAP GRC; implemented deterministic fallback schemas and loop guards, boosting task success from 68% to 92%.</li>
+        <li class="bullet-item"><span class="bullet-label">AI Observability &amp; Tracing: </span>Integrated distributed tracing to monitor tool latency, token burn, and step failures, diagnosing context fragmentation during 60+ min meetings.</li>
+        <li class="bullet-item"><span class="bullet-label">Confidence Abstention Gating: </span>Enforced 0.75 cosine similarity guardrail instructing LLMs to abstain on low context, eliminating fabricated technical details.</li>
         <li class="bullet-item"><span class="bullet-label">Low-Latency Streaming: </span>Deployed multi-tier Redis semantic cache with SSE streaming, reducing perceived generation latency by 60% during live sessions.</li>
       </ul>
 
@@ -424,11 +422,11 @@ body {
       <div class="project-title" style="font-size: 9.4pt;">Project 1: Argus — Multi-Agent AI Platform</div>
       <span class="project-tagline">Autonomous hierarchical multi-agent platform with specialized tool routing, runtime guardrails, and full observability</span>
       <ul class="bullet-list">
-        <li class="bullet-item"><span class="bullet-label">Hierarchical Agent Routing: </span>Architected planner-specialist framework decomposing goals across research, analysis, and writing agents with scoped tool permissions.</li>
-        <li class="bullet-item"><span class="bullet-label">Decoupled Async Backend (FastAPI): </span>Built async service routing requests through OpenRouter for dynamic task-based model selection and provider failover.</li>
+        <li class="bullet-item"><span class="bullet-label">Hierarchical Agent Routing (LangGraph): </span>Architected supervisor-specialist framework decomposing goals across research, analysis, and writing agents with scoped tool permissions.</li>
+        <li class="bullet-item"><span class="bullet-label">Observability, Tracing &amp; Failure Debugging: </span>Instrumented full-lifecycle Langfuse tracing across every agent hop; diagnosed tool loops and context overflow, reducing step failure rate by 34%.</li>
+        <li class="bullet-item"><span class="bullet-label">Agent Evaluation Test Suite: </span>Benchmarked multi-step planning accuracy and tool-selection precision against golden trajectories, improving task completion from 71% to 89%.</li>
         <li class="bullet-item"><span class="bullet-label">Dual-Ended Guardrail Pipeline: </span>Enforced input prompt-injection detection, strict tool allowlists, and Pydantic output schema validation with PII scrubbing.</li>
-        <li class="bullet-item"><span class="bullet-label">Full Observability with Langfuse: </span>Instrumented end-to-end agent traces tracking latency, tool invocations, and token expenses to evaluate prompt revisions.</li>
-        <li class="bullet-item"><span class="bullet-label">Real-Time Streaming UI &amp; Azure Cloud: </span>Created React/TypeScript UI streaming agent step execution; deployed on Azure VM with Docker, Nginx, and TLS.</li>
+        <li class="bullet-item"><span class="bullet-label">Decoupled Async Backend &amp; Deployment: </span>Built async FastAPI service with dynamic provider failover; deployed on Azure VM with Docker, Nginx, and TLS.</li>
       </ul>
     </div>
 
@@ -444,13 +442,14 @@ body {
       </ul>
     </div>
 
-    <!-- Project 3: RAG Document QA -->
+    <!-- Project 3: Domain-Adapted LLM Fine-Tuning & Evaluation Engine -->
     <div class="entry" style="margin-bottom: 5px;">
-      <div class="project-title" style="font-size: 9.4pt;">Project 3: RAG Document QA System</div>
-      <span class="project-tagline">Production-grade AI-powered question answering on PDF and TXT documents using FastAPI and React</span>
+      <div class="project-title" style="font-size: 9.4pt;">Project 3: Domain-Adapted LLM Fine-Tuning &amp; Evaluation Engine</div>
+      <span class="project-tagline">Parameter-efficient post-training pipeline with QLoRA, automated G-Eval benchmarking, and optimized vLLM serving</span>
       <ul class="bullet-list">
-        <li class="bullet-item"><span class="bullet-label">Full-Stack Document QA: </span>Engineered FastAPI and React/TypeScript system with ChromaDB and sentence-transformers for verified Q&amp;A across PDF/TXT files.</li>
-        <li class="bullet-item"><span class="bullet-label">Dockerized API Deployment: </span>Built async REST APIs and deployed complete stack via Docker with an interactive dashboard for monitoring ingestion KPIs.</li>
+        <li class="bullet-item"><span class="bullet-label">QLoRA Fine-Tuning: </span>Fine-tuned open-weights LLMs (Llama-3-8B / Mistral) using Unsloth and Hugging Face TRL on domain instruction datasets, reducing structured output formatting errors by 82%.</li>
+        <li class="bullet-item"><span class="bullet-label">Automated Evals &amp; Benchmarking: </span>Evaluated checkpoints against baseline models using DeepEval/G-Eval (reasoning, syntax adherence), validating comparable accuracy to GPT-4o-mini at 75% lower inference cost.</li>
+        <li class="bullet-item"><span class="bullet-label">Production Inference Optimization: </span>Quantized weights to 4-bit AWQ and served via vLLM with continuous batching and PagedAttention, achieving 3.8x higher throughput.</li>
       </ul>
     </div>
 
@@ -459,8 +458,8 @@ body {
       <div class="project-title" style="font-size: 9.4pt;">Project 4: Insurance Claim Automation System</div>
       <span class="project-tagline">AI-powered insurance claim processing using Google Gemini AI, LangChain, and Flask</span>
       <ul class="bullet-list">
-        <li class="bullet-item"><span class="bullet-label">Gemini-Powered Claim Extraction: </span>Developed automated medical claim validation pipeline using Google Gemini AI and NLP, reducing manual review time by 70%.</li>
-        <li class="bullet-item"><span class="bullet-label">LangChain Decision Engine: </span>Built Flask web application with LangChain integration for intelligent claim assessment, error handling, and data validation.</li>
+        <li class="bullet-item"><span class="bullet-label">Multimodal Claim Extraction: </span>Developed automated medical claim validation pipeline using Google Gemini Vision and NLP, reducing manual review time by 70%.</li>
+        <li class="bullet-item"><span class="bullet-label">Decision Engine &amp; Validation: </span>Built Flask web application with LangChain integration for intelligent claim assessment, Pydantic error handling, and confidence-based routing.</li>
       </ul>
     </div>
   </div>
@@ -470,16 +469,19 @@ body {
     <div class="section-title">Technical Skills</div>
     <div class="skills-container">
       <div class="skill-row">
-        <span class="skill-label">AI / LLMs: </span>Large Language Models (OpenAI, DeepSeek R1, Claude, Azure OpenAI, Llama, Gemini), Fine-Tuning &amp; Integration, LangChain, LangGraph, AI Orchestration, Multi-Agent Architectures, Prompt Engineering, Prompt-Caching &amp; Registry
+        <span class="skill-label">Agentic AI &amp; LLMs: </span>Multi-Agent Systems, LangGraph, LangChain, Tool/Function-Calling, State Graphs, Supervisor-Worker Patterns, Prompt Engineering, Prompt Caching, OpenAI, Claude, DeepSeek R1, Gemini
       </div>
       <div class="skill-row">
-        <span class="skill-label">RAG &amp; Search: </span>Retrieval-Augmented Generation (RAG), Semantic Search, Azure AI Search, Weaviate, FAISS, pgvector (Azure PostgreSQL), ChromaDB
+        <span class="skill-label">Advanced RAG &amp; Search: </span>Hybrid Search (Dense + BM25/FTS), Cross-Encoder Reranking (FlashRank, BGE-Reranker), Parent-Child Chunking, pgvector (PostgreSQL), Weaviate, FAISS, ChromaDB
       </div>
       <div class="skill-row">
-        <span class="skill-label">Backend &amp; APIs: </span>Python, FastAPI, Flask, REST APIs &amp; Microservices for AI Applications, Pydantic, Structured Outputs, PostgreSQL, PgSQL, Async Programming
+        <span class="skill-label">AI Evals &amp; Observability: </span>LLM Evals (RAGAS, DeepEval, G-Eval), Observability &amp; Tracing (Langfuse, OpenTelemetry), Failure Mode Analysis, Guardrails (NeMo Guardrails, Pydantic, Abstention Gating)
       </div>
       <div class="skill-row">
-        <span class="skill-label">MLOps &amp; Cloud: </span>Databricks (Unity Catalog, Delta Lake, PySpark, MLflow), MLOps (Model Deployment, Monitoring, Evaluation &amp; Quality Tuning), Containerization (Docker, Kubernetes), Azure Cloud Platform, CI/CD, Git, GitLab
+        <span class="skill-label">Fine-Tuning &amp; Inference: </span>PEFT, LoRA/QLoRA, Unsloth, Hugging Face (Transformers, TRL), Quantization (AWQ/GGUF), vLLM, NVIDIA NIM, Model Routing &amp; Failover
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Backend, Cloud &amp; MLOps: </span>Python, FastAPI, AsyncIO, REST APIs, PostgreSQL, Docker, Azure, Databricks (Unity Catalog, Delta Lake, MLflow), CI/CD, Git
       </div>
     </div>
   </div>
@@ -539,5 +541,12 @@ for idx, page in enumerate(doc):
     img = Image.open(png_file)
     img.save(webp_file, "WEBP", quality=95)
     print(f"Saved {webp_file}")
+
+# Keep Shubhangi_Jeve_AIML.pdf in sync
+aiml_pdf_path = os.path.abspath("public/Shubhangi_Jeve_AIML.pdf")
+if os.path.exists(pdf_path):
+    import shutil
+    shutil.copyfile(pdf_path, aiml_pdf_path)
+    print(f"Synced {pdf_path} to {aiml_pdf_path}")
 
 print("All resume assets updated successfully!")
